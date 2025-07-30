@@ -6,13 +6,12 @@
 /*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:44:33 by mlakhdar          #+#    #+#             */
-/*   Updated: 2024/11/30 18:44:34 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:31:07 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// merging if for the ft_strlen and check_nl
 size_t	merging(const char *s, int mode)
 {
 	size_t	i;

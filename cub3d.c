@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/30 19:31:45 by mlakhdar          #+#    #+#             */
+/*   Updated: 2025/07/30 19:31:46 by mlakhdar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cub3d.h"
 // we have first to parse the input and read the file and 
 #include <stdbool.h>
@@ -47,7 +59,10 @@ int main(int ac, char **av)
     buffer = malloc(sizeof(char *));
     int size = 0;
     while((buffer[size] = get_next_line(fd)) != NULL)
+    {
+      printf("BUFFER[%d] = %s", size, buffer[size]);
       size++;
+    }
     printf("rak ghadi blan \n");
   }
   else 
