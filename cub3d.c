@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 19:31:45 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/07/31 06:45:42 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/07/31 06:59:19 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,14 @@ bool valid_path_xpm(char *path)
 }
 bool dup_dir(t_textures *t , char *dir )
 {
-  if(t->ea && strncmp(dir , "EA" , 2) == 0)
-    return false;
-  else if(t->no && strncmp(dir , "NO" , 2) == 0)
-    return false;
-  else if(t->so && strncmp(dir , "SO" , 2) == 0)
-    return false;
-  else if(t->we && strncmp(dir , "WE" ,2) == 0)
-    return false;
-  return true;
+  if ((t->ea && strncmp(dir , "EA" , 2) == 0) ||
+      (t->no && strncmp(dir , "NO" , 2) == 0) ||
+      (t->so && strncmp(dir , "SO" , 2) == 0) ||
+      (t->we && strncmp(dir , "WE" , 2) == 0))
+    return true;
+  return false;
 }
+
 bool get_txt_path(t_textures **tx , char *txt)
 {
   t_textures *x = *tx;
@@ -140,16 +138,33 @@ bool all_txt_set(t_textures *t)
   return (t->ea && t->no && t->so && t->we);
 }
 
+bool texture_exist(t_textures *t)
+{
+  int fd[4] = {open(t->ea, O_RDONLY), open(t->so, O_RDONLY), open(t->no, O_RDONLY), open(t->we, O_RDONLY)};
+  if(fd[0]< 0 || fd[1] < 0 || fd[2] < 0 || fd[3] < 0)
+  {
+    int i = 0;
+    while(i  < 4)
+    {
+      close(fd[i]);
+      i++;
+    }
+    return false;
+  }
+  return true;
+}
 bool get_path_txts(t_lstfile **lst)
 {
   t_lstfile *l = *lst;
   t_textures *t;
   t = malloc(sizeof(t_textures));
   t_file *tmp;
+  
   t->ea = NULL;
   t->no = NULL;
   t->so = NULL;
   t->we = NULL;
+  
   tmp = l->head;
   while(tmp)
   {
@@ -165,6 +180,11 @@ bool get_path_txts(t_lstfile **lst)
   if(!all_txt_set(t))
     return false;
   l->txts = t;
+  if(!texture_exist(t))
+  {
+    printf("a texture file not exist\n");
+    return false;
+  }
   return true;
 }
 
@@ -172,10 +192,10 @@ bool valid_file(t_lstfile *lst)
 {
   t_file *(file);
   file = lst->head;
-  bool r;
-  r = false;
-  r = get_path_txts(&lst);
-  return r;
+  if(!get_path_txts(&lst))
+    return false;
+  
+  return true;
 }
 
 int main(int ac, char **av)
