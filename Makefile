@@ -4,7 +4,7 @@ CFLAGS= -Wall -Werror -Wextra  -g
 
 SRCS= cub3d.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c srcs/parsing/utils_n01.c
 
-NAME=game 
+NAME=cub3d	
 
 OBJS=$(SRCS:.c=.o)
 

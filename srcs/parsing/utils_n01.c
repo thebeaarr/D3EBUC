@@ -190,7 +190,7 @@ bool get_path_txts(t_lstfile **lst)
 
 bool valid_file(t_lstfile *lst)
 {
-  if(!get_path_txts(&lst))
+  if(!get_path_txts(&lst))// now we just tested textures , now what about the color ( f c ) and the map 
     return false;  
   return true;
 }
