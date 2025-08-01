@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 19:31:45 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/07/31 18:16:21 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/08/01 02:35:07 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_lstfile *parse_cub_file(char *input)
 int main(int ac, char **av)
 {
   t_lstfile *lst;
+  t_map *map;
   if (ac == 2)
   {
     if(!(lst = parse_cub_file(av[1])))

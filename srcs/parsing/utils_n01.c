@@ -187,9 +187,52 @@ bool get_path_txts(t_lstfile **lst)
   return true;
 }
 
+int get_color(char *line)
+{
+  char **color;
+  while(!(*line >= '0' && *line <='9'))
+    line++;
+  color = ft_split(line, ',');
+  if(color[3] != NULL)
+    return -1;
+  int r = ft_atoi(color[0]);
+  int g  = ft_atoi(color[1]);
+  int b = ft_atoi(color[2]);
+  // bit shifting
+
+}
+bool get_cf(t_lstfile **lst)
+{
+  t_lstfile *l = *lst;
+  t_file *node = l->head;
+  int flag = 0;
+
+  while (node)
+  {
+    if (strncmp(node->line, "F", 1) == 0)
+    {
+      l->floor = get_color(node->line);
+      flag++;
+    }
+    else if(strncmp(node->line , "C" , 1) == 0)
+    {
+      l->ceiling = get_color(node->line);
+      flag++;
+    }
+    if(flag == 2)
+      break;
+    node = node->next;
+  }
+  if(flag != 2)
+    return false;
+  return true;
+}
 bool valid_file(t_lstfile *lst)
 {
-  if(!get_path_txts(&lst))// now we just tested textures , now what about the color ( f c ) and the map 
-    return false;  
+  if(!get_path_txts(&lst)) // map , color , textures .
+    return false;
+  if(!get_cf(&lst))
+    return false;
+
   return true;
 }

@@ -37,24 +37,11 @@ SRCS = ft_atoi.c \
 	ft_split.c\
 	ft_itoa.c\
 
-BSRCS=ft_lstnew_bonus.c\
-			ft_lstadd_back_bonus.c\
-			ft_lstadd_front_bonus.c\
-			ft_lstclear_bonus.c\
-			ft_lstdelone_bonus.c\
-			ft_lstiter_bonus.c\
-			ft_lstlast_bonus.c\
-			ft_lstsize_bonus.c\
-			ft_lstmap_bonus.c\
 
-BOBJS=$(BSRCS:.c=.o)
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
-
-bonus:$(BOBJS)
-	ar rcs $(NAME) $(BOBJS)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
@@ -63,7 +50,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BOBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
