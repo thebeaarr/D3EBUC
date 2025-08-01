@@ -152,6 +152,16 @@ bool texture_exist(t_textures *t)
   }
   return true;
 }
+void free_array(char **m)
+{
+  int i = 0;
+  while(m[i])
+  {
+    free(m[i]);
+    i++;
+  }
+  free(m);
+}
 
 bool get_path_txts(t_lstfile **lst)
 {
@@ -199,7 +209,12 @@ int get_color(char *line)
   int g  = ft_atoi(color[1]);
   int b = ft_atoi(color[2]);
   // bit shifting
-
+  free_array(color);
+  if(r > 255 || g > 255 || b > 255)
+    return -1;
+  int fc;
+  fc = (r << 16) | (g << 8) | b;
+  return fc;
 }
 bool get_cf(t_lstfile **lst)
 {
@@ -223,7 +238,7 @@ bool get_cf(t_lstfile **lst)
       break;
     node = node->next;
   }
-  if(flag != 2)
+  if (flag != 2 || (l->ceiling == -1 || l->floor == -1))
     return false;
   return true;
 }
