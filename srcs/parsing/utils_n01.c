@@ -164,7 +164,6 @@ bool get_path_txts(t_lstfile **lst)
   t->no = NULL;
   t->so = NULL;
   t->we = NULL;
-  
   tmp = l->head;
   while(tmp)
   {

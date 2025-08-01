@@ -6,7 +6,6 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <ctype.h>
-// we have first to parse the input and read the file and 
 #include <stdbool.h>
 #include <fcntl.h>
 #include <string.h>
@@ -32,9 +31,6 @@ typedef struct s_lstfile
   t_file *head;
   t_textures *txts;  
 } t_lstfile;
-
-
-// parsing part 
 bool valid_file(t_lstfile *lst);
 bool get_path_txts(t_lstfile **lst);
 void free_lstfile(t_lstfile *lst);
@@ -47,8 +43,4 @@ bool is_txt(char *path);
 void print_cfile(t_lstfile *lst);
 t_lstfile *r_file(int fd);
 bool valid_path_input(char *path);
-
-
-// list utiles 
-
 #endif
