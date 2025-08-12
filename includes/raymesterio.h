@@ -1,5 +1,5 @@
-#ifndef EXECUTION_H
-#define  EXECUTION_H
+#ifndef RAYMESTERIO_H
+#define  RAYMESTERIO_H
 #include "../minilibx-linux/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>

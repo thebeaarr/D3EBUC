@@ -55,5 +55,20 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    ".clang-format": "yaml",
+    ".clang-tidy": "yaml",
+    ".flake8": "ini",
+    ".coveragerc": "ini",
+    "*.py.in": "python",
+    "*.pyi.in": "python",
+    "*requirements*.txt": "pip-requirements",
+    "*requirements*.in": "pip-requirements",
+    "*.cpp.in": "cpp",
+    "*.h.in": "cpp",
+    "*.cmake.in": "cmake",
+    "Makefile.*": "makefile",
+    "get_next_line.h": "c"
+  }
 }

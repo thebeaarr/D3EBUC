@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <string.h>
-
+#include <time.h>
 #include "../get_next_line/get_next_line.h"
 #include "../libft/libft.h"
 typedef struct s_file
@@ -33,14 +33,14 @@ typedef struct s_lstfile
   int floor;
   int ceiling;
 } t_lstfile;
-// what excuter will see 
+// what excuter will see
 
 typedef struct s_map
 {
   int floor;
   int ceiling;
   char **map;
-  t_textures *txt; 
+  t_textures *txt;
 } t_map;
 
 bool		valid_file(t_lstfile *lst);
