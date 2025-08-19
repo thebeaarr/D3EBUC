@@ -69,6 +69,7 @@
     "*.h.in": "cpp",
     "*.cmake.in": "cmake",
     "Makefile.*": "makefile",
-    "get_next_line.h": "c"
+    "get_next_line.h": "c",
+    "stdio.h": "c"
   }
 }

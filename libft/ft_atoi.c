@@ -31,7 +31,11 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
+	{
 		num = num * 10 + (str[i++] - '0');
+		if(num > 255)
+			return -1;
+	}
 	num *= sign;
 	return (num);
 }
