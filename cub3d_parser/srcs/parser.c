@@ -16,7 +16,7 @@ void add_back(t_list *head, t_file *current)
   while(tmp->next)
     tmp = tmp->next;
   tmp->next = current;
-} 
+}
 
 bool strings_cal(char ***txt)
 {
@@ -43,7 +43,7 @@ char ***get_textures(t_list *lst)
   t_file *tmp = lst->head;
   while (tmp)
   {
-    if(strncmp(tmp->line , "EA" , 2) == 0 || 
+    if(strncmp(tmp->line , "EA" , 2) == 0 ||
         strncmp(tmp->line , "SO" , 2 ) == 0||
         strncmp(tmp->line , "NO" , 2 ) == 0||
         strncmp(tmp->line , "WE" , 2 ) == 0)
@@ -54,7 +54,7 @@ char ***get_textures(t_list *lst)
     {
       tmp = tmp->next;
       continue;
-  
+
     }
     else
       break;
@@ -67,7 +67,7 @@ char ***get_textures(t_list *lst)
   tmp = lst->head;
   while (tmp)
   {
-    if(strncmp(tmp->line , "EA" , 2) == 0 || 
+    if(strncmp(tmp->line , "EA" , 2) == 0 ||
         strncmp(tmp->line , "SO" , 2 ) == 0||
         strncmp(tmp->line , "NO" , 2 ) == 0||
         strncmp(tmp->line , "WE" , 2 ) == 0)
@@ -162,50 +162,33 @@ char **get_map(t_list *lst)
   map[size] = NULL;
   return map;
 }
-bool textures_valid_exit(char ***textures)
+#include<stdio.h>
+void print_cub3d(t_cub3d *cub3d)
 {
-  char ***txts = textures; // keep the adress or not just go fuck ur self in a ram ( that's what can i say today )
-
-  const int index = 0;
-  for (int i = 0;txts[i]; i++)
+  char ***txt = cub3d->textures;
+  for(int i = 0 ; txt[i] ; i++)
   {
-      int d = open(txts[i][index], O_RDONLY);
-      if(d < 0)
-      {
-        printf("no exist ??? ");
-        return false;
-      }
-      close(d);
+    for(int j =0; txt[i][j];j++)
+    {
+      printf("%s", txt[i][j]);
+      // we have to check if the path is true one , open and close the file text to see if it existed.
+    }
+    printf("\n");
   }
-  return true;
+  printf("floor = %d\nceiling = %d\n", cub3d->colors[0] , cub3d->colors[1]); // already the map is just checked incease of the overflow
+  char **map ;
+  map = cub3d->map;
+  for(int i = 0 ; map[i] ; i++)
+    printf("map[%d] = %s" , i + 1, map[i]);// call a function that check if we have one
+    // player ( just one with the sings ( E , W , S , N ))
+    // the map is closed ( 1 ),
+    // the map contains just 1 , 0 , or spaces , or just
 }
 
-bool valid_cub_file(t_cub3d *cub3d)
-{
-  // check if the textures path are exit or not
-  printf("hna fin ghadya t segv\n");
-  char ***textures = cub3d->textures;
-  if(!textures_valid_exit(textures)) // valid path + exist
-  {
-    printf("ERROR:\n");
-    return false;
-  }
-  // char **map = cub3d->map;
-  // if(!valid_map(map))
-  // {
-  //   printf("ERROR:\n");
-  //   return false;
-  // }
-  printf("already segv\n");
-  return true;
-}
 t_cub3d *main_parser(char *file)
 {
-  // just  open and read on the file. 
-  // trying to understand how does this gonna behave at the end
   int fd = open(file, O_RDONLY);
   t_list *lst;
-  int srgt = 0;
   t_file *current;
   lst = NULL;
   current = NULL;
@@ -221,46 +204,26 @@ t_cub3d *main_parser(char *file)
     }
     else
     add_back(lst, current);
-    printf("%s", current->line);
   }
-  printf("seg %d ???\n\n " , srgt++);
   char ***txt;
   txt = get_textures(lst);
-  printf("seg %d ???\n\n " , srgt++);
-
   int *tab = get_fc(lst);
-  printf("seg %d ???\n\n " , srgt++);
-  printf("%d , %d\n", tab[0], tab[1]);
-  
   char **map = get_map(lst);
-  printf("seg %d ???\n\n " , srgt++);
-
   if(txt == NULL || tab == NULL || map == NULL)
   {
     if(!txt)
-    printf("txt");
+      printf("txt");
     if(!tab)
       printf("tab");
     if(map == NULL)
-    printf("moerim");
-    printf("ERROR:\n");
+      printf("map");
     return NULL;
   }
-  printf("seg %d ???\n\n " , srgt++);
   t_cub3d *cub3d;
   cub3d = malloc(sizeof(t_cub3d));
-  
   cub3d->textures = txt;
   cub3d->colors = tab;
   cub3d->map = map;
-
-  if(!valid_cub_file(cub3d))
-  {
-    printf("ERROR:\n");
-    return NULL;
-  }
-  printf("seg %d ???\n\n " , srgt++);
-  printf("%d", cub3d->colors[0]);
-  printf("seg %d ???\n\n ", srgt++);
+  print_cub3d(cub3d);
   return cub3d;
 }
