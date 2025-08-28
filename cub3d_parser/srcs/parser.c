@@ -184,7 +184,36 @@ void print_cub3d(t_cub3d *cub3d)
     // the map is closed ( 1 ),
     // the map contains just 1 , 0 , or spaces , or just
 }
-
+bool textures_valid(char ***textures_v)
+{
+  char ***textures = textures_v;
+  for(int i = 0 ; textures[i] ; i++)
+  {
+    char*clean_path = ft_substr(textures[i][1] , 0 , ft_strlen(textures[i][1]) -1 );
+    free(textures[i][1]);
+    textures[i][1] = clean_path ;
+    char *extension = ft_strrchr(clean_path , '.');
+    if(strcmp(extension, ".xpm"))
+    {
+      printf("ERROR:no extension xpm in the textures\n");
+      return false;
+    }
+    int fd = open(textures[i][1] , O_RDONLY);
+    if(fd < 0)
+    {
+      printf("ERROR:textures file of %s not existed\n", textures[i][0]) ;
+      close(fd);
+      return false;
+    }
+    close(fd);
+  }
+  return true;
+}
+bool map_valid(char **map_v)
+{
+  char **map = map_v;
+  return true;
+}
 t_cub3d *main_parser(char *file)
 {
   int fd = open(file, O_RDONLY);
@@ -205,6 +234,7 @@ t_cub3d *main_parser(char *file)
     else
     add_back(lst, current);
   }
+  close(fd);
   char ***txt;
   txt = get_textures(lst);
   int *tab = get_fc(lst);
@@ -225,5 +255,14 @@ t_cub3d *main_parser(char *file)
   cub3d->colors = tab;
   cub3d->map = map;
   print_cub3d(cub3d);
+  // map_valid()
+  // textures opened and closed ?
+
+  if(!textures_valid(cub3d->textures))
+  {
+    printf("ERROR:map not valid\n");
+    return NULL;
+  }
+
   return cub3d;
 }
