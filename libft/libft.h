@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:18:25 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/08/01 01:17:30 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:13:08 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(const char *s1, const char *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
-char				**ft_split(const char *s, char c);
+char				**ft_split(const char *s, char c );
 char				*ft_itoa(int n);
 
 #endif

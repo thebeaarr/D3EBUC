@@ -1,6 +1,6 @@
 NAME = libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I. -I./get_next_line
 
 SRCS = ft_atoi.c \
 	ft_bzero.c \
@@ -36,7 +36,7 @@ SRCS = ft_atoi.c \
 	ft_striteri.c\
 	ft_split.c\
 	ft_itoa.c\
-
+	get_next_line/get_next_line.c\
 
 
 OBJS = $(SRCS:.c=.o)
