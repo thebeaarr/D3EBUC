@@ -8,6 +8,7 @@
 
 #include "../../libft/libft.h"
 #include "../../libft/get_next_line/get_next_line.h"
+#include "../../minilibx-linux/mlx.h"
 // linked list for file reader
 typedef struct s_file 
 {
@@ -37,5 +38,5 @@ int get_color(char *file);
 int *get_fc(t_list *lst);
 char **get_map(t_list *lst);
 t_cub3d *main_parser(char *file);
-
+void print_cub3d(t_cub3d *cub3d);
 #endif

@@ -212,6 +212,7 @@ bool textures_valid(char ***textures_v)
 bool map_valid(char **map_v)
 {
   char **map = map_v;
+  (void)map;
   return true;
 }
 t_cub3d *main_parser(char *file)
@@ -254,7 +255,7 @@ t_cub3d *main_parser(char *file)
   cub3d->textures = txt;
   cub3d->colors = tab;
   cub3d->map = map;
-  print_cub3d(cub3d);
+  // print_cub3d(cub3d);
   // map_valid()
   // textures opened and closed ?
 
