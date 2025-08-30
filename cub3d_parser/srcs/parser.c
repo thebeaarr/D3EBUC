@@ -9,6 +9,7 @@ t_file *anode(char *line)
   node->next = NULL;
   return node;
 }
+
 void add_back(t_list *head, t_file *current)
 {
   t_file *tmp;
@@ -36,6 +37,7 @@ bool strings_cal(char ***txt)
   }
   return true;
 }
+
 char ***get_textures(t_list *lst)
 {
   char ***txt;
@@ -72,7 +74,7 @@ char ***get_textures(t_list *lst)
         strncmp(tmp->line , "NO" , 2 ) == 0||
         strncmp(tmp->line , "WE" , 2 ) == 0)
     {
-      txt[count] = ft_split(tmp->line, 32);
+      txt[count] = ft_split(tmp->line ,32);
       count++;
     }
     else if(tmp->line[0] == '\n')

@@ -47,7 +47,7 @@ int main(int ac , char **av)
     {
       for(int j = 0 ; j  < 500 ; j++)
       {
-        // draw 2d game i guess .... ( i forgot how to put pixel on image hahahha)
+        // draw 2d game i guess .... ( i forgot how to put pixel on image hahahha) 
       }
     }
     mlx_loop(data->mlx);
