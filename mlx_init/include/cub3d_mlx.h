@@ -1,5 +1,8 @@
-#ifndef MLX_H
-#define MLX_H
+#ifndef CUB3D_MLX_H
+#define CUB3D_MLX_H
+
+#include <stdio.h>
+#include <stdlib.h>
 #include "../../cub3d_parser/include/parser.h"
 #include "../../minilibx-linux/mlx.h"
 typedef struct s_img 
@@ -21,5 +24,4 @@ typedef struct s_data
 
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void draw_2d(t_data *data);
-
 #endif
