@@ -41,12 +41,12 @@ int init_mlx(t_data *data)
         &data->img->endian);
     return (1);
 }
-static int get_color_(char c)
+static int gett_color(char c)
 {
-    if (c == '1') return 0xFFFFFF; // wall
-    if (c == '0') return 0x000000; // empty
-    if (c == 'P') return 0xFF0000; // player
-    return 0x7F7F7F;               // unknown
+    if (c == '1') return 0xFFFF00; // wall
+    if (c == '0') return 0x0000FF; // empty
+    if (c == 'N' || c == 'W' || c == 'E' || c == 'S') return 0xFF0000; // player
+    return 0x00FF00;               // unknown
 }
 
 void draw_map(t_data *data)
@@ -58,7 +58,7 @@ void draw_map(t_data *data)
     {
         for (int j = 0; map[i][j]; j++)
         {
-            int color = get_color_(map[i][j]);
+            int color = gett_color(map[i][j]);
             for (int y = 0; y < tile; y++)
             {
                 for (int x = 0; x < tile; x++)
@@ -88,7 +88,7 @@ int main(int ac, char **av)
     if (!data)
         return (1);
 
-    // 1) Parse map
+    // 1) Parse map (a problem in the parsing still checking for it)
     data->cub3d = main_parser(av[1]);
     if (!data->cub3d)
     {
