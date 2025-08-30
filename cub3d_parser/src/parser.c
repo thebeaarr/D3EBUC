@@ -1,8 +1,8 @@
 #include "../include/parser.h"
 #include <stdbool.h>
-
-
 // split with spaces
+
+
 
 static int is_whitespace(char ch)
 {
@@ -72,8 +72,6 @@ char **ft_split2(char *s)
   char **trunks;
   if (s == NULL)
     return NULL;
-  while(is_whitespace(*s))
-    s++;
   word_count = ft_countword(s);
   trunks = malloc((word_count + 1) * sizeof(char *));
   if (!trunks)
@@ -84,6 +82,7 @@ char **ft_split2(char *s)
     free(trunks);
     return NULL;
   }
+  printf("mohed\n");
   return trunks;
 }
 
@@ -305,7 +304,8 @@ bool map_valid(char **map_v)
   (void)map;
   return true;
 }
-t_cub3d *main_parser(char *file)
+
+t_list *read_file(char *file )
 {
   int fd = open(file, O_RDONLY);
   t_list *lst;
@@ -326,6 +326,11 @@ t_cub3d *main_parser(char *file)
     add_back(lst, current);
   }
   close(fd);
+  return lst;
+}
+t_cub3d *main_parser(char *file)
+{
+  t_list *lst = read_file(file);
   char ***txt;
   txt = get_textures(lst);
   int *tab = get_fc(lst);
