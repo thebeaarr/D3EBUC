@@ -200,8 +200,9 @@ void print_cub3d(t_cub3d *cub3d)
       printf("%s", txt[i][j]);
       // we have to check if the path is true one , open and close the file text to see if it existed.
     }
+    printf("\n"); 
   }
-  printf("floor = %d\nceiling = %d\n", cub3d->ceiling , cub3d->floor); // already the map is just checked incease of the overflow
+  printf("C = %d\nF = %d\n", cub3d->ceiling , cub3d->floor); // already the map is just checked incease of the overflow
   char **map ;
   map = cub3d->map;
   for(int i = 0 ; map[i] ; i++)
@@ -210,78 +211,8 @@ void print_cub3d(t_cub3d *cub3d)
     // the map is closed ( 1 ),
     // the map contains just 1 , 0 , or spaces , or just
 }
-// bool textures_valid(char ***textures_v)
-// {
-//   char ***textures = textures_v;
-//   for(int i = 0 ; textures[i] ; i++)
-//   {
-//     char*clean_path = ft_substr(textures[i][1] , 0 , ft_strlen(textures[i][1]) -1 );
-//     free(textures[i][1]);
-//     textures[i][1] = clean_path ;
-//     char *extension = ft_strrchr(textures[i][1] , '.');
-//     if(strcmp(extension, ".xpm"))
-//     {
-//       printf("ERROR:no extension xpm in the textures\n");
-//       return false;
-//     }
-//     int fd = open(textures[i][1] , O_RDONLY);
-//     if(fd < 0)
-//     {
-//       printf("ERROR:textures file of %s not existed\n", textures[i][0]) ;
-//       close(fd);
-//       return false;
-//     }
-//     close(fd);
-//   }
-//   return true;
-// }
-// bool map_valid(char **map_v)
-// {
-//   char **map = map_v;
-//   (void)map;
-//   return true;
-// } 
 
 
-// t_cub3d *main_parser(char *file)
-// {
-  //   char ***txt;
-  //   txt = get_textures(lst);
-  //   if(!txt)
-  //   {
-    //     printf("ERROR:textures!");
-    //     exit(1);
-    //   }
-    //   int *tab = get_fc(lst);
-    //   if(!tab)
-    //   {
-      //     printf("ERROR:ceiling floor!");
-      //     exit(1);
-      //   }
-      //   char **map = get_map(lst);
-      //   if(!map)
-      //   {
-        //     printf("ERROR:map!");
-        //     exit(1);
-        //   }
-        //   t_cub3d *cub3d;
-        //   cub3d = malloc(sizeof(t_cub3d));
-        //   cub3d->textures = txt;
-        //   cub3d->colors = tab;
-        //   cub3d->map = map;
-        //   // print_cub3d(cub3d);
-        //   // map_valid()
-        //   // textures opened and closed ?
-        
-        //   if(!textures_valid(cub3d->textures))
-        //   {
-          //     printf("ERROR:map not valid\n");
-          //     return NULL;
-          //   }
-          
-          //   return cub3d;
-          // }
-          
 #include "../include/parser.h"
 
 #include <ctype.h>
@@ -480,6 +411,16 @@ char ***get_textures(t_list *lst)
 
   if(ind != 4)
     return NULL;
+  // path first
+  for(int i  = 0 ; ret[i] ; i++)
+  {
+    char *extension = strrchr(ret[i][1] , '.');
+    if(strcmp(extension , ".xpm"))
+    {
+      printf("paht invalid");
+      exit(1);
+    }
+  }
   // existence 
   for(int i = 0 ; ret[i] ; i++)
   {
@@ -565,6 +506,9 @@ char **map_(t_list *lst)
     h = h->next ;
     i++; 
   }
+  // valid this map , check for any char unlike W , E , S , N ( this happen only one at one time for the player) , 1 and 0 
+  // check again for the player with the number of 1 only check for the map if it just closed ,
+  // we are done with the parsing
   return map;
 }
 t_cub3d *get_file_as_struct(char *path)

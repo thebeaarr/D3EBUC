@@ -9,10 +9,7 @@ int handle_close()
 
 int handle_key(int a  , t_data *data)
 {
-  printf("-------------------------------------------------------------content------------------------------------------------------\n");
-  print_cub3d(data->cub3d);
-  printf("-------------------------------------------------------------content------------------------------------------------------\n");
-
+    (void)data;
   if(a == 65307)
   {
     printf("good bye!");
@@ -20,6 +17,7 @@ int handle_key(int a  , t_data *data)
   }
   return 0;
 }
+
 int init_mlx(t_data *data)
 {
     data->mlx = mlx_init();
