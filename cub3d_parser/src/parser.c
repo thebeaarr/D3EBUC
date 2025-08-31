@@ -2,90 +2,6 @@
 #include <stdbool.h>
 // split with spaces
 
-
-
-static int is_whitespace(char ch)
-{
-  return (ch == 32 || (ch >= 9 && ch <= 13));
-}
-
-static size_t ft_countword(const char *str)
-{
-  int in_word = 0;
-  size_t count = 0;
-  while (*str)
-  {
-    if (!is_whitespace(*str) && !in_word)
-    {
-      in_word = 1;
-      count++;
-    }
-    else if (is_whitespace(*str))
-      in_word = 0;
-    str++;
-  }
-  return count;
-}
-
-static size_t calculate_every_word(const char *s)
-{
-  size_t len = 0;
-  while (s[len] && !is_whitespace(s[len]))
-    len++;
-  return len;
-}
-
-static void	free_memory(char **trunks, size_t i)
-{
-	while (i--)
-		free(trunks[i]);
-}
-
-static int split_helper(char **trunks, const char *s)
-{
-  size_t i = 0;
-  size_t word_len;
-  while (*s)
-  {
-    if (!is_whitespace(*s))
-    {
-      word_len = calculate_every_word(s);
-      trunks[i] = (char *)malloc((word_len + 1) * sizeof(char));
-      if (!trunks[i])
-      {
-        free_memory(trunks, i);
-        return 0;
-      }
-      ft_strlcpy(trunks[i], s, word_len + 1);
-      s += word_len;
-      i++;
-    }
-    else
-      s++;
-  }
-  return 1;
-}
-
-char **ft_split2(char *s)
-{
-  size_t word_count;
-  char **trunks;
-  if (s == NULL)
-    return NULL;
-  word_count = ft_countword(s);
-  trunks = malloc((word_count + 1) * sizeof(char *));
-  if (!trunks)
-    return NULL;
-  trunks[word_count] = NULL;
-  if (!split_helper(trunks, s))
-  {
-    free(trunks);
-    return NULL;
-  }
-  printf("mohed\n");
-  return trunks;
-}
-
 // spaces 
 // make a node with line and NULL in the next;
 
@@ -161,7 +77,7 @@ char ***get_textures(t_list *lst)
         strncmp(tmp->line , "NO" , 2 ) == 0||
         strncmp(tmp->line , "WE" , 2 ) == 0)
     {
-      txt[count] = ft_split2 (tmp->line);
+      txt[count] = ft_split(tmp->line , 32);
       count++;
     }
     else if(tmp->line[0] == '\n')
@@ -278,9 +194,9 @@ bool textures_valid(char ***textures_v)
   char ***textures = textures_v;
   for(int i = 0 ; textures[i] ; i++)
   {
-    // char*clean_path = ft_substr(textures[i][1] , 0 , ft_strlen(textures[i][1]) -1 );
-    // free(textures[i][1]);
-    // textures[i][1] = clean_path ;
+    char*clean_path = ft_substr(textures[i][1] , 0 , ft_strlen(textures[i][1]) -1 );
+    free(textures[i][1]);
+    textures[i][1] = clean_path ;
     char *extension = ft_strrchr(textures[i][1] , '.');
     if(strcmp(extension, ".xpm"))
     {
@@ -303,8 +219,31 @@ bool map_valid(char **map_v)
   char **map = map_v;
   (void)map;
   return true;
+} 
+#include <ctype.h>
+int isspaces(char *str)
+{
+  int index =0 ;
+  while(isspace(str[index]))
+    index++;
+  return str[index] == 0;
 }
-
+int is_part_map(char c)
+{
+  return c == 'N' || c == 'E' || c == 'F' || c == 'C' || c == 'W' || c == 'S';
+}
+char *clean_(char *line)
+{
+  char *clean ;
+  int index = 0;
+  while(isspace(line[index]))
+    index++;
+  if(!is_part_map(line[index]))
+    return line;
+  clean = ft_strdup(line + index);
+  free(line);
+  return clean ; 
+}
 t_list *read_file(char *file )
 {
   int fd = open(file, O_RDONLY);
@@ -315,7 +254,12 @@ t_list *read_file(char *file )
   char *tmp = NULL;
   while((tmp = get_next_line(fd)))
   {
-    if(tmp)
+    if(isspaces(tmp))
+    {
+      free(tmp);
+      continue ;
+    }
+    tmp = clean_(tmp);
     current = anode(tmp);
     if(!lst)
     {
@@ -323,7 +267,9 @@ t_list *read_file(char *file )
       lst->head = current;
     }
     else
-    add_back(lst, current);
+    {
+      add_back(lst, current);
+    }
   }
   close(fd);
   return lst;

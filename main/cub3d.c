@@ -43,16 +43,16 @@ int init_mlx(t_data *data)
 }
 static int gett_color(char c)
 {
-    if (c == '1') return 0xFFFF00; // wall
-    if (c == '0') return 0x0000FF; // empty
-    if (c == 'N' || c == 'W' || c == 'E' || c == 'S') return 0xFF0000; // player
-    return 0x00FF00;               // unknown
+    if (c == '1') return 0xFFFF00;
+    if (c == '0') return 0x0000FF;
+    if (c == 'N' || c == 'W' || c == 'E' || c == 'S') return 0xFF0000;
+    return 0x00FF00;
 }
 
 void draw_map(t_data *data)
 {
     char **map = data->cub3d->map;
-    int tile = 20;
+    int tile = 31;
 
     for (int i = 0; map[i]; i++)
     {
@@ -62,12 +62,7 @@ void draw_map(t_data *data)
             for (int y = 0; y < tile; y++)
             {
                 for (int x = 0; x < tile; x++)
-                {
-                    my_mlx_pixel_put(data->img,
-                        j * tile + x,
-                        i * tile + y,
-                        color);
-                }
+                    my_mlx_pixel_put(data->img,j * tile + x,i * tile + y,color);
             }
         }
     }
