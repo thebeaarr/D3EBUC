@@ -91,16 +91,42 @@ void add_back(t_list *head, t_file *current)
 //   return txt;
 // }
 #include <ctype.h>
-int get_color(char *file )
+char *rm_spaces_check(char *s)
 {
-  if (!file)
+  char *new = malloc(sizeof(char *) * ft_strlen(s) + 1);
+  int index = 0 ;
+  int t = 0;
+  printf("start\n");
+  while(s[index])
+  {
+    if(!isspace(s[index]) && (s[index] != 'C' && s[index] != 'F'))
+    {
+      new[t] = s[index];
+      t++;
+    }
+    index++;
+  }
+  printf("end\n");
+
+  return new;
+}
+int get_color(char *s )
+{
+  printf("start\n");
+  if (!s)
     return -1;
-    
-  // Skip leading whitespace
-  while (*file && isspace(*file))
-    file++;
-    
-  char **color = ft_split(file, ',');
+  // filter string ?? 
+  char *str = NULL;
+  printf("end1\n");
+  
+  str =  rm_spaces_check(s);
+  printf("%s\n----------", str);
+  printf("end2\n");
+  char **color = ft_split(str, ',');
+  for(int i = 0 ; color[i] ; i++)
+  {
+    printf("-%s-\n" , color[i]);
+  }
   if (!color)
     return -1;
   int count = 0;
@@ -114,18 +140,23 @@ int get_color(char *file )
     free(color);
     return -1;
   }
+  
   int r = ft_atoi(color[0]);
   int g = ft_atoi(color[1]);
   int b = ft_atoi(color[2]);
-  
+  printf("end\n");
+  printf("%d - %d - %d\n",r,g,b );
   // Free memory after use
   for(int i = 0; i < count; i++)
     free(color[i]);
   free(color);
+  printf("end\n");
   
   if(r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
     return -1;
   int rgb = (r << 16) | (g << 8) | b;
+  printf("end\n");
+  printf("%d\n", rgb);
   return rgb;
 }
 
@@ -265,6 +296,7 @@ static int	split_helper(char **trunks, const char *s)
 	{
 		if (!isspace(*s))
 		{
+      printf("%s\n",s);
 			word_len = calculate_every_word(s);
 			trunks[i] = (char *)malloc((word_len + 1) * sizeof(char));
 			if (!trunks[i])
@@ -322,6 +354,8 @@ char *clean_(char *line)
 {
   char *clean ;
   int index = 0;
+  // if(!isspace(line))
+  //   return line;
   while(isspace(line[index]))
     index++;
   if(is_part_map(line[index]) == 0)
@@ -331,7 +365,7 @@ char *clean_(char *line)
   int size = strlen(line);
   while(!isspace(line[size]))
     size--;
-  clean = ft_substr(line , index , size - index);
+  clean = ft_substr(line , index , size - index + 1);
   free(line);
   return clean ; 
 }
@@ -374,6 +408,33 @@ int is_txt(char *line)
   return  !ft_strncmp(line , "NO " , 3) || !ft_strncmp(line , "SO " , 3) || !ft_strncmp(line , "WE " , 3)|| !ft_strncmp(line , "EA " , 3);
 }
 
+bool dup_txt(t_list *lst)
+{
+  int n =0;
+  int e = 0;
+  int w = 0;
+  int s=0;
+  t_file *current = lst->head;
+  while(current)
+  {
+    if(strncmp(current->line , "NO" , 2) == 0)
+      n++;
+    else if(strncmp(current->line , "SO" , 2) == 0)
+      s++;
+    else if(strncmp(current->line , "WE" , 2) == 0)
+      w++;
+    else if(strncmp(current->line , "EA" , 2) == 0)
+      e++;
+    if(e > 1 || w > 1 || s > 1 || n > 1)
+    {
+      printf("ERROR:duplicate textures\n");
+      return true;
+    }
+    current = current->next;
+  }
+  return false;
+
+}
 char ***get_textures(t_list *lst)
 {
   t_file *tmp ; 
@@ -382,11 +443,20 @@ char ***get_textures(t_list *lst)
   ret[4] = NULL;
   int ind = 0;
   int count = 6;
+  if(dup_txt(lst))
+    return NULL;
   while(tmp && count)
   {
     if(is_txt(tmp->line))
     {
+      int i =0;
       ret[ind] = ft_split_space(tmp->line);
+      for( ; ret[ind][i] ; i++)
+      {
+        printf("%s\n" , ret[ind][i]);
+      }
+      if(i != 2)
+        return NULL;
       if (!ret[ind] || !ret[ind][0] || !ret[ind][1])
       {
         printf("ERROR: Invalid texture line format\n");
@@ -411,6 +481,8 @@ char ***get_textures(t_list *lst)
 
   if(ind != 4)
     return NULL;
+  //check numebr of string ? 
+  
   // path first
   for(int i  = 0 ; ret[i] ; i++)
   {
@@ -421,6 +493,7 @@ char ***get_textures(t_list *lst)
       exit(1);
     }
   }
+
   // existence 
   for(int i = 0 ; ret[i] ; i++)
   {
@@ -449,9 +522,9 @@ void colors_(t_list *lst , t_cub3d *cub3d )
   tmp = lst->head;
   while(tmp && ind != 2 && count )
   {
-    if(strncmp(tmp->line , "F " , 2) == 0)
+    if(strncmp(tmp->line , "F" , 1) == 0)
     {
-      cub3d->floor = get_color(tmp->line + 2);  // Skip "F " prefix
+      cub3d->floor = get_color(tmp->line);  // Skip "F " prefix
       if(cub3d->floor == -1)
       {
         printf("ERROR:problem\n");
@@ -459,9 +532,9 @@ void colors_(t_list *lst , t_cub3d *cub3d )
       }
       ind++;
     }
-    else if(strncmp(tmp->line , "C " , 2) == 0)
+    else if(strncmp(tmp->line , "C" , 1) == 0)
     {
-      cub3d->ceiling = get_color(tmp->line + 2);  // Skip "C " prefix
+      cub3d->ceiling = get_color(tmp->line);  // Skip "C " prefix
       if(cub3d->ceiling == -1)
       {
         printf("ERROR:problem\n");
@@ -472,6 +545,7 @@ void colors_(t_list *lst , t_cub3d *cub3d )
     count--;
     tmp = tmp->next;
   }
+  printf("%d\n" , ind);
   if(ind != 2)
   {
     printf("floor or ceiling are not exist !");
@@ -549,25 +623,20 @@ char **map_(t_list *lst)
     }
   }
   // check if the map if closed or not 
-  
+
   return map;
 }
 t_cub3d *get_file_as_struct(char *path)
 {
   t_list *lst = read_file(path);
-  // t_file *tmp = lst->head;
-  // while(tmp)
-  // {
-  //   printf("%s\n", tmp->line);
-  //   tmp = tmp->next;
-  // }
-  // get the textures ? 
-  // get the colors ? 
-  // get the maps ? 
   t_cub3d *cub3d = malloc(sizeof(t_cub3d));
   cub3d->textures  = get_textures(lst);
+  if(cub3d->textures == NULL)
+    return NULL ;
   colors_(lst , cub3d);
   cub3d->map = map_(lst);
+  if(cub3d->map == NULL)
+    return NULL;
   print_cub3d(cub3d);
   return cub3d;
 }
