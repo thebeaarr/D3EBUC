@@ -176,7 +176,7 @@ void print_cub3d(t_cub3d *cub3d)
   {
     for(int j =0; txt[i][j];j++)
     {
-      printf("%s\n", txt[i][j]);
+      printf("%s", txt[i][j]);
       // we have to check if the path is true one , open and close the file text to see if it existed.
     }
     printf("\n");
@@ -332,10 +332,12 @@ t_list *read_file(char *file )
   close(fd);
   return lst;
 }
+
 int is_txt(char *line)
 {
   return  !ft_strncmp(line , "NO " , 3) || !ft_strncmp(line , "SO " , 3) || !ft_strncmp(line , "WE " , 3)|| !ft_strncmp(line , "EA " , 3);
 }
+
 char ***get_textures(t_list *lst)
 {
   t_file *tmp ; 
@@ -361,19 +363,19 @@ char ***get_textures(t_list *lst)
 
 int *colors_(t_list *lst)
 {
-  int *tab = malloc(sizeof(int )*2);
+  int *tab = malloc(sizeof(int)*2);
   int count = 6;
   t_file *tmp ;
   int ind = 0;
   tmp = lst->head;
   while(tmp && ind != 2 && count )
   {
-    if(ft_strncmp(tmp->line , "F " , 3) == 0)
+    if(strncmp(tmp->line , "F " , 2) == 0)
     {
       tab[0] = get_color(tmp->line);
       ind++;
     }
-    else if(ft_strncmp(tmp->line , "C " , 3) == 0)
+    else if(strncmp(tmp->line , "C " , 2) == 0)
     {
       tab[1] = get_color(tmp->line);
       ind++;
@@ -381,10 +383,11 @@ int *colors_(t_list *lst)
     count--;
     tmp = tmp->next;
   }
-  if(ind !=2 )
+  if(ind > 2 || ind < 2)
     return NULL;
   return tab ;
 }
+
 char **map_(t_list *lst)
 {
   t_file *tmp ;
@@ -395,7 +398,7 @@ char **map_(t_list *lst)
     tmp = tmp->next;
     count--;
   }
-  char **map ;
+  char **map;
   int c_s  = 0;
   t_file *h = tmp;
   while(tmp)
@@ -417,12 +420,12 @@ char **map_(t_list *lst)
 t_cub3d *get_file_as_struct(char *path)
 {
   t_list *lst = read_file(path);
-  t_file *tmp = lst->head;
-  while(tmp)
-  {
-    printf("%s", tmp->line);
-    tmp = tmp->next;
-  }
+  // t_file *tmp = lst->head;
+  // while(tmp)
+  // {
+  //   printf("%s\n", tmp->line);
+  //   tmp = tmp->next;
+  // }
   // get the textures ? 
   // get the colors ? 
   // get the maps ? 
@@ -430,5 +433,6 @@ t_cub3d *get_file_as_struct(char *path)
   cub3d->textures  = get_textures(lst);
   cub3d->colors = colors_(lst);
   cub3d->map = map_(lst);
+  print_cub3d(cub3d);
   return cub3d;
 }
