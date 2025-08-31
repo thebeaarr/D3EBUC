@@ -31,13 +31,7 @@ typedef struct s_cub3d
   char **map;       // the map ;
   int *colors;      // floor 1 , ceiling 2
   char ***textures; // textures
-} t_cub3d;
-t_file *anode(char *line);
-void add_back(t_list *head, t_file *current);
-char ***get_textures(t_list *lst);
-int get_color(char *file);
-int *get_fc(t_list *lst);
-char **get_map(t_list *lst);
-t_cub3d *main_parser(char *file);
+} t_cub3d;  
 void print_cub3d(t_cub3d *cub3d);
+t_cub3d *get_file_as_struct(char *path);
 #endif

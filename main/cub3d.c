@@ -84,14 +84,14 @@ int main(int ac, char **av)
         return (1);
 
     // 1) Parse map (a problem in the parsing still checking for it)
-    data->cub3d = main_parser(av[1]);
+    data->cub3d = get_file_as_struct(av[1]);
     if (!data->cub3d)
     {
         printf("ERROR: parsing\n");
         free(data);
         return (1);
     }
-    print_cub3d(data->cub3d);
+    // print_cub3d(data->cub3d);
 
     // 2) Initialize MLX
     if (!init_mlx(data))
@@ -109,6 +109,5 @@ int main(int ac, char **av)
     mlx_hook(data->win, 17, 0, handle_close, data);
     mlx_key_hook(data->win, handle_key, data);
     mlx_loop(data->mlx);
-
     return (0);
 }
