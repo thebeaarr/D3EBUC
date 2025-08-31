@@ -90,19 +90,40 @@ void add_back(t_list *head, t_file *current)
 //   lst->ptr_hold = tmp; // current place when we got to take the colors  i guess ( if they eexist )
 //   return txt;
 // }
-
+#include <ctype.h>
 int get_color(char *file )
 {
+  if (!file)
+    return -1;
+    
+  // Skip leading whitespace
+  while (*file && isspace(*file))
+    file++;
+    
   char **color = ft_split(file, ',');
+  if (!color)
+    return -1;
   int count = 0;
   while(color[count])
     count++;
   if(count != 3)
+  {
+    // Free memory before returning
+    for(int i = 0; i < count; i++)
+      free(color[i]);
+    free(color);
     return -1;
+  }
   int r = ft_atoi(color[0]);
   int g = ft_atoi(color[1]);
   int b = ft_atoi(color[2]);
-  if(r  == -1 || g == -1  || b == -1)
+  
+  // Free memory after use
+  for(int i = 0; i < count; i++)
+    free(color[i]);
+  free(color);
+  
+  if(r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
     return -1;
   int rgb = (r << 16) | (g << 8) | b;
   return rgb;
@@ -434,7 +455,23 @@ char ***get_textures(t_list *lst)
   {
     if(is_txt(tmp->line))
     {
-      ret[ind]  = ft_split_space(tmp->line);// normalment espace ? and how many string if more than 2 u suck return NULL 
+      ret[ind] = ft_split_space(tmp->line);
+      if (!ret[ind] || !ret[ind][0] || !ret[ind][1])
+      {
+        printf("ERROR: Invalid texture line format\n");
+        // Free allocated memory before returning
+        for(int j = 0; j < ind; j++)
+        {
+          if(ret[j])
+          {
+            for(int k = 0; ret[j][k]; k++)
+              free(ret[j][k]);
+            free(ret[j]);
+          }
+        }
+        free(ret);
+        return NULL;
+      }
       ind++;
     }
     count--;
@@ -446,6 +483,11 @@ char ***get_textures(t_list *lst)
   // existence 
   for(int i = 0 ; ret[i] ; i++)
   {
+    if (!ret[i][1])
+    {
+      printf("ERROR: Missing texture path\n");
+      return NULL;
+    }
     int fd = open(ret[i][1] , O_RDONLY);
     if(fd < 0)
     {
@@ -468,7 +510,7 @@ void colors_(t_list *lst , t_cub3d *cub3d )
   {
     if(strncmp(tmp->line , "F " , 2) == 0)
     {
-      cub3d->floor = get_color(tmp->line);
+      cub3d->floor = get_color(tmp->line + 2);  // Skip "F " prefix
       if(cub3d->floor == -1)
       {
         printf("ERROR:problem\n");
@@ -478,7 +520,7 @@ void colors_(t_list *lst , t_cub3d *cub3d )
     }
     else if(strncmp(tmp->line , "C " , 2) == 0)
     {
-      cub3d->ceiling = get_color(tmp->line);
+      cub3d->ceiling = get_color(tmp->line + 2);  // Skip "C " prefix
       if(cub3d->ceiling == -1)
       {
         printf("ERROR:problem\n");
