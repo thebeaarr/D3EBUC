@@ -29,7 +29,9 @@ typedef struct  s_list
 typedef struct s_cub3d
 {
   char **map;       // the map ;
-  int *colors;      // floor 1 , ceiling 2
+  // int *colors;      // floor 1 , ceiling 2
+  int floor ;
+  int ceiling ;
   char ***textures; // textures
 } t_cub3d;  
 void print_cub3d(t_cub3d *cub3d);

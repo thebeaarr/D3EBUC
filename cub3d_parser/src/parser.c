@@ -109,10 +109,10 @@ int get_color(char *file )
 }
 
 // int *get_fc(t_list *lst)
-// {
 //   t_file *head = lst->head;
 //   int *tab = malloc(sizeof(int) * 2);
 //   int count = 0;
+// {
 //   while (head)
 //   {
 //     if(head->line[0] == 'F')
@@ -181,7 +181,7 @@ void print_cub3d(t_cub3d *cub3d)
     }
     printf("\n");
   }
-  printf("floor = %d\nceiling = %d\n", cub3d->colors[0] , cub3d->colors[1]); // already the map is just checked incease of the overflow
+  printf("floor = %d\nceiling = %d\n", cub3d->ceiling , cub3d->floor); // already the map is just checked incease of the overflow
   char **map ;
   map = cub3d->map;
   for(int i = 0 ; map[i] ; i++)
@@ -361,9 +361,8 @@ char ***get_textures(t_list *lst)
   return ret ;
 }
 
-int *colors_(t_list *lst)
+void colors_(t_list *lst , t_cub3d *cub3d )
 {
-  int *tab = malloc(sizeof(int)*2);
   int count = 6;
   t_file *tmp ;
   int ind = 0;
@@ -372,20 +371,32 @@ int *colors_(t_list *lst)
   {
     if(strncmp(tmp->line , "F " , 2) == 0)
     {
-      tab[0] = get_color(tmp->line);
+      cub3d->floor = get_color(tmp->line);
+      if(cub3d->floor == -1)
+      {
+        printf("ERROR:problem\n");
+        exit(1);  
+      }
       ind++;
     }
     else if(strncmp(tmp->line , "C " , 2) == 0)
     {
-      tab[1] = get_color(tmp->line);
+      cub3d->ceiling = get_color(tmp->line);
+      if(cub3d->ceiling == -1)
+      {
+        printf("ERROR:problem\n");
+        exit(1);
+      }
       ind++;
     }
     count--;
     tmp = tmp->next;
   }
-  if(ind > 2 || ind < 2)
-    return NULL;
-  return tab ;
+  if(ind != 2)
+  {
+    printf("floor or ceiling are not exist !");
+    exit(1);
+  }
 }
 
 char **map_(t_list *lst)
@@ -431,7 +442,7 @@ t_cub3d *get_file_as_struct(char *path)
   // get the maps ? 
   t_cub3d *cub3d = malloc(sizeof(t_cub3d));
   cub3d->textures  = get_textures(lst);
-  cub3d->colors = colors_(lst);
+  colors_(lst , cub3d);
   cub3d->map = map_(lst);
   print_cub3d(cub3d);
   return cub3d;
