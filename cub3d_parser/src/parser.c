@@ -510,26 +510,46 @@ char **map_(t_list *lst)
   // check again for the player with the number of 1 only check for the map if it just closed ,
   // we are done with the parsing
   // started with checking valid content ?
+  // int count_p = 0;
+  // for(int i = 0 ; map[i]; i++)
+  // {
+  //   for(int j = 0; map[i][j];j++)
+  //   {
+  //     if( map[i][j] == 'W' || map[i][j] == 'E'|| map[i][j] == 'N'|| map[i][j] == 'S')
+  //       count_p++;
+  //     if(count_p > 1)
+  //     {
+  //       printf("ERROR:duplicated players\n");
+  //       exit(1);
+  //     }
+  //     if(map[i][j] && !(map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'W' || map[i][j] == 'E'||map[i][j] == 'S'||map[i][j] == 'N'||map[i][j] == ' '))
+  //     {
+  //       printf("ERROR:invalid char\n");
+  //       exit(1);
+  //     }
+  //   }
+  // }
   int count_p = 0;
-  for(int i = 0 ; map[i]; i++)
+  for(int i = 0 ; map[i] ; i++)
   {
-    for(int j = 0; map[i][j];j++)
+    for(int j = 0 ; map[i][j] ; j++)
     {
-      if( map[i][j] == 'W' || map[i][j] == 'E'|| map[i][j] == 'N'|| map[i][j] == 'S')
+      if(map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == 'S' || map[i][j] == 'N')
         count_p++;
       if(count_p > 1)
       {
-        printf("ERROR:duplicated players\n");
+        printf("ERROR:multiple players\n");
         exit(1);
       }
-      if(map[i][j] && !(map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'W' || map[i][j] == 'E'||map[i][j] == 'S'||map[i][j] == 'N'||map[i][j] == ' '))
+      if(map[i][j] != '\n' && map[i][j] != '\t' && map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'W' && map[i][j] != 'N'&& map[i][j] != 'E' && map[i][j] != 'S' && map[i][j] != ' ')
       {
         printf("ERROR:invalid char\n");
         exit(1);
       }
     }
   }
-
+  // check if the map if closed or not 
+  
   return map;
 }
 t_cub3d *get_file_as_struct(char *path)

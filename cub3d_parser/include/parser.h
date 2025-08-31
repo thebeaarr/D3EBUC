@@ -24,16 +24,20 @@ typedef struct  s_list
   t_file *ptr_hold;
 } t_list;
 
-
+// the player 
+// typedef struct s_player
+// {
+// thinking what to track for the player ( i have to load the textures i forgot)
+// }t_player;
 // the map 
 typedef struct s_cub3d
 {
   char **map;       // the map ;
-  // int *colors;      // floor 1 , ceiling 2
   int floor ;
   int ceiling ;
   char ***textures; // textures
-} t_cub3d;  
+  // t_player *player ;
+} t_cub3d;
 void print_cub3d(t_cub3d *cub3d);
 t_cub3d *get_file_as_struct(char *path);
 #endif

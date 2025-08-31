@@ -9,7 +9,8 @@ int handle_close()
 
 int handle_key(int a  , t_data *data)
 {
-    (void)data;
+  // something like 
+  (void)data;
   if(a == 65307)
   {
     printf("good bye!");
