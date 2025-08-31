@@ -179,7 +179,6 @@ void print_cub3d(t_cub3d *cub3d)
       printf("%s", txt[i][j]);
       // we have to check if the path is true one , open and close the file text to see if it existed.
     }
-    printf("\n");
   }
   printf("floor = %d\nceiling = %d\n", cub3d->ceiling , cub3d->floor); // already the map is just checked incease of the overflow
   char **map ;
@@ -266,6 +265,91 @@ void print_cub3d(t_cub3d *cub3d)
 
 #include <ctype.h>
 #include <ctype.h>
+
+static size_t	ft_countword(const char *str)
+{
+	int		in_word;
+	size_t	count;
+
+	in_word = 0;
+	count = 0;
+	while (*str)
+	{
+		if (!isspace(*str) && !in_word)
+		{
+			in_word = 1;
+			count++;
+		}
+		else if (isspace(*str))
+			in_word = 0;
+		str++;
+	}
+	return (count);
+}
+
+static size_t	calculate_every_word(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] && !isspace(s[len]))
+		len++;
+	return (len);
+}
+
+static void	free_memory(char **trunks, size_t i)
+{
+	while (i--)
+		free(trunks[i]);
+}
+
+static int	split_helper(char **trunks, const char *s)
+{
+	size_t	i;
+	size_t	word_len;
+
+	i = 0;
+	while (*s)
+	{
+		if (!isspace(*s))
+		{
+			word_len = calculate_every_word(s);
+			trunks[i] = (char *)malloc((word_len + 1) * sizeof(char));
+			if (!trunks[i])
+			{
+				free_memory(trunks, i);
+				return (0);
+			}
+			ft_strlcpy(trunks[i], s, word_len + 1);
+			s += word_len;
+			i++;
+		}
+		else
+			s++;
+	}
+	return (1);
+}
+
+char	**ft_split_space(const char *s)
+{
+	size_t	word_count;
+	char	**trunks;
+
+	if (s == NULL)
+		return (NULL);
+	word_count = ft_countword(s);
+	trunks = malloc((word_count + 1) * sizeof(char *));
+	if (!trunks)
+		return (NULL);
+	trunks[word_count] = NULL;
+	if (!split_helper(trunks, s))
+	{
+		free(trunks);
+		return (NULL);
+	}
+	return (trunks);
+}
+
 int isspaces(char *str)
 {
   int index =0 ;
@@ -273,13 +357,13 @@ int isspaces(char *str)
     index++;
   return str[index] == 0;
 }
+
 int is_part_map(char c)
 {
    if(c == 'N' || c == 'E' || c == 'F' || c == 'C' || c == 'W' || c == 'S')
     return 1;
-  else if(c == '1' || c == '0')
+  else
     return 0;
-  return -1;
 }
 
 char *clean_(char *line)
@@ -291,11 +375,11 @@ char *clean_(char *line)
   if(is_part_map(line[index]) == 0)
     return line;
   else if(is_part_map(line[index]) == -1)
-    return NULL;
+    return line;
   int size = strlen(line);
   while(!isspace(line[size]))
     size--;
-  clean = ft_substr(line , index , size);
+  clean = ft_substr(line , index , size - index);
   free(line);
   return clean ; 
 }
@@ -350,14 +434,27 @@ char ***get_textures(t_list *lst)
   {
     if(is_txt(tmp->line))
     {
-      ret[ind]  = ft_split(tmp->line , 32);// normalment espace ? and how many string if more than 2 u suck return NULL 
+      ret[ind]  = ft_split_space(tmp->line);// normalment espace ? and how many string if more than 2 u suck return NULL 
       ind++;
     }
     count--;
     tmp = tmp->next;
   }
+
   if(ind != 4)
     return NULL;
+  // existence 
+  for(int i = 0 ; ret[i] ; i++)
+  {
+    int fd = open(ret[i][1] , O_RDONLY);
+    if(fd < 0)
+    {
+      printf("ERROR:path %s not exist\n", ret[i][1]);
+      exit(1);
+    }
+    close(fd);
+  }
+  printf("succuss\n");
   return ret ;
 }
 
