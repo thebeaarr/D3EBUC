@@ -509,6 +509,27 @@ char **map_(t_list *lst)
   // valid this map , check for any char unlike W , E , S , N ( this happen only one at one time for the player) , 1 and 0 
   // check again for the player with the number of 1 only check for the map if it just closed ,
   // we are done with the parsing
+  // started with checking valid content ?
+  int count_p = 0;
+  for(int i = 0 ; map[i]; i++)
+  {
+    for(int j = 0; map[i][j];j++)
+    {
+      if( map[i][j] == 'W' || map[i][j] == 'E'|| map[i][j] == 'N'|| map[i][j] == 'S')
+        count_p++;
+      if(count_p > 1)
+      {
+        printf("ERROR:duplicated players\n");
+        exit(1);
+      }
+      if(map[i][j] && !(map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'W' || map[i][j] == 'E'||map[i][j] == 'S'||map[i][j] == 'N'||map[i][j] == ' '))
+      {
+        printf("ERROR:invalid char\n");
+        exit(1);
+      }
+    }
+  }
+
   return map;
 }
 t_cub3d *get_file_as_struct(char *path)
