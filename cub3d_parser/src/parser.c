@@ -148,7 +148,9 @@ int get_color(char *s )
   int r = ft_atoi(color[0]);
   int g = ft_atoi(color[1]);
   int b = ft_atoi(color[2]);
-  
+  printf("%d" , b);
+  printf("%d" , g); 
+  printf("%d" , r);
   // Free memory after use
   for(int i = 0; i < count; i++)
     free(color[i]);
@@ -221,6 +223,7 @@ int get_color(char *s )
 //   map[size] = NULL;
 //   return map;
 // }
+
 #include<stdio.h>
 void print_cub3d(t_cub3d *cub3d)
 {
@@ -646,7 +649,7 @@ char **map_(t_list *lst)
     }
   }
   // check if the map if closed or not 
-
+  
   return map;
 }
 t_cub3d *get_file_as_struct(char *path)

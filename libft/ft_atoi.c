@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: feedback <feedback@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:58:18 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/08/18 14:57:42 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/09/01 00:54:36 by feedback         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	ft_atoi(const char *str)
 		if(num > 255)
 			return -1;
 	}
+	if(str[i] != '\0')
+		return -1;
 	num *= sign;
 	return (num);
 }
