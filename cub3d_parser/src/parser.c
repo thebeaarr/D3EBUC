@@ -106,11 +106,8 @@ char *rm_spaces_check(char *s)
   
   while(s[index])
   {
-    if(!isspace(s[index]))
-    {
       new[t] = s[index];
       t++;
-    }
     index++;
   }
   new[t] = '\0';  // Null terminate the string
