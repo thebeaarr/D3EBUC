@@ -1,10 +1,18 @@
 #ifndef CUB3D_MLX_H
-#define CUB3D_MLX_H
+# define CUB3D_MLX_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../cub3d_parser/include/parser.h"
 #include "../../minilibx-linux/mlx.h"
+
+typedef enum e_keys
+{
+	XK_Left = 0xff52,
+	XK_Right = 0xff53,
+	XK_
+}             t_keys;
+
 typedef struct s_img 
 {
   void *img ;
