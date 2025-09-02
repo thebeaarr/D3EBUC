@@ -447,6 +447,11 @@ void print_cub3d(t_cub3d *cub3d)
     printf("map[%d] = %s" , i + 1, map[i]);// call a function that check if we have one
 }
 
+bool player(char c)
+{
+  return c == 'N' || c == 'W' || c == 'E' || c == 'S' ;
+}
+
 bool parse_map(char **map)
 {
   for(int i = 0 ; map[i] ; i++)
@@ -459,11 +464,21 @@ bool parse_map(char **map)
     int j = 0;
     for(; map[i][j] ; j++)
     {
+      if(map[i][j] != '1' && map[i][j] != '0' && !player(map[i][j]) && !isspace(map[i][j]))
+      {
+        printf("not a valid char\n");
+        return false;
+      }
       if(!isspace(map[i][j]))
         break;
     }
     if(map[i][j] == '\0' || map[i][j] == '\n')
+    {
+      printf("no walls\n");
       return false;
+    }
+    // check if it close or not db wla n7wi mok 
+    
   }
   return true;
 }
@@ -472,13 +487,9 @@ t_cub3d *get_file_as_struct(char *path)
 {
 
   t_cub3d *store;
-
   store = NULL;
-
   store = malloc(sizeof(t_cub3d));
-
   t_list *list = read_file(path);
-
   if(list == NULL)
   {
     printf("ERROR");
