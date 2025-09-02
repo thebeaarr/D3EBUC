@@ -467,6 +467,7 @@ bool parse_map(char **map)
   }
   return true;
 }
+
 t_cub3d *get_file_as_struct(char *path)
 {
 
