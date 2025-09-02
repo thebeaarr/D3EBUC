@@ -1,6 +1,9 @@
 #include "../include/parser.h"
 #include <ctype.h>
 #include <ctype.h>
+#include <ctype.h>
+#include <stdbool.h>
+
 
 static size_t	ft_countword(const char *str)
 {
@@ -91,7 +94,6 @@ t_file *anode(char *line)
 {
   t_file *node = malloc(sizeof(t_file));
   node->line = strdup(line);
-  free(line);
   node->next = NULL;
   return node;
 }
@@ -104,17 +106,17 @@ void add_back(t_file **head, t_file *current)
     tmp = tmp->next;
   tmp->next = current;
 }
-bool is_first_str_map(char *str)
-{
-  int i = 0;
-  while(str[i])
-  {
-    if(str[i] != '1' && !isspace(str[i]) && str[i] != '\n')
-      return false;
-    i++;
-  }
-  return true;
-}
+// bool is_first_str_map(char *str)
+// {
+//   int i = 0;
+//   while(str[i])
+//   {
+//     if(str[i] != '1' ||  !isspace(str[i]) || str[i] != '\n')
+//       return false;
+//     i++;
+//   }
+//   return true;
+// }
 bool isspaces(char *line)
 {
   int i = 0;
@@ -122,9 +124,12 @@ bool isspaces(char *line)
   {
     if(!isspace(line[i]))
       return false;
+    i++;
   }
-  return true;
+  return line[i] == '\0';
 }
+
+#include <ctype.h>
 t_list *read_file(char *path)
 {
   char *tmp ;
@@ -139,9 +144,21 @@ t_list *read_file(char *path)
     // read first part of the map
   while((tmp = get_next_line(fd)))
   {
-    if(is_first_str_map(tmp))
+    int i = 0;
+    if(tmp[0] == '\n')
+    {
+      free(tmp);
+      continue;
+    }
+    while(tmp[i] == '1' || isspace(tmp[i]) || tmp[i] == '\n')
+      i++;
+    if(tmp[i] == '\0')
       break;
-    line = anode(tmp);
+    i = 0;
+    while(isspace(tmp[i]))
+      i++;
+
+    line = anode(tmp + i);
     if(!list)
     {
       list = malloc(sizeof(t_list));
@@ -150,17 +167,10 @@ t_list *read_file(char *path)
     else
       add_back(&list->head_f , line);
   }
-
   // read first part of the map
-
   list->head_s = anode(tmp);
   while((tmp = get_next_line(fd)))
   {
-    if(isspaces(tmp))
-    {
-      printf("map empty");
-      exit(1);
-    }
     line = anode(tmp);
     add_back(&list->head_s , line);
   }
@@ -262,8 +272,7 @@ char ***get_textures(t_file *head)
   }
   return textures;
 }
-#include <ctype.h>
-#include <stdbool.h>
+
 bool dup_c(t_file *head)
 {
   t_file *current ;
@@ -287,8 +296,6 @@ bool dup_c(t_file *head)
   return (count_f != 1 || count_c != 1);
 }
 
-
-#include <ctype.h>
 char *rm_spaces_check(char *s)
 {
   char *new = malloc(sizeof(char) * ft_strlen(s) + 1);
@@ -310,6 +317,7 @@ char *rm_spaces_check(char *s)
   new[t] = '\0';
   return new;
 }
+
 int get_color(char *s )
 {
   if (!s)
@@ -408,24 +416,93 @@ char **get_map(t_file *head)
   while(current)
   {
     map[i] = current->line;
-    i++;
     current = current->next;
-  } 
+    i++;
+  }
   return map;
+}
+
+void print_list(t_file *head)
+{
+  t_file *current  = head;
+  while(current)
+  {
+    printf("%s" , current->line);
+    current = current->next;
+  }
+}
+void print_cub3d(t_cub3d *cub3d)
+{
+  char ***txt = cub3d->textures;
+  for(int i = 0 ; txt[i] ; i++)
+  {
+    for(int j =0; txt[i][j];j++)
+      printf("%s", txt[i][j]);
+    printf("\n");
+  }
+  printf("floor = %d\nceiling = %d\n", cub3d->floor, cub3d->ceiling); // already the map is just checked incease of the overflow
+  char **map ;
+  map = cub3d->map;
+  for(int i = 0 ; map[i] ; i++)
+    printf("map[%d] = %s" , i + 1, map[i]);// call a function that check if we have one
+}
+
+bool parse_map(char **map)
+{
+  for(int i = 0 ; map[i] ; i++)
+  {
+    if(map[i][0] == '\n')
+    {
+      printf("empty line\n");
+      return false;
+    }
+    int j = 0;
+    for(; map[i][j] ; j++)
+    {
+      if(!isspace(map[i][j]))
+        break;
+    }
+    if(map[i][j] == '\0' || map[i][j] == '\n')
+      return false;
+  }
+  return true;
 }
 t_cub3d *get_file_as_struct(char *path)
 {
+
   t_cub3d *store;
+
   store = NULL;
+
   store = malloc(sizeof(t_cub3d));
+
   t_list *list = read_file(path);
-  if(size_list(list->head_f) > 6)
+
+  if(list == NULL)
+  {
+    printf("ERROR");
     return NULL;
+  }
+  int size = size_list(list->head_f);
+  printf("size 1 : %d\n",size);
+  if(size > 6)
+    return NULL;
+  printf("----------- first list\n");
+  print_list(list->head_f);
+  printf("------------second list\n");
+  print_list(list->head_s);
   store->textures = get_textures(list->head_f);
   if(store->textures == NULL)
     return NULL;
   if(!get_colors_(store , list->head_f))
     return NULL;
   store->map = get_map(list->head_s);
+  if(store->map == NULL)
+    return NULL;
+  if(!parse_map(store->map))
+  {
+    return NULL;
+  }
+  print_cub3d(store);
   return store;
 }

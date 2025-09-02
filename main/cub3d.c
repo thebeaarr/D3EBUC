@@ -34,10 +34,7 @@ int init_mlx(t_data *data)
         return (0);
 
     data->img->img = mlx_new_image(data->mlx, 1000, 500);
-    data->img->adr = mlx_get_data_addr(data->img->img,
-        &data->img->bits_per_pixel,
-        &data->img->line_length,
-        &data->img->endian);
+    data->img->adr = mlx_get_data_addr(data->img->img,&data->img->bits_per_pixel,&data->img->line_length,&data->img->endian);
     return (1);
 }
 static int gett_color(char c)
@@ -52,7 +49,6 @@ void draw_map(t_data *data)
 {
     char **map = data->cub3d->map;
     int tile = 31;
-
     for (int i = 0; map[i]; i++)
     {
         for (int j = 0; map[i][j]; j++)

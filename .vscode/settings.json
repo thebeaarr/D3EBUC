@@ -71,6 +71,7 @@
     "Makefile.*": "makefile",
     "get_next_line.h": "c",
     "stdio.h": "c",
-    "mlx.h": "c"
+    "mlx.h": "c",
+    "cstdlib": "c"
   }
 }
