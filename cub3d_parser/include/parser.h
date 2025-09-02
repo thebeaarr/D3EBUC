@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
-
+#include <stdbool.h>
+#include <ctype.h>
 #include "../../libft/libft.h"
 #include "../../libft/get_next_line/get_next_line.h"
 #include "../../minilibx-linux/mlx.h"
@@ -20,8 +21,8 @@ typedef struct s_file
 
 typedef struct  s_list
 {
-  t_file *head;
-  t_file *ptr_hold;
+  t_file *head_f;
+  t_file *head_s;
 } t_list;
 
 // the player 
@@ -40,4 +41,5 @@ typedef struct s_cub3d
 } t_cub3d;
 void print_cub3d(t_cub3d *cub3d);
 t_cub3d *get_file_as_struct(char *path);
+int validate_map_boundaries(char **map);
 #endif
