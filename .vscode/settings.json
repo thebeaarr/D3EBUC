@@ -70,6 +70,7 @@
     "*.cmake.in": "cmake",
     "Makefile.*": "makefile",
     "get_next_line.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "mlx.h": "c"
   }
 }
