@@ -501,9 +501,7 @@ t_cub3d *get_file_as_struct(char *path)
   if(store->map == NULL)
     return NULL;
   if(!parse_map(store->map))
-  {
     return NULL;
-  }
   print_cub3d(store);
   return store;
 }
