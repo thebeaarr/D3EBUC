@@ -19,17 +19,20 @@ typedef struct s_file
 
 typedef struct  s_list
 {
-  t_file *head_f; // first -> texutres c f .
-  t_file *head_s;// map_s ;
+  t_file *head_f;
+  t_file *head_s;
 } t_list;
 
 typedef struct s_cub3d
 {
-  char **map;       // the map ;
+  char **map;
   int floor ;
   int ceiling ;
-  char ***textures; // textures
+  char ***textures;
 } t_cub3d;
+void free_dptr(char **txt);
+void free_tptr(char ***textures , int count);
+void free_list(t_list *head);
 bool parse_map(char **map);
 char **get_map(t_file *head);
 char	**ft_split_space(const char *s);
@@ -43,4 +46,5 @@ bool get_colors_(t_cub3d *store , t_file *head);
 bool is_player(char c);
 void print_cub3d(t_cub3d *cub3d);
 int size_list(t_file *head);
+
 #endif

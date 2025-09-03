@@ -9,7 +9,7 @@ t_list *read_file(char *path)
   if(fd < 0)
   {
     printf("ERROR: failed to open file");
-    exit(1);
+    return NULL;
   }
     // read first part of the map
   while((tmp = get_next_line(fd)))
@@ -23,7 +23,7 @@ t_list *read_file(char *path)
     while(tmp[i] == '1' || isspace(tmp[i]) || tmp[i] == '\n')
       i++;
     if(tmp[i] == '\0')
-      break;
+		break;
     i = 0;
     while(isspace(tmp[i]))
       i++;
@@ -36,14 +36,24 @@ t_list *read_file(char *path)
     }
     else
       add_back(&list->head_f , line);
+	free(tmp);
+  }
+  if(size_list(list->head_f) > 6)
+  {
+	free_list(list);
+	return NULL;
   }
   // read first part of the map
   list->head_s = anode(tmp);
+  free(tmp);
   while((tmp = get_next_line(fd)))
   {
     line = anode(tmp);
     add_back(&list->head_s , line);
+	free(tmp);
   }
+  if(tmp)
+  	free(tmp);
   close(fd);  
   return list;
 }

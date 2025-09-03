@@ -38,7 +38,7 @@ char *rm_spaces_check(char *s)
   while(s[index])
   {
       new[t] = s[index];
-      t++;
+      	t++;
     index++;
   }
   new[t] = '\0';
@@ -74,8 +74,7 @@ int get_color(char *s )
   int r = ft_atoi(color[0]);
   int g = ft_atoi(color[1]);
   int b = ft_atoi(color[2]);
-  
-  // Free memory after use
+
   for(int i = 0; i < count; i++)
     free(color[i]);
   free(color);

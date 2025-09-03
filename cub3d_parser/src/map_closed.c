@@ -14,7 +14,7 @@ bool map_closed(char **map)
 			}
 			if(map[i][j] == '0' || is_player(map[i][j]))
 			{
-			  if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) ) && j > 0 )
+			  if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) || map[i][j + 1] == '\0' ) && j > 0 )
 			    return false;
 			}
 		}
@@ -24,7 +24,7 @@ bool map_closed(char **map)
 		if(is_player(map[i][j]) || map[i][j] == '0' )
 			return false;
 	}
-	
+
 	return true;
 }
 

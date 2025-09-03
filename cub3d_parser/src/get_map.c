@@ -16,7 +16,7 @@ char **get_map(t_file *head)
    i = 0;
   while(current)
   {
-    map[i] = current->line;
+    map[i] = strdup(current->line);
     current = current->next;
     i++;
   }

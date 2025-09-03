@@ -32,3 +32,30 @@ bool is_player(char c)
 {
   return c == 'N' || c == 'W' || c == 'E' || c == 'S' ;
 }
+
+
+void free_file(t_file*head)
+{
+	t_file *tmp ;
+	while(head)
+	{
+		tmp = head->next ;
+		free(head->line);
+		free(head);
+		head = tmp ;
+	}
+	head = NULL;
+}
+void free_list(t_list *head)
+{
+	if(head)
+	{
+		if(head->head_s)
+			free_file(head->head_s);
+		if(head->head_f)
+			free_file(head->head_f);
+		free(head);
+	}
+	head = NULL;
+}
+

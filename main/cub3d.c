@@ -9,8 +9,7 @@ int handle_close()
 
 int handle_key(int a  , t_data *data)
 {
-  // something like 
-  (void)data;   
+  (void)data;
   if(a == 65307)
   {
     printf("good bye!");
@@ -74,20 +73,17 @@ int main(int ac, char **av)
         return (1);
     }
 
-    data = malloc(sizeof(t_data));
-    if (!data)
-        return (1);
-
+	
     // 1) Parse map (a problem in the parsing still checking for it)
-    data->cub3d = get_file_as_struct(av[1]);
-    if (!data->cub3d)
+    t_cub3d *cub3d = get_file_as_struct(av[1]);
+    if (!cub3d)
     {
-        printf("ERROR: parsing\n");
-        free(data);
+		printf("ERROR: parsing\n");
         return (1);
     }
     // print_cub3d(data->cub3d);
-
+	data = malloc(sizeof(t_data));
+	data->cub3d = cub3d ;
     // 2) Initialize MLX
     if (!init_mlx(data))
     {

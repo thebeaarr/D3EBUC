@@ -66,6 +66,34 @@ bool path_valid(char *str)
   return true;
 }
 
+void free_dptr(char **txt)
+{
+	int index;
+
+	index = 0;
+	while(txt[index])
+	{
+		free(txt[index]);
+		index++;
+	}
+	free(txt);
+	txt = NULL;
+}
+
+void free_tptr(char ***textures , int count )
+{
+	int index;
+
+	index = 0;
+	while(index < count)
+	{
+		free_dptr(textures[index]);
+		index++;
+	}
+	free(textures);
+	textures = NULL;
+}
+
 char ***get_textures(t_file *head)
 {
   t_file *current = head;
@@ -86,7 +114,8 @@ char ***get_textures(t_file *head)
       if(!check_ntxt(textures[count]) || !path_valid(textures[count][1]))
       {
         printf("invalid textures");
-        return NULL;
+		free_tptr(textures , count);
+		return NULL;
       }
       count++;
     }
