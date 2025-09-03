@@ -167,7 +167,6 @@ t_list *read_file(char *path)
     else
       add_back(&list->head_f , line);
   }
-  printf("%s", tmp);
   // read first part of the map
   list->head_s = anode(tmp);
   while((tmp = get_next_line(fd)))
@@ -457,7 +456,6 @@ bool is_player(char c)
 bool map_closed(char **map)
 {
 	int i  = 1;
-	// first line has to be full of just 1 and spaces ( for the next string will be the)
 	for( ; map[i +1] ; i++)
 	{
 		for(int j = 0 ; map[i][j] ; j++)
@@ -484,50 +482,49 @@ bool map_closed(char **map)
 }
 
 bool parse_map(char **map)
-{
-  int count_p  =0;
-  for(int i = 0; map[i] ;i++)
-  {
-    for(int k =0 ; map[i][k];k++)
-    {
-      if(is_player(map[i][k]))
-        count_p++;
-    }
-  }
-  if(count_p != 1)
-  {
-    printf("ERROR:player not exist or there is multiple player\n");
-    return false;    
-  }
-  for(int i = 0 ; map[i] ; i++)
-  {
-    if(map[i][0] == '\n')
-    {
-      printf("empty line\n");
-      return false;
-    }
-    int j = 0;
-    for(; map[i][j] ; j++)
-    {
-      if(map[i][j] != '1' && map[i][j] != '0' && !is_player(map[i][j]) && !isspace(map[i][j]))
-      {
-        printf("not a valid char\n");
-        return false;
-      }
-      if(!isspace(map[i][j]))
-        break;
-    }
-    if(map[i][j] == '\0' || map[i][j] == '\n')
-    {
-      printf("no walls\n");
-      return false;
-    }
-    // check if it close or not db wla n7wi mok 
-      if(!map_closed(map))
-        return false;
-  }
-  return true;
-}
+{	
+	int count_p  =0;
+	for(int i = 0; map[i] ;i++)
+	{
+		for(int k =0 ; map[i][k];k++)
+		{
+		  if(is_player(map[i][k]))
+		    count_p++;
+		}
+	}
+	if(count_p != 1)
+	{
+		printf("ERROR:player not exist or there is multiple player\n");
+		return false;
+	}
+	for(int i = 0 ; map[i] ; i++)
+	{
+		if(map[i][0] == '\n')
+		{
+		  printf("empty line\n");
+		  return false;
+		}
+		int j = 0;
+		for(; map[i][j] ; j++)
+		{
+		  if(map[i][j] != '1' && map[i][j] != '0' && !is_player(map[i][j]) && !isspace(map[i][j]))
+		  {
+		    printf("not a valid char\n");
+		    return false;
+		  }
+		  if(!isspace(map[i][j]))
+		    break;
+		}
+		if(map[i][j] == '\0' || map[i][j] == '\n')
+		{
+			printf("no walls\n");
+			return false;
+		}
+		if(!map_closed(map))
+			return false;
+	}
+	return true;
+}	
 
 t_cub3d *get_file_as_struct(char *path)
 {
@@ -542,13 +539,12 @@ t_cub3d *get_file_as_struct(char *path)
     return NULL;
   }
   int size = size_list(list->head_f);
-  printf("size 1 : %d\n",size);
   if(size > 6)
     return NULL;
-  printf("----------- first list\n");
-  print_list(list->head_f);
-  printf("------------second list\n");
-  print_list(list->head_s);
+//   printf("----------- first list\n");
+//   print_list(list->head_f);
+//   printf("------------second list\n");
+//   print_list(list->head_s);
   store->textures = get_textures(list->head_f);
   if(store->textures == NULL)
     return NULL;
@@ -559,6 +555,6 @@ t_cub3d *get_file_as_struct(char *path)
     return NULL;
   if(!parse_map(store->map))
     return NULL;
-  print_cub3d(store);
+//   print_cub3d(store);
   return store;
 }
