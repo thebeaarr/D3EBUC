@@ -64,5 +64,7 @@ int 	handle_close();
 int		init_mlx(t_data *data);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void  	draw_2d(t_data *data);
+int		draw_map(void *arg);
+int		draw_map_init(void *arg);
 
 #endif

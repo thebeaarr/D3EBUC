@@ -106,3 +106,68 @@ int key_release(t_keys key , t_data *data)
     //   printf("release ->\n");
     return 0;
 }
+
+static int gett_color(char c)
+{
+    if (c == '1')
+		return WHITE;
+    if (c == '0')
+		return BLACK;
+    if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
+		return ORANGE;
+    return GREEN;
+}
+
+int	draw_map_init(void *arg)
+{
+	t_data *data;
+
+	data = (t_data *)arg;
+    char **map = data->cub3d->map;
+    int tile = 40;
+
+    for (int i = 0; map[i]; i++)
+    {
+        for (int j = 0; map[i][j] && map[i][j] != '\n'; j++)
+        {
+            int color = gett_color(map[i][j]);
+			if (color == ORANGE)
+				color = BLACK;
+			for (int y = 0; y < tile; y++)
+			{
+				for (int x = 0; x < tile; x++)
+				{
+					my_mlx_pixel_put(data->img,j * tile + x,i * tile + y,color);
+				}
+			}
+        }
+    }
+    mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	return (0);
+}
+
+int	draw_map(void *arg)
+{
+
+	t_data *data;
+
+	data = (t_data *)arg;
+    char **map = data->cub3d->map;
+    int tile = 40;
+	draw_map_init(data);
+    for (int i = 0; map[i]; i++)
+    {
+        for (int j = 0; map[i][j]; j++)
+        {
+            int color = gett_color(map[i][j]);
+			for (int y = 1; y < tile && color == ORANGE; y++)
+			{
+				for (int x = 1; x < tile; x++)
+					my_mlx_pixel_put(data->img,j * tile + x + data->position.x * 20, i * tile + y + data->position.y * 20, color);
+
+			}
+        }
+    }
+    mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	return (0);
+}
