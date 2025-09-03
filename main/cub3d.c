@@ -56,6 +56,7 @@ int	draw_map(void *arg)
 			i = 0;
 			color = *(int *)(img->adr + x * byte + y * img->line_length);
 			// printf("color : %X\n",0xffffff);
+			
 			// printf("%X %zu\n",WHITE, sizeof(WHITE));
 			if (color == ORANGE)
 			{
