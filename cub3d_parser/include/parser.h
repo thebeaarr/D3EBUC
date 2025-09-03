@@ -15,13 +15,12 @@ typedef struct s_file
 {
   char *line;
   struct s_file *next;
-
 } t_file;
 
 typedef struct  s_list
 {
-  t_file *head_f;
-  t_file *head_s;
+  t_file *head_f; // first -> texutres c f .
+  t_file *head_s;// map_s ;
 } t_list;
 
 typedef struct s_cub3d

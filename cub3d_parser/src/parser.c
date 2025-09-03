@@ -167,6 +167,7 @@ t_list *read_file(char *path)
     else
       add_back(&list->head_f , line);
   }
+  printf("%s", tmp);
   // read first part of the map
   list->head_s = anode(tmp);
   while((tmp = get_next_line(fd)))
@@ -424,7 +425,7 @@ char **get_map(t_file *head)
 
 void print_list(t_file *head)
 {
-  t_file *current  = head;
+  t_file *current= head;
   while(current)
   {
     printf("%s" , current->line);
@@ -453,18 +454,26 @@ bool is_player(char c)
 }
 
 
-
 bool map_closed(char **map)
 {
-  // first line has 
-  for(int i = 0; map[i] ; i++)
+  // first line has to be full of just 1 and spaces ( for the next string will be the)
+  for(int i = 1 ; map[i + 1] ; i++)
   {
-    for(int j = 0 ; map[i][j]; j++)
+    for(int j = 0 ; map[i][j] ; j++)
     {
-      
+      if(isspace(map[i][j]))
+      {
+        if((map[i - 1][j] == '0' || map[i + 1][j] == '0' || map[i][j+1] == '0' || map[i][j - 1] == '0' )&& j > 0 )
+          return false;
+      }
+      if(map[i][j] == '0' || is_player(map[i][j]))
+      {
+        if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) )&& j > 0 )
+          return false;
+      }
     }
   }
-  return true ;
+  return true;
 }
 
 bool parse_map(char **map)
@@ -507,8 +516,8 @@ bool parse_map(char **map)
       return false;
     }
     // check if it close or not db wla n7wi mok 
-    // if(!map_closed(map))
-      // return false;
+      if(!map_closed(map))
+        return false;
   }
   return true;
 }
