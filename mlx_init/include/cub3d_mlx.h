@@ -19,17 +19,17 @@ typedef enum e_keys
 
 typedef enum e_colors
 {
-	BLACK   = 0x000000,
-    WHITE   = 0xFFFFFF,
-    RED     = 0xFF0000,
-    GREEN   = 0x00FF00,
-    BLUE    = 0x0000FF,
-    YELLOW  = 0xFFFF00,
-    CYAN    = 0x00FFFF,
-    MAGENTA = 0xFF00FF,
-    ORANGE  = 0xFFA500,
-    PURPLE  = 0x800080,
-    GRAY    = 0x808080
+	BLACK   = 0x00000000,
+    WHITE   = 0xFFFFFFFF,
+    RED     = 0x00FF0000,
+    GREEN   = 0x0000FF00,
+    BLUE    = 0x000000FF,
+    YELLOW  = 0x00FFFF00,
+    CYAN    = 0x0000FFFF,
+    MAGENTA = 0x00FF00FF,
+    ORANGE  = 0x00FFA500,
+    PURPLE  = 0x00800080,
+    GRAY    = 0x00808080
 }				t_colors;
 
 typedef struct s_position

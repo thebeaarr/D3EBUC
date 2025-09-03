@@ -2,44 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// int handle_close()
-// {
-//   printf("tfi daw\n");
-//   exit(1);
-// }
-
-// int handle_key(int a  , t_data *data)
-// {
-//   // something like 
-//   (void)data;
-//     printf("keysym is %d , %c \n",a , a);
-
-//   return 0;
-// }
-
-/* render_init.c */
-// int init_mlx(t_data *data)
-// {
-//     data->mlx = mlx_init();
-//     if (!data->mlx)
-//         return (0);
-
-//     data->win = mlx_new_window(data->mlx, 1000, 800, "Cub3D");
-//     if (!data->win)
-//         return (0);
-
-//     data->img = malloc(sizeof(t_image));
-//     if (!data->img)
-//         return (0);
-
-// 	data->img->img = mlx_new_image(data->mlx, 1000, 800);
-//     data->img->adr = mlx_get_data_addr(data->img->img,
-//         &data->img->bits_per_pixel,
-//         &data->img->line_length,
-//         &data->img->endian);
-//     return (1);
-// }
-
 static int gett_color(char c)
 {
     if (c == '1')
@@ -57,7 +19,7 @@ int	draw_map_init(void *arg)
 
 	data = (t_data *)arg;
     char **map = data->cub3d->map;
-    int tile = 60;
+    int tile = 40;
 
     for (int i = 0; map[i]; i++)
     {
@@ -79,31 +41,50 @@ int	draw_map(void *arg)
 {
 	t_data *data;
 	t_image *img;
-    int tile = 60;
+	int		byte;
+	t_colors color;
+	int		i;
 
+	i = 0;
 	data = (t_data *)arg;
 	img = data->img;
-	for (int j = 0; img->adr[j]; j++)
+	byte = img->bits_per_pixel / 8;
+	for (int y = 0; y < 800; y++)
 	{
-		int color = gett_color(img->adr[j]);
-		if (color == ORANGE)
+		for (int x = 0; x < 800; x++)
 		{
-			for (int y = 0; y < tile; y++)
+			i = 0;
+			color = *(int *)(img->adr + x * byte + y * img->line_length);
+			// printf("color : %X\n",0xffffff);
+			// printf("%X %zu\n",WHITE, sizeof(WHITE));
+			if (color == ORANGE)
 			{
-				for (int x = 0; x < tile; x++)
-				my_mlx_pixel_put(data->img,j * tile + x + data->position.x * 5,(j * img->line_length) * tile + y + data->position.y ,color);
+				if (data->position.x != 0 || data->position.y != 0)
+				{
+					i++;
+					if(i == 10000) 
+					{
+						data->position.x = 0;
+						data->position.y = 0;
+						break;
+					}
+				}
+					printf("%d",data->position.y);
+
+				my_mlx_pixel_put(data->img,x + data->position.x, y + data->position.y, color);
+				// printf("data->postiion.y %d\n",data->position.y);
+				// data->position.y = 0;	
 			}
+			else
+				my_mlx_pixel_put(data->img,x, y, color);
+			// printf("color %d: %d\n",i, color);
+			// i++;
 		}
-		else
-			for (int y = 0; y < tile; y++)
-			{
-				for (int x = 0; x < tile; x++)
-				my_mlx_pixel_put(data->img,j * tile + x,j * img->line_length * tile + y,color);
-			}
 	}
     mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	return (0);
 }
+
 int main(int ac, char **av)
 {
     t_data *data;
@@ -140,10 +121,12 @@ int main(int ac, char **av)
 	data->position.x = 0;
 	data->position.y = 0;
     // 3) Draw the map (2D debug)
+	printf("data lenght  : %d\n", data->img->line_length);
+	printf("bit/pixel : %d\n",data->img->bits_per_pixel);
 	draw_map_init(data);
 	mlx_loop_hook(data->mlx, draw_map, data);
     // 4) Events + loop
-    mlx_hook(data->win, 17, 0, handle_close, data);
+    // mlx_hook(data->win, 17, 0, handle_close, data);
 	mlx_hook(data->win, 2, KeyPressMask, key_press, data);
 	mlx_hook(data->win, 3, KeyReleaseMask, key_release, data);
     mlx_loop(data->mlx);

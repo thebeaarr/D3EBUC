@@ -17,24 +17,24 @@ int key_press(t_keys key , t_data *data)
     }
     else if (key == XK_s)
 	{
-		data->position.y += 1;
+		data->position.y = +1;
     	printf("s\n");
 	}
 	else if (key == XK_w)
 	{
 
-		data->position.y -= 1;
+		data->position.y = -1;
 		printf("w\n");
 	}
     else if (key == XK_a)
 	{
 
-		data->position.x -= 1;
+		data->position.x = -1;
 		printf("a\n");
 	}
     else if (key == XK_d)
 	{
-		data->position.x += 1;
+		data->position.x = +1;
 		printf("d\n");
 	}
     else if (key == XK_Left)
@@ -59,17 +59,50 @@ int key_release(t_keys key , t_data *data)
 	//   free_all_exit()
       exit(0);
     }
+
     else if (key == XK_s)
-      printf("relase s\n");
+	{
+		data->position.y = 0;
+    	printf("relase s\n");
+	}
+	else if (key == XK_w)
+	{
+
+		data->position.y = 0;
+		printf("relase w\n");
+	}
     else if (key == XK_a)
-      printf("release a\n");
+	{
+
+		data->position.x = 0;
+		printf("relase a\n");
+	}
     else if (key == XK_d)
-      printf("release d\n");
-    else if (key == XK_w)
-      printf("release w\n");
+	{
+		data->position.x = 0;
+		printf("relase d\n");
+	}
     else if (key == XK_Left)
-      printf("release <-\n");
+	{
+
+      printf("<-\n");
+	}
     else if (key == XK_Right)
-      printf("release ->\n");
+	{
+
+      printf("->\n");
+	}
+    // else if (key == XK_s)
+    //   printf("relase s\n");
+    // else if (key == XK_a)
+    //   printf("release a\n");
+    // else if (key == XK_d)
+    //   printf("release d\n");
+    // else if (key == XK_w)
+    //   printf("release w\n");
+    // else if (key == XK_Left)
+    //   printf("release <-\n");
+    // else if (key == XK_Right)
+    //   printf("release ->\n");
     return 0;
 }
