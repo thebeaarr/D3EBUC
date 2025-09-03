@@ -2,7 +2,8 @@ CC = cc
 MLX_DIR = minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 CFLAGS = -Wall -Werror -Wextra -I./libft -I./libft/get_next_line -I$(MLX_DIR) -I./mlx_init/include -g
-SRCS = cub3d_parser/src/parser.c main/cub3d.c mlx_init/src/mlx.c
+SRCS = cub3d_parser/src/parser.c main/cub3d.c mlx_init/src/mlx.c cub3d_parser/src/tools.c cub3d_parser/src/tools_1.c cub3d_parser/src/tools_2.c \
+		cub3d_parser/src/read_file.c cub3d_parser/src/map_closed.c cub3d_parser/src/get_textures.c cub3d_parser/src/get_map.c cub3d_parser/src/get_color.c 
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
