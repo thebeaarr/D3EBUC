@@ -26,7 +26,7 @@ int	draw_map_init(void *arg)
         for (int j = 0; map[i][j]; j++)
         {
             int color = gett_color(map[i][j]);
-			for (int y = 0; y < tile; y++)
+			for (int y = 0; y < tile && color != ORANGE; y++)
 			{
 				for (int x = 0; x < tile; x++)
 				my_mlx_pixel_put(data->img,j * tile + x,i * tile + y,color);
@@ -39,49 +39,27 @@ int	draw_map_init(void *arg)
 
 int	draw_map(void *arg)
 {
+
 	t_data *data;
-	t_image *img;
-	int		byte;
-	t_colors color;
-	int		i;
 
-	i = 0;
 	data = (t_data *)arg;
-	img = data->img;
-	byte = img->bits_per_pixel / 8;
-	for (int y = 0; y < 800; y++)
-	{
-		for (int x = 0; x < 800; x++)
-		{
-			i = 0;
-			color = *(int *)(img->adr + x * byte + y * img->line_length);
-			// printf("color : %X\n",0xffffff);
-			// printf("%X %zu\n",WHITE, sizeof(WHITE));
-			if (color == ORANGE)
+    char **map = data->cub3d->map;
+    int tile = 40;
+	draw_map_init(data);
+    for (int i = 0; map[i]; i++)
+    {
+        for (int j = 0; map[i][j]; j++)
+        {
+            int color = gett_color(map[i][j]);
+			for (int y = 1; y < tile && color == ORANGE; y++)
 			{
-				if (data->position.x != 0 || data->position.y != 0)
-				{
-					i++;
-					if(i == 10000) 
-					{
-						data->position.x = 0;
-						data->position.y = 0;
-						break;
-					}
-				}
-					printf("%d",data->position.y);
-
-				my_mlx_pixel_put(data->img,x + data->position.x, y + data->position.y, color);
-				// printf("data->postiion.y %d\n",data->position.y);
-				// data->position.y = 0;	
+				for (int x = 1; x < tile; x++)
+				my_mlx_pixel_put(data->img,j * tile + x + data->position.x * 20, i * tile + y + data->position.y * 20, color);
 			}
-			else
-				my_mlx_pixel_put(data->img,x, y, color);
-			// printf("color %d: %d\n",i, color);
-			// i++;
-		}
-	}
+        }
+    }
     mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	sleep(10);
 	return (0);
 }
 
@@ -123,10 +101,9 @@ int main(int ac, char **av)
     // 3) Draw the map (2D debug)
 	printf("data lenght  : %d\n", data->img->line_length);
 	printf("bit/pixel : %d\n",data->img->bits_per_pixel);
-	draw_map_init(data);
 	mlx_loop_hook(data->mlx, draw_map, data);
     // 4) Events + loop
-    // mlx_hook(data->win, 17, 0, handle_close, data);
+    mlx_hook(data->win, 17, 0, handle_close, data);
 	mlx_hook(data->win, 2, KeyPressMask, key_press, data);
 	mlx_hook(data->win, 3, KeyReleaseMask, key_release, data);
     mlx_loop(data->mlx);

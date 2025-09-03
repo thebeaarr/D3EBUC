@@ -6,7 +6,7 @@ int init_mlx(t_data *data)
     if (!data->mlx)
         return (0);
 
-    data->win = mlx_new_window(data->mlx, 800, 800, "Cub3D");
+    data->win = mlx_new_window(data->mlx, 1000, 1000, "Cub3D");
     if (!data->win)
         return (0);
 
