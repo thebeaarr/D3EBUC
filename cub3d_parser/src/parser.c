@@ -447,13 +447,42 @@ void print_cub3d(t_cub3d *cub3d)
     printf("map[%d] = %s" , i + 1, map[i]);// call a function that check if we have one
 }
 
-bool player(char c)
+bool is_player(char c)
 {
   return c == 'N' || c == 'W' || c == 'E' || c == 'S' ;
 }
 
+
+
+bool map_closed(char **map)
+{
+  // first line has 
+  for(int i = 0; map[i] ; i++)
+  {
+    for(int j = 0 ; map[i][j]; j++)
+    {
+      
+    }
+  }
+  return true ;
+}
+
 bool parse_map(char **map)
 {
+  int count_p  =0;
+  for(int i = 0; map[i] ;i++)
+  {
+    for(int k =0 ; map[i][k];k++)
+    {
+      if(is_player(map[i][k]))
+        count_p++;
+    }
+  }
+  if(count_p != 1)
+  {
+    printf("ERROR:player not exist or there is multiple player\n");
+    return false;    
+  }
   for(int i = 0 ; map[i] ; i++)
   {
     if(map[i][0] == '\n')
@@ -464,7 +493,7 @@ bool parse_map(char **map)
     int j = 0;
     for(; map[i][j] ; j++)
     {
-      if(map[i][j] != '1' && map[i][j] != '0' && !player(map[i][j]) && !isspace(map[i][j]))
+      if(map[i][j] != '1' && map[i][j] != '0' && !is_player(map[i][j]) && !isspace(map[i][j]))
       {
         printf("not a valid char\n");
         return false;
@@ -478,7 +507,8 @@ bool parse_map(char **map)
       return false;
     }
     // check if it close or not db wla n7wi mok 
-    
+    // if(!map_closed(map))
+      // return false;
   }
   return true;
 }

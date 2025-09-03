@@ -48,7 +48,7 @@ static int gett_color(char c)
 void draw_map(t_data *data)
 {
     char **map = data->cub3d->map;
-    int tile = 31;
+    int tile = 35    ;
     for (int i = 0; map[i]; i++)
     {
         for (int j = 0; map[i][j]; j++)
