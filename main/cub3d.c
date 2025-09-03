@@ -37,14 +37,18 @@ int init_mlx(t_data *data)
     data->img->adr = mlx_get_data_addr(data->img->img,&data->img->bits_per_pixel,&data->img->line_length,&data->img->endian);
     return (1);
 }
-static int gett_color(char c)
+static int	gett_color(char c)
 {
-    if (c == '1') return 0xFFFF00;
-    if (c == '0') return 0x0000FF;
-    if (c == 'N' || c == 'W' || c == 'E' || c == 'S') return 0xFF0000;
-    return 0x00FF00;
+	if (c == '1')        // Walls
+		return (0x808080);   // Gray
+	if (c == '0')        // Empty floor
+		return (0xFFFFFF);   // White
+	if (c == 'N' || c == 'W' || c == 'E' || c == 'S') // Player start
+		return (0xFF0000);   // Red
+	if (c == ' ')        // Outside map / void
+		return (0x000000);   // Black
+	return (0x00FF00);    // Debug (green if unknown char)
 }
-
 void draw_map(t_data *data)
 {
     char **map = data->cub3d->map;

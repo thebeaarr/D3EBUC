@@ -456,24 +456,31 @@ bool is_player(char c)
 
 bool map_closed(char **map)
 {
-  // first line has to be full of just 1 and spaces ( for the next string will be the)
-  for(int i = 1 ; map[i + 1] ; i++)
-  {
-    for(int j = 0 ; map[i][j] ; j++)
-    {
-      if(isspace(map[i][j]))
-      {
-        if((map[i - 1][j] == '0' || map[i + 1][j] == '0' || map[i][j+1] == '0' || map[i][j - 1] == '0' )&& j > 0 )
-          return false;
-      }
-      if(map[i][j] == '0' || is_player(map[i][j]))
-      {
-        if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) )&& j > 0 )
-          return false;
-      }
-    }
-  }
-  return true;
+	int i  = 1;
+	// first line has to be full of just 1 and spaces ( for the next string will be the)
+	for( ; map[i +1] ; i++)
+	{
+		for(int j = 0 ; map[i][j] ; j++)
+		{
+			if(isspace(map[i][j]))
+			{
+				if((map[i - 1][j] == '0' || map[i + 1][j] == '0' || map[i][j+1] == '0' || map[i][j - 1] == '0' ) && j > 0 )
+					return false;
+			}
+			if(map[i][j] == '0' || is_player(map[i][j]))
+			{
+			  if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) ) && j > 0 )
+			    return false;
+			}
+		}
+	}
+	for(int j = 0; map[i][j] ; j++)
+	{
+		if(is_player(map[i][j]) || map[i][j] == '0' )
+			return false;
+	}
+	
+	return true;
 }
 
 bool parse_map(char **map)
