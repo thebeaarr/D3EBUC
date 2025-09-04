@@ -9,7 +9,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
 OBJ = $(SRCS:.c=.o)
-NAME = cub3d
+NAME = cub3dtest
 
 all: $(NAME)
 

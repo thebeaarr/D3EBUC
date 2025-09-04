@@ -37,6 +37,8 @@ bool is_player(char c)
 void free_file(t_file*head)
 {
 	t_file *tmp ;
+	tmp = NULL;
+	
 	while(head)
 	{
 		tmp = head->next ;
@@ -44,18 +46,14 @@ void free_file(t_file*head)
 		free(head);
 		head = tmp ;
 	}
-	head = NULL;
 }
 void free_list(t_list *head)
 {
 	if(head)
 	{
-		if(head->head_s)
-			free_file(head->head_s);
-		if(head->head_f)
-			free_file(head->head_f);
+		free_file(head->head_f);
+		free_file(head->head_s);
 		free(head);
 	}
-	head = NULL;
 }
 

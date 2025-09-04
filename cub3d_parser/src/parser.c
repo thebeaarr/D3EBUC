@@ -17,10 +17,10 @@ t_cub3d *get_file_as_struct(char *path)
   t_cub3d *store;
   store = NULL;
   /// check the path and open it to see if it's just good ? 
-  if(!path_cub(path))
-	return NULL;
-  store = malloc(sizeof(t_cub3d));
-  t_list *list = read_file(path);
+	if(!path_cub(path))
+		return NULL;
+	t_list *list = read_file(path);
+	store = malloc(sizeof(t_cub3d));
   if(list == NULL || list->head_f == NULL || list->head_s == NULL)
   {
     printf("ERROR");

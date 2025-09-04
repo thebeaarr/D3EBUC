@@ -9,20 +9,23 @@ bool map_closed(char **map)
 	{
 		// the first char we know that is has to be a 
 		int k = 0 ;
-		for(;  isspace(map[i][k]) ; k++);
+		for(;  map[i][k] == 32 ; k++);
 		if(map[i][k] != '1')
 			return false;
 		for(int j = 0 ; map[i][j] ; j++)
 		{
-			if(isspace(map[i][j]))
+			if(map[i][j] == 32)
 			{
 				if((map[i - 1][j] == '0' || map[i + 1][j] == '0' || map[i][j+1] == '0' || map[i][j - 1] == '0' ) )
 					return false;
 			}
 			if(map[i][j] == '0' || is_player(map[i][j]))
 			{
-			  if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) || map[i][j + 1] == '\0' ) )
-			    return false;
+				if(((ft_strlen(map[i]) > ft_strlen(map[i + 1]) && ft_strlen(map[i]) > ft_strlen(map[i  - 1]) ) || map[i-1][j] == 32 || map[i + 1][j] == 32 || map[i][j+1] == 32 || map[i][j - 1] == 32 || map[i][j + 1] == '\0' ) )
+				{
+					printf("player may escape the map\n");
+					return false;
+				}
 			}
 			if(is_player(map[i][j]))
 			{
@@ -69,12 +72,12 @@ bool parse_map(char **map)
 		int j = 0;
 		for(; map[i][j] ; j++)
 		{
-		  if(map[i][j] != '1' && map[i][j] != '0' && !is_player(map[i][j]) && !isspace(map[i][j]))
+		  if(map[i][j] != '1' && map[i][j] != '0' && !is_player(map[i][j]) && map[i][j] != 32)
 		  {
 		    printf("not a valid char\n");
 		    return false;
 		  }
-		  if(!isspace(map[i][j]))
+		  if(map[i][j] != 32)
 		    break;
 		}
 		if(map[i][j] == '\0' || map[i][j] == '\n')

@@ -4,7 +4,7 @@ t_list *read_file(char *path)
 {
   char *tmp ;
   t_list *list = NULL;
-  t_file *line ;
+  t_file *line = NULL;
   int fd = open(path  , O_RDONLY);
   if(fd < 0)
   {
@@ -20,7 +20,7 @@ t_list *read_file(char *path)
       free(tmp);
       continue;
     }
-    while(tmp[i] == '1' || isspace(tmp[i]) || tmp[i] == '\n')
+    while(tmp[i] == '1' || tmp[i] == 32 || tmp[i] == '\n')
       i++;
     if(tmp[i] == '\0')
 		break;
@@ -31,7 +31,11 @@ t_list *read_file(char *path)
     line = anode(tmp + i);
     if(!list)
     {
-      list = malloc(sizeof(t_list));
+      list = malloc(sizeof(t_list)); 
+	  // because of the move or jump depends on
+	  // uninitialised variables !!! find a good soltuions
+	  list->head_f = NULL;
+	  list->head_s = NULL;
       list->head_f = line  ;
     }
     else
@@ -44,6 +48,13 @@ t_list *read_file(char *path)
 	return NULL;
   }
   // read first part of the map
+  if(tmp == NULL)
+  {
+	// remove shit and freee
+	printf("uncompete map\n");
+	free_list(list);
+	exit(1);
+  }
   list->head_s = anode(tmp);
   free(tmp);
   while((tmp = get_next_line(fd)))

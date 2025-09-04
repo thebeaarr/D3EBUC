@@ -33,6 +33,7 @@ typedef struct s_cub3d
 void free_dptr(char **txt);
 void free_tptr(char ***textures , int count);
 void free_list(t_list *head);
+void free_file(t_file*head);
 bool parse_map(char **map);
 char **get_map(t_file *head);
 char	**ft_split_space(const char *s);
