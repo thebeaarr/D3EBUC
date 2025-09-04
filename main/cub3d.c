@@ -25,6 +25,5 @@ int main(int ac , char **av)
 		free_cub3d(cub3d);
 		return 1;
 	}
-	mlx_init();
 	return 0;
 }
