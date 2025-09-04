@@ -1,8 +1,5 @@
 #include "../include/parser.h"
 
-
-
-
 bool path_cub(char *path)
 {
 	char *extension;
