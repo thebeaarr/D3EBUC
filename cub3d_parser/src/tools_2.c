@@ -25,7 +25,7 @@ void print_cub3d(t_cub3d *cub3d)
   char **map ;
   map = cub3d->map;
   for(int i = 0 ; map[i] ; i++)
-    printf("map[%d] = %s" , i + 1, map[i]);// call a function that check if we have one
+    printf("--%s\n" , map[i]);// call a function that check if we have one
 }
 
 bool is_player(char c)

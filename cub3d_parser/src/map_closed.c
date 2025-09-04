@@ -1,21 +1,36 @@
 #include "../include/parser.h"
 
+
+
 bool map_closed(char **map)
 {
 	int i  = 1;
 	for( ; map[i +1] ; i++)
 	{
+		// the first char we know that is has to be a 
+		int k = 0 ;
+		for(;  isspace(map[i][k]) ; k++);
+		if(map[i][k] != '1')
+			return false;
 		for(int j = 0 ; map[i][j] ; j++)
 		{
 			if(isspace(map[i][j]))
 			{
-				if((map[i - 1][j] == '0' || map[i + 1][j] == '0' || map[i][j+1] == '0' || map[i][j - 1] == '0' ) && j > 0 )
+				if((map[i - 1][j] == '0' || map[i + 1][j] == '0' || map[i][j+1] == '0' || map[i][j - 1] == '0' ) )
 					return false;
 			}
 			if(map[i][j] == '0' || is_player(map[i][j]))
 			{
-			  if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) || map[i][j + 1] == '\0' ) && j > 0 )
+			  if((isspace(map[i-1][j]) || isspace(map[i + 1][j]) || isspace(map[i][j+1]) || isspace(map[i][j - 1]) || map[i][j + 1] == '\0' ) )
 			    return false;
+			}
+			if(is_player(map[i][j]))
+			{
+				if(( map[i-1][j] == '1' && map[i + 1][j] == '1' && map[i][j+1] == '1' && map[i][j - 1] == '1' && map[i][j + 1] == '1' ) )
+				{
+					printf("player can't move\n");
+					return false;
+				}
 			}
 		}
 	}

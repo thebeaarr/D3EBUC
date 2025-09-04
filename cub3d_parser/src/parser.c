@@ -1,12 +1,27 @@
 #include "../include/parser.h"
 
+
+
+
+bool path_cub(char *path)
+{
+	char *extension;
+
+	extension = ft_strrchr(path , '.');
+	if(strcmp(extension  , ".cub") == 0)
+		return true;
+	return false;
+}
 t_cub3d *get_file_as_struct(char *path)
 {
   t_cub3d *store;
   store = NULL;
+  /// check the path and open it to see if it's just good ? 
+  if(!path_cub(path))
+	return NULL;
   store = malloc(sizeof(t_cub3d));
   t_list *list = read_file(path);
-  if(list == NULL)
+  if(list == NULL || list->head_f == NULL || list->head_s == NULL)
   {
     printf("ERROR");
     return NULL;
@@ -42,6 +57,6 @@ t_cub3d *get_file_as_struct(char *path)
 	free(store);
 	return NULL;
   }
-//   print_cub3d(store);
+  print_cub3d(store);
   return store;
 }
