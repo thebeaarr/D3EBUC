@@ -25,9 +25,6 @@ int main(int ac , char **av)
 		free_cub3d(cub3d);
 		return 1;
 	}
-	// data->mlx = mlx_init();
-	// data->win = mlx_new_window(data->mlx , 400 , 200 , "test" );
-	// data->img->img = mlx_new_image(data->mlx , 2 , 2);
-	// data->img->adr = mlx_get_data_addr(data->img->img , &data->img->bits_per_pixel , &data->img->line_length , &data->img->endian);
+	mlx_init();
 	return 0;
 }
