@@ -54,7 +54,19 @@ t_cub3d *get_file_as_struct(char *path)
 	free(store);
 	return NULL;
   }
-  printf("x  = %d, y = %d" , store->player_x , store->player_y);
+  for(int i = 0 ; store->map[i]   ; i++)
+  {
+    for(int j = 0 ; store->map[i][j]; j++)
+    {
+      if(is_player(store->map[i][j]))
+      {
+        store->player_x = j;
+        store->player_y = i;
+        break;
+      }
+    }
+  }
+  printf("x  = %d, y = %d\n\n" , store->player_x , store->player_y);
   print_cub3d(store);
   return store;
 }

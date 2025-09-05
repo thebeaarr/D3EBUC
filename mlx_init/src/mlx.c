@@ -48,15 +48,56 @@ bool is_key_mover(int keycode)
 
 void move_player(int keycode  , t_data *config)
 {
-	(void)config;
+	// valid the position 
+	// then change between the chars 
+	char **map = config->cub3d->map;
+	int x = config->cub3d->player_x;
+	int y = config->cub3d->player_y;
+	int c;
 	if(keycode == 97)
+	{
 		printf("A\n");
+		if(map[y][x - 1] != '\0' && map[y][x-1] != '1')
+		{
+			c  = map[y][x];
+			map[y][x] = '0';
+			map[y][x - 1] = c;
+			config->cub3d->player_x--;
+		}
+	}
 	else if(keycode == 115)
+	{
 		printf("S\n");
+		if(map[y - 1][x] != '\0' && map[y - 1][x] != '1')
+		{
+			c  = map[y][x];
+			map[y][x] = '0';
+			map[y - 1][x] = c;
+			config->cub3d->player_y--;
+		}
+	}
 	else if(keycode == 119)
+	{
 		printf("W\n");
+		if(map[y + 1][x] != '\0' && map[y + 1][x] != '1')
+		{
+			c  = map[y][x];
+			map[y][x] = '0';
+			map[y + 1][x] = c;
+			config->cub3d->player_y++;
+		}
+	}
 	else if(keycode == 100)
+	{
 		printf("D\n");
+		if(map[y][x + 1] != '\0' && map[y][x+1] != '1')
+		{
+			c  = map[y][x];
+			map[y][x] = '0';
+			map[y][x + 1] = c;
+			config->cub3d->player_x++;
+		}	
+	}
 }
 
 
@@ -68,8 +109,12 @@ int key_press_handler(int keycode, t_data *config)
 		exit(1);
 	}
 	if(is_key_mover(keycode))
+	{
 		move_player(keycode  , config);
-    return (0);
+		draw_shit(config);
+		mlx_put_image_to_window(config->mlx , config->win ,config->img->img , 0 , 0);
+	}
+  return (0);
 }
 
 int key_release_handler(int keycode)
@@ -95,8 +140,10 @@ bool chef_raycaster(t_cub3d *cub3d)
 {
 	t_data *_config;
 	printf("seg here \n");  
+
 	_config = malloc(sizeof(t_data));
 	_config->cub3d = cub3d ;
+	// find the positino of the player first ( sorry i have to get it first from her ? hahah )
 	_config->mlx  = mlx_init();
 	_config->win =  mlx_new_window(_config->mlx  , 500 , 300 , "test");
 	printf("seg here \n");  
@@ -113,7 +160,7 @@ bool chef_raycaster(t_cub3d *cub3d)
 	draw_shit(_config);
 	mlx_put_image_to_window(_config->mlx , _config->win , _config->img->img , 0, 0);
     mlx_hook(_config->win, 2, 1L<<0, key_press_handler,_config);
-	mlx_hook(_config->win, 4, 1L<<2, mouse_click_handler , NULL);
+	// mlx_hook(_config->win, 4, 1L<<2, mouse_click_handler , NULL);
 	mlx_loop(_config->mlx);
 	return true;
 }
