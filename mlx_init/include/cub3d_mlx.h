@@ -1,5 +1,4 @@
-#ifndef CUB3D_MLX_H
-# define CUB3D_MLX_H
+#pragma once 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,5 +30,4 @@ typedef struct s_data
 }t_data;
 
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
-void draw_2d(t_data *data);
-#endif
+bool chef_raycaster(t_cub3d *cub3d);

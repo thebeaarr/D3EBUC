@@ -1,5 +1,6 @@
 #include "../cub3d_parser/include/parser.h"
 #include "../mlx_init/include/cub3d_mlx.h"
+#include "../mlx_init/include/cub3d_mlx.h"
 
 void free_cub3d(t_cub3d *cub3d)
 {
@@ -19,11 +20,6 @@ int main(int ac , char **av)
 	cub3d = get_file_as_struct(av[1]);
 	if(cub3d == NULL)
 		return 1;
-	t_data *data = malloc(sizeof(t_data));
-	if(data == NULL)
-	{
-		free_cub3d(cub3d);
-		return 1;
-	}
+	chef_raycaster(cub3d);
 	return 0;
 }
