@@ -36,7 +36,7 @@ bool chef_raycaster(t_cub3d *cub3d)
 			my_mlx_pixel_put(_config->img ,i ,j , i * 255 - j * 255);	
 	}
 	mlx_put_image_to_window(_config->mlx , _config->win , _config->img->img , 0, 0);
-	while(1); // mn b3d w nchufo hadchi kifach khdam
+	while(1); // mn b3d w nchufo hadchi kifach khdam  byna mlx_loop(window) ms machi db 
 	return true;
 }
 
