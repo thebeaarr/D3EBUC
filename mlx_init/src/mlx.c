@@ -30,9 +30,13 @@ bool chef_raycaster(t_cub3d *cub3d)
 	// 	printf("%c\n" , _config->img->adr[i]);
 	// that's not good hhhhhh 
 	// anyway try to crazy hhh
-	my_mlx_pixel_put(_config->img , 299 ,20 , 0x00ff00);	
+	for(int i  = 10 ; i < 500 ; i++)
+	{
+		for(int j = 10 ; j< 300 ; j++)
+			my_mlx_pixel_put(_config->img ,i ,j , i * 255 - j * 255);	
+	}
 	mlx_put_image_to_window(_config->mlx , _config->win , _config->img->img , 0, 0);
-	while(1);
+	while(1); // mn b3d w nchufo hadchi kifach khdam
 	return true;
 }
 
