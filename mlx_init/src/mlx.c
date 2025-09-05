@@ -30,7 +30,7 @@ void draw_shit(t_data *_config)
 	{
 		for(int j = 0 ; map[i][j]; j++)
 		{
-			int tile = 16; 
+			int tile = 30; 
 			for(int x = 0 ; x  < tile; x ++)
 			{
 				for(int  y = 0; y < tile ; y++)
@@ -216,10 +216,10 @@ bool chef_raycaster(t_cub3d *cub3d)
 	_config->cub3d = cub3d ;
 	// find the positino of the player first ( sorry i have to get it first from her ? hahah )
 	_config->mlx  = mlx_init();
-	_config->win =  mlx_new_window(_config->mlx  , 500 , 300 , "test");
+	_config->win =  mlx_new_window(_config->mlx  , 1000 ,700 , "test");
 	printf("seg here \n");  
 	_config->img = malloc(sizeof(t_image));
-	_config->img->img = mlx_new_image(_config->mlx, 500 , 300);
+	_config->img->img = mlx_new_image(_config->mlx, 1000 , 700);
 	_config->img->adr = mlx_get_data_addr(_config->img->img  ,&_config->img->bits_per_pixel, &_config->img->line_length , &_config->img->endian );
 	// printf("--%x --- %d--- %d---\n", ++*_config->img->adr++ , _config->img->line_length ,_config->img->endian);
 	// u trying to tell me that the adr is nothign ??  is a space then okay 
