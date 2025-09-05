@@ -54,6 +54,7 @@ t_cub3d *get_file_as_struct(char *path)
 	free(store);
 	return NULL;
   }
+  printf("x  = %d, y = %d" , store->player_x , store->player_y);
   print_cub3d(store);
   return store;
 }

@@ -67,7 +67,6 @@ bool parse_map(char **map)
 {
 	int player_count = 0;
 	int i = 0;
-
 	while (map[i])
 	{
 		if (map[i][0] == '\n' || map[i][0] == '\0')
@@ -78,10 +77,9 @@ bool parse_map(char **map)
 		int j = 0;
 		while (map[i][j])
 		{
-			char c = map[i][j];
-			if (is_player(c))
-					player_count++;
-			else if (c != '0' && c != '1' && c != 32)
+			if (is_player(map[i][j]))
+				player_count++;
+			else if (  map[i][j] != '0' &&  map[i][j] != '1' &&  map[i][j] != 32)
 			{
 				printf("not a valid char\n");
 				return false;

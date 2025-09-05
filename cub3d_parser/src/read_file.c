@@ -15,7 +15,7 @@ t_list *read_file(char *path)
   while((tmp = get_next_line(fd)))
   {
     int i = 0;
-    if(tmp[0] == '\n')
+    if(tmp[0] == '\n' || isspaces(tmp))
     {
       free(tmp);
       continue;

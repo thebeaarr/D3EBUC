@@ -26,8 +26,11 @@ typedef struct  s_list
 typedef struct s_cub3d
 {
   char **map;
-  int floor ;
-  int ceiling ;
+  // player position 
+  int player_x ;
+  int player_y; 
+  int floor;
+  int ceiling;
   char ***textures;
 } t_cub3d;
 void free_dptr(char **txt);
