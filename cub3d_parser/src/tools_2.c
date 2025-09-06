@@ -21,11 +21,11 @@ void print_cub3d(t_cub3d *cub3d)
       printf("%s", txt[i][j]);
     printf("\n");
   }
-  printf("floor = %d\nceiling = %d\n", cub3d->floor, cub3d->ceiling); // already the map is just checked incease of the overflow
+  printf("floor = %d\nceiling = %d\n", cub3d->floor, cub3d->ceiling);
   char **map ;
   map = cub3d->map;
   for(int i = 0 ; map[i] ; i++)
-    printf("--%s|\n" , map[i]);// call a function that check if we have one
+    printf("--%s|\n" , map[i]);
 }
 
 bool is_player(char c)

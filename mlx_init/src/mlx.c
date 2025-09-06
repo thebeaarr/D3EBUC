@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "../../cub3d_parser/include/parser.h"
 #include "../../minilibx-linux/mlx.h"
+
+
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
@@ -149,8 +151,9 @@ void move_player2(int keycode , t_data *config)
 {
 	if(keycode == 65362)
 	{
-			config->cub3d->player_y -= 3;
-			printf("↑\n");
+
+		config->cub3d->player_y -= 3;
+		printf("↑\n");
 	}
 	else if(keycode ==65364)
 	{
