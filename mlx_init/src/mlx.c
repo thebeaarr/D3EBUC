@@ -36,8 +36,11 @@ void draw_shit(t_data *_config)
 			}
 		}
 	}
-	// i know the position of the player
-	my_mlx_pixel_put(_config->img ,_config->cub3d->player_x , _config->cub3d->player_y , 0x00FFFF);
+	for(int i = -3 ; i < 3 ; i++)
+	{
+		for(int j = -3 ; j < 3 ; j++)
+			my_mlx_pixel_put(_config->img ,_config->cub3d->player_x + i, _config->cub3d->player_y + j, 0x00FFFF);
+	}
 }
 // bool is_key_mover(int keycode)
 // {	
