@@ -12,15 +12,11 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 }
 int color_render(char c)
 {
-    if(is_player(c))
-        return 0x00FFFF;   // cyan
-    if(c == '1')
+	if(c == '1')
         return 0x00FF00;   // green
-    if(c == '0')
-        return 0x0000FF;   // blue
-    if(c == ' ')
+	if(c == ' ')
         return 0x000000;   // black
-    return 0xFFFFFF;       // white for unknown chars
+	return 0x0000FF;   // blue
 }
 
 void draw_shit(t_data *_config)
@@ -40,6 +36,8 @@ void draw_shit(t_data *_config)
 			}
 		}
 	}
+	// i know the position of the player
+	my_mlx_pixel_put(_config->img ,_config->cub3d->player_x , _config->cub3d->player_y , 0x00FFFF);
 }
 // bool is_key_mover(int keycode)
 // {	
@@ -143,61 +141,25 @@ bool is_key_mover2(int keycode)
 }
 void move_player2(int keycode , t_data *config)
 {
-	char **map = config->cub3d->map;
-	int x = config->cub3d->player_x;
-	int y = config->cub3d->player_y;
-	int c;
 	if(keycode == 65362)
 	{
-		if(map[y - 1][x] != '\0' && map[y - 1][x] != '1')
-		{
+			config->cub3d->player_y -= 3;
 			printf("↑\n");
-			c  = map[y][x];
-			map[y][x] = '0';
-			map[y - 1][x ] = c;
-			config->cub3d->player_y--;
-		}
-		else
-			printf("can't move\n");
 	}
 	else if(keycode ==65364)
 	{
-		if(map[y - 1][x] != '\0' && map[y + 1][x] != '1')
-		{
-			printf("↓\n");
-			c  = map[y][x];
-			map[y][x] = '0';
-			map[y + 1][x] = c;
-			config->cub3d->player_y++;
-		}
-		else
-			printf("can't move\n");
+		printf("↓\n");
+		config->cub3d->player_y+= 3;
 	}
 	else if(keycode == 65363)
 	{
-		if(map[y + 1][x] != '\0' && map[y][x + 1] != '1')
-		{
-			printf("→\n");
-			c  = map[y][x];
-			map[y][x] = '0';
-			map[y][x + 1] = c;
-			config->cub3d->player_x++;
-		}
-		else
-			printf("can't move\n");
+		printf("→\n");
+		config->cub3d->player_x+= 3;
 	}
 	else if(keycode == 65361)
 	{
-		if(map[y][x - 1] != '\0' && map[y][x-1] != '1')
-		{
-			printf("←\n");
-			c  = map[y][x];
-			map[y][x] = '0';
-			map[y][x - 1] = c;
-			config->cub3d->player_x--;
-		}
-		else
-			printf("can't move\n");
+		printf("←\n");
+		config->cub3d->player_x-=3;
 	}
 }
 int key_press_hadik(int keycode , t_data *config)

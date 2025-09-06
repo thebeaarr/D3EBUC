@@ -60,8 +60,8 @@ t_cub3d *get_file_as_struct(char *path)
     {
       if(is_player(store->map[i][j]))
       {
-        store->player_x = j;
-        store->player_y = i;
+        store->player_x = j * 30  + 15;
+        store->player_y = i * 30 + 15;
         break;
       }
     }
