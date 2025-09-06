@@ -149,47 +149,55 @@ void move_player2(int keycode , t_data *config)
 	int c;
 	if(keycode == 65362)
 	{
-		printf("↑\n");
 		if(map[y - 1][x] != '\0' && map[y - 1][x] != '1')
 		{
+			printf("↑\n");
 			c  = map[y][x];
 			map[y][x] = '0';
 			map[y - 1][x ] = c;
 			config->cub3d->player_y--;
 		}
+		else
+			printf("can't move\n");
 	}
 	else if(keycode ==65364)
 	{
-		printf("↓\n");
 		if(map[y - 1][x] != '\0' && map[y + 1][x] != '1')
 		{
+			printf("↓\n");
 			c  = map[y][x];
 			map[y][x] = '0';
 			map[y + 1][x] = c;
 			config->cub3d->player_y++;
 		}
+		else
+			printf("can't move\n");
 	}
 	else if(keycode == 65363)
 	{
-		printf("→\n");
 		if(map[y + 1][x] != '\0' && map[y][x + 1] != '1')
 		{
+			printf("→\n");
 			c  = map[y][x];
 			map[y][x] = '0';
 			map[y][x + 1] = c;
 			config->cub3d->player_x++;
 		}
+		else
+			printf("can't move\n");
 	}
 	else if(keycode == 65361)
 	{
-		printf("←\n");
 		if(map[y][x - 1] != '\0' && map[y][x-1] != '1')
 		{
+			printf("←\n");
 			c  = map[y][x];
 			map[y][x] = '0';
 			map[y][x - 1] = c;
 			config->cub3d->player_x--;
-		}	
+		}
+		else
+			printf("can't move\n");
 	}
 }
 int key_press_hadik(int keycode , t_data *config)
@@ -207,6 +215,8 @@ int key_press_hadik(int keycode , t_data *config)
 	}
 	return 0;
 }
+
+
 bool chef_raycaster(t_cub3d *cub3d)
 {
 	t_data *_config;
@@ -214,26 +224,15 @@ bool chef_raycaster(t_cub3d *cub3d)
 
 	_config = malloc(sizeof(t_data));
 	_config->cub3d = cub3d ;
-	// find the positino of the player first ( sorry i have to get it first from her ? hahah )
 	_config->mlx  = mlx_init();
 	_config->win =  mlx_new_window(_config->mlx  , 1000 ,700 , "test");
 	printf("seg here \n");  
 	_config->img = malloc(sizeof(t_image));
 	_config->img->img = mlx_new_image(_config->mlx, 1000 , 700);
 	_config->img->adr = mlx_get_data_addr(_config->img->img  ,&_config->img->bits_per_pixel, &_config->img->line_length , &_config->img->endian );
-	// printf("--%x --- %d--- %d---\n", ++*_config->img->adr++ , _config->img->line_length ,_config->img->endian);
-	// u trying to tell me that the adr is nothign ??  is a space then okay 
-	/// that's toought
-	// for(int i = 0 ;_config->img->adr ; i++)
-	// 	printf("%c\n" , _config->img->adr[i]);
-	// that's not good hhhhhh 
-	// anyway try to crazy hhh
 	draw_shit(_config);
 	mlx_put_image_to_window(_config->mlx , _config->win , _config->img->img , 0, 0);
-  // mlx_hook(_config->win, 2, 1L<<0, key_press_handler,_config);
-  mlx_hook(_config->win, 2, 1L<<0, key_press_hadik,_config);
-	// mlx_hook(_config->win, 4, 1L<<2, mouse_click_handler , NULL);
+	mlx_hook(_config->win, 2, 1L<<0, key_press_hadik,_config);
 	mlx_loop(_config->mlx);
 	return true;
 }
-
