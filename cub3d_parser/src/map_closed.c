@@ -4,28 +4,26 @@
 #include <string.h>
 
 
-static char get_cell(char **map, int i, int j, int rows)
+static char get_cell(char **map, int i, int j)
 {
-    if (i < 0 || i >= rows) return ' ';
-    if (j < 0 || j >= (int)strlen(map[i])) return ' ';
     return map[i][j];
 }
 
-static bool has_hole(char **map, int i, int j, int rows)
+static bool has_hole(char **map, int i, int j)
 {
-    if (get_cell(map, i - 1, j, rows) == ' ') return true;
-    if (get_cell(map, i + 1, j, rows) == ' ') return true;
-    if (get_cell(map, i, j - 1, rows) == ' ') return true;
-    if (get_cell(map, i, j + 1, rows) == ' ') return true;
+    if (get_cell(map, i - 1, j) == ' ') return true;
+    if (get_cell(map, i + 1, j) == ' ') return true;
+    if (get_cell(map, i, j - 1) == ' ') return true;
+    if (get_cell(map, i, j + 1) == ' ') return true;
     return false;
 }
 
-static bool player_trapped(char **map, int i, int j, int rows)
+static bool player_trapped(char **map, int i, int j)
 {
-    if (get_cell(map, i - 1, j, rows) != '1') return false;
-    if (get_cell(map, i + 1, j, rows) != '1') return false;
-    if (get_cell(map, i, j - 1, rows) != '1') return false;
-    if (get_cell(map, i, j + 1, rows) != '1') return false;
+    if (get_cell(map, i - 1, j) != '1') return false;
+    if (get_cell(map, i + 1, j) != '1') return false;
+    if (get_cell(map, i, j - 1) != '1') return false;
+    if (get_cell(map, i, j + 1) != '1') return false;
     return true;
 }
 
@@ -36,7 +34,7 @@ bool map_closed(char **map)
 	while (map[rows])
 		rows++;
 	int i = 0;
-	while (i < rows)
+	while (map[i])
 	{
 		int j = 0;
 		while (map[i][j])
@@ -44,13 +42,13 @@ bool map_closed(char **map)
 			char c = map[i][j]; 
 			if (c == '0' || is_player(c))
 			{
-				if (has_hole(map, i, j, rows))
+				if (has_hole(map, i, j))
 				{
 					printf("player or zero may escape the map\n");
 					return false;
 				}
 			}
-			if (is_player(c) && player_trapped(map, i, j, rows))
+			if (is_player(c) && player_trapped(map, i, j))
 			{
 				printf("player can't move\n");
 				return false;

@@ -42,6 +42,7 @@ void draw_shit(t_data *_config)
 			my_mlx_pixel_put(_config->img ,_config->cub3d->player_x + i, _config->cub3d->player_y + j, 0x00FFFF);
 	}
 }
+
 // bool is_key_mover(int keycode)
 // {	
 // 	return keycode == 97 || keycode == 115 || keycode == 100 || keycode == 119; 
@@ -138,9 +139,11 @@ void draw_shit(t_data *_config)
 //         printf("Right mouse button clicked!\n");
 //     return (0);
 // }
+
+
 bool is_key_mover2(int keycode)
 {
-	return keycode ;
+	return keycode;
 }
 void move_player2(int keycode , t_data *config)
 {
