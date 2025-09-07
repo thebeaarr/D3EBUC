@@ -11,6 +11,9 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 OBJ = $(SRCS:.c=.o)
 NAME = cub3d
 
+HEADER_FILE_MLX = mlx_init/include/cub3d_mlx.h
+PARSER_HDR= cub3d_parser/include/parser.h
+
 all: $(NAME)
 
 $(LIBFT):
@@ -19,7 +22,7 @@ $(LIBFT):
 $(MLX_LIB):
 	make -C $(MLX_DIR)
 
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
+$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ) $(HEADER_FILE_MLX) $(PARSER_HDR)
 	$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o: %.c
