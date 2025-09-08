@@ -43,11 +43,11 @@ void draw_shit(t_data *_config)
 
 bool is_key_mover2(int keycode)
 {
-	return keycode == 65362 || keycode ==65364 || keycode ==65363 || keycode ==65361;
+	return keycode == 119 || keycode == 115 || keycode == 100 || keycode == 97;
 }
 void move_player2(int keycode , t_data *config)
 {
-	if(keycode == 65362)
+	if(keycode == 119)
 	{
 		char **map = config->cub3d->map ;
 		if( map[(config->cub3d->player_y  - 3 ) / config->cub3d->tile][(config->cub3d->player_x) / config->cub3d->tile] == '1')
@@ -58,7 +58,7 @@ void move_player2(int keycode , t_data *config)
 		config->cub3d->player_y -= 3;
 		printf("↑\n");
 	}
-	else if(keycode ==65364)
+	else if(keycode ==115)
 	{
 		char **map = config->cub3d->map ;
 		if( map[(config->cub3d->player_y  + 3) / config->cub3d->tile][(config->cub3d->player_x) / config->cub3d->tile] == '1')
@@ -69,7 +69,7 @@ void move_player2(int keycode , t_data *config)
 		printf("↓\n");
 		config->cub3d->player_y+= 3;
 	}
-	else if(keycode == 65363)
+	else if(keycode == 100)
 	{
 		char **map = config->cub3d->map ;
 		if( map[(config->cub3d->player_y) / config->cub3d->tile][(config->cub3d->player_x + 3) / config->cub3d->tile] == '1')
@@ -80,7 +80,7 @@ void move_player2(int keycode , t_data *config)
 		printf("→\n");
 		config->cub3d->player_x+= 3;
 	}
-	else if(keycode == 65361)
+	else if(keycode == 97)
 	{
 		char **map = config->cub3d->map ;
 		if( map[(config->cub3d->player_y  ) / config->cub3d->tile][(config->cub3d->player_x - 3) / config->cub3d->tile] == '1')
