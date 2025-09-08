@@ -55,30 +55,12 @@ int	draw_map(void *arg)
 		{
 			i = 0;
 			color = *(int *)(img->adr + x * byte + y * img->line_length);
-			// printf("color : %X\n",0xffffff);
-			// printf("%X %zu\n",WHITE, sizeof(WHITE));
 			if (color == ORANGE)
 			{
-				if (data->position.x != 0 || data->position.y != 0)
-				{
-					i++;
-					if(i == 10000) 
-					{
-						data->position.x = 0;
-						data->position.y = 0;
-						break;
-					}
-				}
-					printf("%d",data->position.y);
-
 				my_mlx_pixel_put(data->img,x + data->position.x, y + data->position.y, color);
-				// printf("data->postiion.y %d\n",data->position.y);
-				// data->position.y = 0;	
 			}
 			else
 				my_mlx_pixel_put(data->img,x, y, color);
-			// printf("color %d: %d\n",i, color);
-			// i++;
 		}
 	}
     mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
