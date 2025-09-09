@@ -14,10 +14,20 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 int color_render(char c)
 {
 	if(c == '1')
-        return 0x00FF00;   // green
+		return 0x00FF00;
 	if(c == ' ')
-        return 0x000000;   // black
-	return 0x0000FF;   // blue
+		return 0x000000;
+	return 0x0000FF;
+}
+
+
+void draw_player(t_data *_config)
+{
+	for(int i = -3 ; i < 3 ; i++)
+	{
+		for(int j = -3 ; j < 3 ; j++)
+			my_mlx_pixel_put(_config->img ,_config->cub3d->player_x + i, _config->cub3d->player_y + j, 0x00FFFF);
+	}
 }
 
 void draw_shit(t_data *_config)
@@ -34,11 +44,7 @@ void draw_shit(t_data *_config)
 			}
 		}
 	}
-	for(int i = -3 ; i < 3 ; i++)
-	{
-		for(int j = -3 ; j < 3 ; j++)
-			my_mlx_pixel_put(_config->img ,_config->cub3d->player_x + i, _config->cub3d->player_y + j, 0x00FFFF);
-	}
+	draw_player(_config);
 }
 
 bool is_key_mover2(int keycode)

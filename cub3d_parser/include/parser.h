@@ -27,6 +27,15 @@ typedef struct  s_list
 	t_file *head_s;
 } t_list;
 
+
+typedef struct s_keys 
+{
+	int w;
+	int s ;
+	int d;
+	int n ;
+}t_keys ;
+
 typedef struct s_cub3d
 {
 	char **map;
@@ -34,7 +43,8 @@ typedef struct s_cub3d
 	int map_h;
 	int tile ;
 	int player_x ;
-	int player_y; 
+	int player_y;
+	t_keys keys; 
 	int floor;
 	int ceiling;
 	char ***textures;
