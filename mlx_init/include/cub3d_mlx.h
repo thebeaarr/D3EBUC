@@ -6,6 +6,10 @@
 #include "../../cub3d_parser/include/parser.h"
 #include "../../minilibx-linux/mlx.h"
 #include <X11/X.h>
+#define RAY_COUNT 200
+#define RAY_STEP 1.0
+
+
 
 typedef enum e_keys
 {
@@ -67,7 +71,27 @@ typedef struct s_data
   float			angle;
   t_image		*img;
   t_cub3d		*cub3d;
+  t_position 	orange_position;
 }t_data;
+
+typedef struct s_ray
+{
+    double dirX;       
+    double dirY;       
+    int mapX;           
+    int mapY;           
+    double sideDistX;
+    double sideDistY;
+    double deltaX;       
+    double deltaY;       
+    double distance;    
+    int stepX;           
+    int stepY;           
+    int side;           	
+    int lineHeight;      
+    int startY;          
+    int endY;            
+} t_ray;
 
 /* key handling */
 int 	key_release(t_keys key , t_data *data);

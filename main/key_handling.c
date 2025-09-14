@@ -88,8 +88,11 @@ int key_release(t_keys key , t_data *data)
 
 void	update_movement(t_data *data)
 {
-	float speed = data->movement.speed;
-	float rot_speed = 0.05;
+	float speed;
+	float rot_speed;
+	
+	speed = data->movement.speed;
+	rot_speed = 0.05;
 	
 	if (data->movement.up)
 		data->position.y -= speed;
@@ -158,7 +161,7 @@ int	draw_map(void *arg)
 		{
 			color = gett_color(map[i][j]);
 			
-			if (map[i][j] != 'N' && map[i][j] != 'W' && map[i][j] != 'E' && map[i][j] != 'S')
+			if (color != ORANGE)
 			{
 				for (y = 0; y < tile; y++)
 				{
@@ -178,17 +181,21 @@ int	draw_map(void *arg)
 	{
 		for (j = 0; map[i][j]; j++)
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S')
+			color = gett_color(map[i][j]);
+			if (color == ORANGE)
 			{
-				
-				color = ORANGE;
 				for (y = 0; y < tile; y++)
 				{
 					for (x = 0; x < tile; x++)
 					{
+
 						screen_x = j * tile + x + (int)data->position.x;
 						screen_y = i * tile + y + (int)data->position.y;
-						
+						if(color == ORANGE && y == 0 && x == 0)
+						{
+							data->orange_position.x = screen_x;
+							data->orange_position.y = screen_y;
+						}
 						if (screen_x >= 0 && screen_x < 800 && screen_y >= 0 && screen_y < 800)
 							my_mlx_pixel_put(data->img, screen_x, screen_y, color);
 					}
@@ -207,12 +214,11 @@ void	draw_direction_line(t_data *data)
 {
 	int		start_x, start_y, end_x, end_y;
 	int		tile = 40;
-	float	line_length = 30.0;
 	
-	start_x = data->position.x * tile + tile / 2;
-	start_y = data->position.y * tile + tile / 2;
-	end_x = start_x + (int)(cosf(data->angle) * line_length);
-	end_y = start_y + (int)(sinf(data->angle) * line_length);
+	start_x = data->orange_position.x + tile / 2;
+	start_y = data->orange_position.y + tile / 2;
+	end_x = start_x + (int)(cosf(data->angle) * 40);
+	end_y = start_y + (int)(sinf(data->angle) * 40);
 	
 	draw_line(data, start_x, start_y, end_x, end_y, GREEN);
 }
