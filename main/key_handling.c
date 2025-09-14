@@ -204,7 +204,7 @@ int	draw_map(void *arg)
 		}
 	}
 	draw_direction_line(data);
-	
+	printf("data->agle, %f\n", data->angle * 40);
 	update_movement(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	return (0);
@@ -254,7 +254,10 @@ void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 	while (i <= steps)
 	{
 		if (x >= 0 && x < 800 && y >= 0 && y < 800)
+		{			
 			my_mlx_pixel_put(data->img, x, y, color);
+
+		}
 		x += x_inc;
 		y += y_inc;
 		i++;

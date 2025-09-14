@@ -6,8 +6,6 @@
 #include "../../cub3d_parser/include/parser.h"
 #include "../../minilibx-linux/mlx.h"
 #include <X11/X.h>
-#define RAY_COUNT 200
-#define RAY_STEP 1.0
 
 
 
