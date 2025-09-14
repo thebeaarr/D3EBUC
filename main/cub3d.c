@@ -1,71 +1,7 @@
 #include "../mlx_init/include/cub3d_mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-static int gett_color(char c)
-{
-    if (c == '1')
-		return WHITE;
-    if (c == '0')
-		return BLACK;
-    if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
-		return ORANGE;
-    return GREEN;
-}
-
-int	draw_map_init(void *arg)
-{
-	t_data *data;
-
-	data = (t_data *)arg;
-    char **map = data->cub3d->map;
-    int tile = 40;
-
-    for (int i = 0; map[i]; i++)
-    {
-        for (int j = 0; map[i][j]; j++)
-        {
-            int color = gett_color(map[i][j]);
-			for (int y = 0; y < tile; y++)
-			{
-				for (int x = 0; x < tile; x++)
-				my_mlx_pixel_put(data->img,j * tile + x,i * tile + y,color);
-			}
-        }
-    }
-    mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	return (0);
-}
-
-int	draw_map(void *arg)
-{
-	t_data *data;
-	t_image *img;
-	int		byte;
-	t_colors color;
-	int		i;
-
-	i = 0;
-	data = (t_data *)arg;
-	img = data->img;
-	byte = img->bits_per_pixel / 8;
-	for (int y = 0; y < 800; y++)
-	{
-		for (int x = 0; x < 800; x++)
-		{
-			i = 0;
-			color = *(int *)(img->adr + x * byte + y * img->line_length);
-			if (color == ORANGE)
-			{
-				my_mlx_pixel_put(data->img,x + data->position.x, y + data->position.y, color);
-			}
-			else
-				my_mlx_pixel_put(data->img,x, y, color);
-		}
-	}
-    mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	return (0);
-}
+#include <math.h>
 
 int main(int ac, char **av)
 {
@@ -100,8 +36,17 @@ int main(int ac, char **av)
         free(data);
         return (1);
     }
+	//should be moved to cub_init later
 	data->position.x = 0;
 	data->position.y = 0;
+	data->angle = 0.0;
+    data->movement.up = 0;
+    data->movement.down = 0;
+    data->movement.left = 0;
+    data->movement.right = 0;
+    data->movement.rot_left = 0;
+    data->movement.rot_right = 0;
+    data->movement.speed = 2.0;
     // 3) Draw the map (2D debug)
 	printf("data lenght  : %d\n", data->img->line_length);
 	printf("bit/pixel : %d\n",data->img->bits_per_pixel);

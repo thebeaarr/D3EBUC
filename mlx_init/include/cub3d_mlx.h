@@ -38,6 +38,17 @@ typedef struct s_position
 	int y;
 }				t_position;
 
+typedef struct s_movement
+{
+	int	up;
+	int	down;
+	int	left;
+	int	right;
+	int	rot_left;
+	int	rot_right;
+	float	speed;
+}				t_movement;
+
 typedef struct s_img 
 {
 	void 	*img;
@@ -52,6 +63,8 @@ typedef struct s_data
   void			*mlx;
   void			*win;
   t_position	position;
+  t_movement	movement;
+  float			angle;
   t_image		*img;
   t_cub3d		*cub3d;
 }t_data;
@@ -60,9 +73,13 @@ typedef struct s_data
 int 	key_release(t_keys key , t_data *data);
 int 	key_press(t_keys key , t_data *data);
 int 	handle_close();
+void	update_movement(t_data *data);
+void	draw_direction_line(t_data *data);
+void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 
 int		init_mlx(t_data *data);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void  	draw_2d(t_data *data);
-
+int		draw_map_init(void *arg);
+int		draw_map(void *arg);
 #endif
