@@ -6,6 +6,8 @@
 #include "../../cub3d_parser/include/parser.h"
 #include "../../minilibx-linux/mlx.h"
 #include <X11/X.h>
+# define MV_SPEED 2.5;
+# define TILE 40
 
 typedef enum e_keys
 {
@@ -15,6 +17,7 @@ typedef enum e_keys
 	XK_d = 0x0064,
 	XK_w = 0x0077,
 	XK_s = 0x0073,
+	XK_escape = 0xff1b,
 }             t_keys;
 
 typedef enum e_colors
@@ -36,6 +39,8 @@ typedef struct s_position
 {
 	int	x;
 	int y;
+	float	screen_x;
+	float	screen_y; 
 }				t_position;
 
 typedef struct s_img 
@@ -47,6 +52,11 @@ typedef struct s_img
 	int		endian;
 }	t_image;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+}			t_player;
 typedef struct s_data
 {
   void			*mlx;
@@ -54,6 +64,7 @@ typedef struct s_data
   t_position	position;
   t_image		*img;
   t_cub3d		*cub3d;
+  t_player		player;
 }t_data;
 
 /* key handling */

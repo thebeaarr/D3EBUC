@@ -53,58 +53,37 @@ int key_press(t_keys key , t_data *data)
 int key_release(t_keys key , t_data *data)
 {
     (void)data;
-    if(key == 65307)
+    if(key == XK_escape)
     {
       printf("cub3D closed(Esc)\n");
 	//   free_all_exit()
       exit(0);
     }
-
     else if (key == XK_s)
 	{
-		// data->position.y = 0;
-    	printf("relase s\n");
+		printf("release s\n");
+		data->position.y = 0;
 	}
 	else if (key == XK_w)
 	{
-
-		// data->position.y = 0;
-		printf("relase w\n");
+		printf("release s\n");
+		data->position.y = 0;
 	}
     else if (key == XK_a)
 	{
-
-		// data->position.x = 0;
-		printf("relase a\n");
+		printf("release s\n");
+		data->position.x = 0;
 	}
     else if (key == XK_d)
 	{
-		// data->position.x = 0;
-		printf("relase d\n");
+		printf("release s\n");
+		data->position.x = 0;
 	}
-    else if (key == XK_Left)
-	{
-
-      printf("<-\n");
-	}
-    else if (key == XK_Right)
-	{
-
-      printf("->\n");
-	}
-    // else if (key == XK_s)
-    //   printf("relase s\n");
-    // else if (key == XK_a)
-    //   printf("release a\n");
-    // else if (key == XK_d)
-    //   printf("release d\n");
-    // else if (key == XK_w)
-    //   printf("release w\n");
     // else if (key == XK_Left)
-    //   printf("release <-\n");
+    //   printf("<-\n");
     // else if (key == XK_Right)
-    //   printf("release ->\n");
-    return 0;
+    //   printf("->\n");
+     return 0;
 }
 
 static int gett_color(char c)
@@ -124,7 +103,6 @@ int	draw_map_init(void *arg)
 
 	data = (t_data *)arg;
     char **map = data->cub3d->map;
-    int tile = 40;
 
     for (int i = 0; map[i]; i++)
     {
@@ -133,11 +111,11 @@ int	draw_map_init(void *arg)
             int color = gett_color(map[i][j]);
 			if (color == ORANGE)
 				color = BLACK;
-			for (int y = 0; y < tile; y++)
+			for (int y = 0; y < TILE; y++)
 			{
-				for (int x = 0; x < tile; x++)
+				for (int x = 0; x < TILE; x++)
 				{
-					my_mlx_pixel_put(data->img,j * tile + x,i * tile + y,color);
+					my_mlx_pixel_put(data->img,j * TILE + x,i * TILE + y,color);
 				}
 			}
         }
@@ -146,28 +124,68 @@ int	draw_map_init(void *arg)
 	return (0);
 }
 
+void	update_movement(t_data *data)
+{
+
+	if (data->position.x)
+		data->position.screen_x += MV_SPEED;
+	if (data->position.y == 1)
+		data->position.screen_y += MV_SPEED;
+	if (data->position.x == -1)
+		data->position.screen_x -= MV_SPEED;
+	if (data->position.y == -1)
+		data->position.screen_y -= MV_SPEED;
+	// if (data->position.y == -1)
+	// 	data->position.screen_y -= 2;
+	// if (data->position.y == -1)
+	// 	data->position.screen_y -= 2;
+}
+
+void	borders_stop(t_data *data, int x, int y)
+{
+	t_player	*player;
+
+	player = &data->player;
+	if (x == 0 && data->img->adr[(player->y * data->img->line_length + (player->x + 39) * (data->img->bits_per_pixel / 8))] == (char)WHITE)
+		data->position.screen_x -= MV_SPEED;
+	if (x == 0 && data->img->adr[(player->y * data->img->line_length + (player->x) * (data->img->bits_per_pixel / 8))] == (char)WHITE)
+		data->position.screen_x += MV_SPEED;
+	if (y == 0 && data->img->adr[((player->y + 39) * data->img->line_length + (player->x) * (data->img->bits_per_pixel / 8))] == (char)WHITE)
+		data->position.screen_y -= MV_SPEED;
+	if (y == 0 && data->img->adr[((player->y)* data->img->line_length + (player->x) * (data->img->bits_per_pixel / 8))] == (char)WHITE)
+		data->position.screen_y += MV_SPEED;
+}
+
 int	draw_map(void *arg)
 {
 
-	t_data *data;
+	t_data 		*data;
+	t_player	*player;
+	char		**map;
 
 	data = (t_data *)arg;
-    char **map = data->cub3d->map;
-    int tile = 40;
+	player	= &data->player;
+    map = data->cub3d->map;
 	draw_map_init(data);
     for (int i = 0; map[i]; i++)
     {
-        for (int j = 0; map[i][j]; j++)
+        for (int j = 0; map[i][j] && map[i][j] != '\n'; j++)
         {
             int color = gett_color(map[i][j]);
-			for (int y = 1; y < tile && color == ORANGE; y++)
+			
+			for (int y = 0; color == ORANGE && y < TILE; y++)
 			{
-				for (int x = 1; x < tile; x++)
-					my_mlx_pixel_put(data->img,j * tile + x + data->position.x * 20, i * tile + y + data->position.y * 20, color);
-
+				for (int x = 0; x < TILE; x++)
+				{
+					player->x = j * TILE + x + (int)data->position.screen_x;
+					player->y = i * TILE + y + (int)data->position.screen_y;
+					// borders_stop(data, x ,y);
+					my_mlx_pixel_put(data->img, player->x , player->y, color);
+				}
 			}
         }
     }
+	update_movement(data);
     mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	return (0);
 }

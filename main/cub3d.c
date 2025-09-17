@@ -39,6 +39,8 @@ int main(int ac, char **av)
     }
 	data->position.x = 0;
 	data->position.y = 0;
+	data->position.screen_y = 0;
+	data->position.screen_x = 0;
     // 3) Draw the map (2D debug)
 	printf("data lenght  : %d\n", data->img->line_length);
 	printf("bit/pixel : %d\n",data->img->bits_per_pixel);

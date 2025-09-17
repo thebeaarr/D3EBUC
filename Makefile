@@ -15,10 +15,10 @@ all: $(NAME)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(MLX_LIB):
-	make -C $(MLX_DIR)
+# $(MLX_LIB):
+# 	make -C $(MLX_DIR)
 
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ) mlx_init/include/cub3d_mlx.h
 	$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o: %.c
