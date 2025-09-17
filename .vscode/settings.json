@@ -76,6 +76,7 @@
 	"stdlib.h": "c",
 	"parser.h": "c",
 	"mlx_int.h": "c",
-	"x.h": "c"
+	"x.h": "c",
+	"cub3d.h": "c"
 }
 }
