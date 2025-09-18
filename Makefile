@@ -5,6 +5,7 @@ CFLAGS = -Wall -Werror -Wextra -Iinclude -I./libft -I./libft/get_next_line -I$(M
 SRCS = cub3d_parser/src/parser.c $(wildcard Raycast/*.c)  $(wildcard init/*.c)  main.c
 
 LIBFT_DIR = libft
+HEADER = include/cub3d.h
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
 OBJ = $(SRCS:.c=.o)
@@ -15,8 +16,8 @@ all: $(NAME)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(NAME): $(LIBFT) $(OBJ) include/cub3d.h
-	$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
+$(NAME): $(LIBFT) $(OBJ) $(HEADER)
+	$(CC) $(OBJ) $(HEADER) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

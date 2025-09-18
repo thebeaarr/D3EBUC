@@ -3,10 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../cub3d_parser/include/parser.h"
-#include "../../minilibx-linux/mlx.h"
+#include "../cub3d_parser/include/parser.h"
+#include "../minilibx-linux/mlx.h"
 #include <X11/X.h>
-# define MV_SPEED 2.5;
+# define MV_SPEED 1.0;
 # define TILE 40
 
 typedef enum e_keys
@@ -19,7 +19,7 @@ typedef enum e_keys
 	XK_s = 0x0073,
 	XK_escape = 0xff1b,
 }             t_keys;
-
+ 
 typedef enum e_colors
 {
 	BLACK   = 0x00000000,
@@ -54,6 +54,8 @@ typedef struct s_img
 
 typedef struct s_player
 {
+	int	init_x;
+	int	init_y;
 	int	x;
 	int	y;
 }			t_player;
@@ -73,8 +75,11 @@ int 	key_press(t_keys key , t_data *data);
 void	update_movement(t_data *data);
 int 	handle_close();
 
+/* Init cub3D*/
 int		init_mlx(t_data *data);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
-int		draw_map(void *arg);
+void	get_player_pos(t_data *data);
+int		gett_color(char c);
 
+int		draw_map(void *arg);
 #endif
