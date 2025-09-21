@@ -23,27 +23,31 @@ int	gett_color(char c)
 	return (GREEN);
 }
 
-void	get_player_pos(t_data *data)
+void	player_init(t_player *player)
 {
 	char		**map;
 	int			i;
 	int			j;
 
-	map = data->cub3d->map;
-	i = 0;
-	while (map[i])
-	{
+	map = player->data->cub3d->map;
+	player->position.x = 0;
+	player->position.y = 0;
+	player->position.screen_y = 0;
+	player->position.screen_x = 0;
+	player->angle = 0;
+	i = -1;
+	while (map[++i])
+	{ 
 		j = 0;
 		while (map[i][j] && map[i][j] != '\n')
 		{
 			if (gett_color(map[i][j]) == ORANGE)
 			{
-				data->player.init_x = j;
-				data->player.init_y = i;
+				player->init_x = j * TILE;
+				player->init_y = i * TILE;
 				return ;
 			}
 			j++;
 		}
-		i++;
 	}
 }

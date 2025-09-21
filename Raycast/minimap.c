@@ -18,22 +18,19 @@ static int	is_border(t_data *data, int x, int y)
 		(data->img->bits_per_pixel / 8))] == (char)WHITE);
 }
 
-static void	borders_stop(t_data *data, int x, int y)
+static void	borders_stop(t_player *player, int x, int y)
 {
-	t_player	*player;
-
-	player = &data->player;
-	if (x == 0 && is_border(data, player->x + 39, player->y))
-		data->position.screen_x -= MV_SPEED;
-	if (x == 0 && is_border(data, player->x, player->y))
-		data->position.screen_x += MV_SPEED;
-	if (y == 0 && is_border(data, player->x, player->y + 39))
-		data->position.screen_y -= MV_SPEED;
-	if (y == 0 && is_border(data, player->x, player->y))
-		data->position.screen_y += MV_SPEED;
+	if (x == 0 && is_border(player->data, player->x + TILE - 1, player->y))
+		player->position.screen_x -= MV_SPEED;
+	if (x == 0 && is_border(player->data, player->x, player->y))
+		player->position.screen_x += MV_SPEED;
+	if (y == 0 && is_border(player->data, player->x, player->y + TILE - 1))
+		player->position.screen_y -= MV_SPEED;
+	if (y == 0 && is_border(player->data, player->x, player->y))
+		player->position.screen_y += MV_SPEED;
 }
 
-static int	draw_map_init(void *arg)
+static void	draw_map_init(void *arg)
 {
 	t_data *data;
 	data = (t_data *)arg;
@@ -55,7 +52,6 @@ static int	draw_map_init(void *arg)
         }
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	return (0);
 }
 
 int	draw_map(void *arg)
@@ -74,15 +70,16 @@ int	draw_map(void *arg)
 		x = 0;
 		while (x < TILE)
 		{
-			player->x = player->init_x * TILE + x + (int)data->position.screen_x;
-			player->y = player->init_y * TILE + y + (int)data->position.screen_y;
-			borders_stop(data, x, y);
+			player->x = player->init_x + x + (int)player->position.screen_x;
+			player->y = player->init_y + y + (int)player->position.screen_y;
+			borders_stop(player, x, y);
 			my_mlx_pixel_put(data->img, player->x, player->y, ORANGE);
 			x++;
 		}
 		y++;
 	}
-	update_movement(data);
+	player_view(&data->player);
+	update_movement(player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	return (0);
 }

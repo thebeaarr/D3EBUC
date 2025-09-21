@@ -77,6 +77,7 @@
 	"parser.h": "c",
 	"mlx_int.h": "c",
 	"x.h": "c",
-	"cub3d.h": "c"
+	"cub3d.h": "c",
+	"math.h": "c"
 }
 }

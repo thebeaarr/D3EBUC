@@ -1,13 +1,15 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../cub3d_parser/include/parser.h"
-#include "../minilibx-linux/mlx.h"
-#include <X11/X.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "../cub3d_parser/include/parser.h"
+# include "../minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <math.h>
 # define MV_SPEED 1.0;
-# define TILE 40
+# define TILE 30
+# define ROT_SPPED 0.05
 
 typedef enum e_keys
 {
@@ -41,6 +43,8 @@ typedef struct s_position
 	int y;
 	float	screen_x;
 	float	screen_y; 
+	int		rot_left;
+	int		rot_right;
 }				t_position;
 
 typedef struct s_img 
@@ -54,32 +58,36 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	int	init_x;
-	int	init_y;
-	int	x;
-	int	y;
+	struct s_data	*data;
+  t_position		position;
+	int				init_x;
+	int				init_y;
+	int				x;
+	int				y;
+	float			angle;
 }			t_player;
+
 typedef struct s_data
 {
-  void			*mlx;
-  void			*win;
-  t_position	position;
-  t_image		*img;
-  t_cub3d		*cub3d;
-  t_player		player;
+	void			*mlx;
+	void			*win;
+	t_image			*img;
+	t_cub3d			*cub3d;
+	t_player		player;
+
 }t_data;
 
 /* key handling */
-int 	key_release(t_keys key , t_data *data);
-int 	key_press(t_keys key , t_data *data);
-void	update_movement(t_data *data);
+int 	key_release(t_keys key, t_player *player);
+int 	key_press(t_keys key, t_player *player);
+void	update_movement(t_player *player);
 int 	handle_close();
+void	player_view(t_player *player);
 
 /* Init cub3D*/
 int		init_mlx(t_data *data);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
-void	get_player_pos(t_data *data);
+void	player_init(t_player *player);
 int		gett_color(char c);
-
 int		draw_map(void *arg);
 #endif
