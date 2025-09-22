@@ -9,7 +9,7 @@
 # include <math.h>
 # define MV_SPEED 1.0;
 # define TILE 30
-# define ROT_SPPED 0.05
+# define ROT_SPPED 0.005
 
 typedef enum e_keys
 {
@@ -37,15 +37,23 @@ typedef enum e_colors
     GRAY    = 0x00808080
 }				t_colors;
 
-typedef struct s_position
+typedef struct s_cord
 {
 	int	x;
-	int y;
-	float	screen_x;
-	float	screen_y; 
+	int	y;
+}			t_cord;
+
+typedef struct s_action
+{
+	int		down;
+	int		up;
+	int		left;
+	int		right;
 	int		rot_left;
 	int		rot_right;
-}				t_position;
+	float	screen_x;
+	float	screen_y; 
+}			t_action;
 
 typedef struct s_img 
 {
@@ -54,12 +62,12 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_image;
+}			t_image;
 
 typedef struct s_player
 {
 	struct s_data	*data;
-  t_position		position;
+  	t_action		action;
 	int				init_x;
 	int				init_y;
 	int				x;

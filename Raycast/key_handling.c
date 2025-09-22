@@ -28,33 +28,33 @@ int	key_press(t_keys key, t_player *player)
 	}
 	else if (key == XK_s)
 	{
-		printf("press s\n");
-		player->position.y = 1;
+		player->action.up = 0;
+		player->action.down = 1;
 	}
 	else if (key == XK_w)
 	{
-		printf("press w\n");
-		player->position.y = -1;
+		player->action.down = 0;
+		player->action.up = 1;
 	}
 	else if (key == XK_a)
 	{
-		printf("press a\n");
-		player->position.x = -1;
+		player->action.right = 0;
+		player->action.left = 1;
 	}
 	else if (key == XK_d)
 	{
-		printf("press d\n");
-		player->position.x = 1;
+		player->action.left = 0;
+		player->action.right = 1;
 	}
 	else if (key == XK_Left)
 	{
-		player->position.rot_left = 1;
-		printf("<-\n");
+		player->action.rot_left = 1;
+		player->action.rot_right= 0;
 	}
 	else if (key == XK_Right)
 	{
-		player->position.rot_right = 1; 
-		printf("->\n");
+		player->action.rot_right = 1; 
+		player->action.rot_left = 0; 
 	}
 	return (0);
 }
@@ -62,50 +62,32 @@ int	key_press(t_keys key, t_player *player)
 int	key_release(t_keys key, t_player *player)
 {
 	if (key == XK_s)
-	{
-		printf("release s\n");
-		player->position.y = 0;
-	}
+		player->action.down = 0;
 	else if (key == XK_w)
-	{
-		printf("release w\n");
-		player->position.y = 0;
-	}
+		player->action.up = 0;
 	else if (key == XK_a)
-	{
-		printf("release a\n");
-		player->position.x = 0;
-	}
+		player->action.left = 0;
 	else if (key == XK_d)
-	{
-		printf("release d\n");
-		player->position.x = 0;
-	}
+		player->action.right = 0;
 	else if (key == XK_Left)
-	{
-		player->position.rot_left = 0;
-		printf("<-\n");
-	}
+		player->action.rot_left = 0;
 	else if (key == XK_Right)
-	{
-		player->position.rot_right = 0;
-		printf("->\n");
-	}
+		player->action.rot_right = 0;
 	return (0);
 }
 
 void	update_movement(t_player *player)
 {
-	if (player->position.x == 1)
-		player->position.screen_x += MV_SPEED;
-	if (player->position.x == -1)
-		player->position.screen_x -= MV_SPEED;
-	if (player->position.y == 1)
-		player->position.screen_y += MV_SPEED;
-	if (player->position.y == -1)
-		player->position.screen_y -= MV_SPEED;
-	if (player->position.rot_left)
+	if (player->action.right)
+		player->action.screen_x += MV_SPEED;
+	if (player->action.left)
+		player->action.screen_x -= MV_SPEED;
+	if (player->action.down)
+		player->action.screen_y += MV_SPEED;
+	if (player->action.up)
+		player->action.screen_y -= MV_SPEED;
+	if (player->action.rot_left)
 		player->angle -= ROT_SPPED;
-	if (player->position.rot_right)
+	if (player->action.rot_right)
 		player->angle += ROT_SPPED;
 }

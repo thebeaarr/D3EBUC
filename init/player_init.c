@@ -30,10 +30,12 @@ void	player_init(t_player *player)
 	int			j;
 
 	map = player->data->cub3d->map;
-	player->position.x = 0;
-	player->position.y = 0;
-	player->position.screen_y = 0;
-	player->position.screen_x = 0;
+	player->action.down = 0;
+	player->action.up = 0;
+	player->action.left = 0;
+	player->action.right = 0;
+	player->action.screen_y = 0;
+	player->action.screen_x = 0;
 	player->angle = 0;
 	i = -1;
 	while (map[++i])

@@ -21,13 +21,13 @@ static int	is_border(t_data *data, int x, int y)
 static void	borders_stop(t_player *player, int x, int y)
 {
 	if (x == 0 && is_border(player->data, player->x + TILE - 1, player->y))
-		player->position.screen_x -= MV_SPEED;
+		player->action.screen_x -= MV_SPEED;
 	if (x == 0 && is_border(player->data, player->x, player->y))
-		player->position.screen_x += MV_SPEED;
+		player->action.screen_x += MV_SPEED;
 	if (y == 0 && is_border(player->data, player->x, player->y + TILE - 1))
-		player->position.screen_y -= MV_SPEED;
+		player->action.screen_y -= MV_SPEED;
 	if (y == 0 && is_border(player->data, player->x, player->y))
-		player->position.screen_y += MV_SPEED;
+		player->action.screen_y += MV_SPEED;
 }
 
 static void	draw_map_init(void *arg)
@@ -70,8 +70,8 @@ int	draw_map(void *arg)
 		x = 0;
 		while (x < TILE)
 		{
-			player->x = player->init_x + x + (int)player->position.screen_x;
-			player->y = player->init_y + y + (int)player->position.screen_y;
+			player->x = player->init_x + x + (int)player->action.screen_x;
+			player->y = player->init_y + y + (int)player->action.screen_y;
 			borders_stop(player, x, y);
 			my_mlx_pixel_put(data->img, player->x, player->y, ORANGE);
 			x++;
