@@ -7,9 +7,11 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <math.h>
-# define MV_SPEED 1.0;
-# define TILE 30
-# define ROT_SPPED 0.005
+# define MV_SPEED 1.0
+# define TILE 20
+# define ROT_SPPED 0.01 
+# define RAYSIZE 30 * TILE	
+# define BORDER 0xFFFFFFFF
 
 typedef enum e_keys
 {
@@ -27,7 +29,7 @@ typedef enum e_colors
 	BLACK   = 0x00000000,
     WHITE   = 0xFFFFFFFF,
     RED     = 0x00FF0000,
-    GREEN   = 0x0000FF00,
+    GREEN   = 0x0099FF00,
     BLUE    = 0x000000FF,
     YELLOW  = 0x00FFFF00,
     CYAN    = 0x0000FFFF,
@@ -98,4 +100,5 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	player_init(t_player *player);
 int		gett_color(char c);
 int		draw_map(void *arg);
+int	is_border(t_data *data, int x, int y);
 #endif

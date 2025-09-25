@@ -20,7 +20,9 @@ void	draw_line(t_data *data, t_player *player , int dx, int dy)
 	y = 0;
 	while (i < steps)
 	{
-		my_mlx_pixel_put(data->img, (int)(player->x - TILE / 2 + x) , (int)(player->y - TILE /2 + y) , GREEN);
+		if (is_border(player->data, (player->x - TILE / 2 + x), (int)(player->y - TILE /2 + y)))
+			break;			
+		my_mlx_pixel_put(data->img, (int)(player->x - TILE / 2 + x) , (int)(player->y - TILE /2 + y) , RED);
 		x += x_inc;
 		y += y_inc;
 		i++;
@@ -34,10 +36,19 @@ void	player_view(t_player *player)
 	int	end_y;
 	int	dx;
 	int	dy;
+	float	next_ray;
+	int	i = 0;
+	int		raysnum;
 
-	end_x = (int)(cosf(player->angle) * 60) + player->x - TILE / 2;
-	end_y = (int)(sinf(player->angle) * 60) + player->y - TILE / 2;
-	dx = end_x - player->x + TILE / 2;
-	dy = end_y - player->y + TILE / 2;
-	draw_line(player->data, player, dx, dy);
+	raysnum = 1000;
+	next_ray = M_PI_2 / (float)raysnum;
+	while(i < raysnum)
+	{
+		end_x = (int)(cosf(player->angle + next_ray * i) * RAYSIZE) + player->x - TILE / 2;
+		end_y = (int)(sinf(player->angle + next_ray * i) * RAYSIZE) + player->y - TILE / 2;
+		dx = end_x - player->x + TILE / 2;
+		dy = end_y - player->y + TILE / 2;
+		draw_line(player->data, player, dx, dy);
+		i++;
+	}
 }

@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-static int	is_border(t_data *data, int x, int y)
+int	is_border(t_data *data, int x, int y)
 {
 	return (data->img->adr[(y * data->img->line_length + x *
-		(data->img->bits_per_pixel / 8))] == (char)WHITE);
+		(data->img->bits_per_pixel / 8))] == (char)BORDER);
 }
 
 static void	borders_stop(t_player *player, int x, int y)

@@ -36,7 +36,7 @@ void	player_init(t_player *player)
 	player->action.right = 0;
 	player->action.screen_y = 0;
 	player->action.screen_x = 0;
-	player->angle = 0;
+	player->angle = M_PI_4;
 	i = -1;
 	while (map[++i])
 	{ 
