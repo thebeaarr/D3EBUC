@@ -54,7 +54,7 @@ static void	draw_map_init(void *arg)
     mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
 
-int	draw_map(void *arg)
+int	draw_minimap(void *arg)
 {
 	t_data 		*data;
 	t_player	*player;

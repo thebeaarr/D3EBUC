@@ -10,7 +10,7 @@
 # define MV_SPEED 1.0
 # define TILE 20
 # define ROT_SPPED 0.01 
-# define RAYSIZE 5 * TILE	
+# define RAYSIZE 50 * TILE	
 # define BORDER 0xFFFFFFFF
 
 typedef enum e_keys
@@ -99,6 +99,6 @@ int		init_mlx(t_data *data);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	player_init(t_player *player);
 int		gett_color(char c);
-int		draw_map(void *arg);
+int		draw_minimap(void *arg);
 int	is_border(t_data *data, int x, int y);
 #endif
