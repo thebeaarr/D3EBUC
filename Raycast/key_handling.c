@@ -79,15 +79,31 @@ int	key_release(t_keys key, t_player *player)
 void	update_movement(t_player *player)
 {
 	if (player->action.right)
-		player->action.screen_x += MV_SPEED;
+	{
+		player->action.screen_x += cosf(M_PI_2 + player->angle) * MV_SPEED;
+		player->action.screen_y += sin(M_PI_2 + player->angle) * MV_SPEED;
+	}
 	if (player->action.left)
-		player->action.screen_x -= MV_SPEED;
+	{
+		player->action.screen_x += cosf(-M_PI_2 + player->angle) * MV_SPEED;
+		player->action.screen_y += sin(-M_PI_2 + player->angle) * MV_SPEED;
+	}
 	if (player->action.down)
-		player->action.screen_y += MV_SPEED;
+	{
+		player->action.screen_x -= cosf(player->angle) * MV_SPEED;
+		player->action.screen_y -= sin(player->angle) * MV_SPEED;
+	}
 	if (player->action.up)
-		player->action.screen_y -= MV_SPEED;
+	{
+		player->action.screen_x += cosf(player->angle) * MV_SPEED;
+		player->action.screen_y += sin(player->angle) * MV_SPEED;
+	}
 	if (player->action.rot_left)
+	{
 		player->angle -= ROT_SPPED;
+	}
 	if (player->action.rot_right)
+	{
 		player->angle += ROT_SPPED;
+	}
 }

@@ -10,7 +10,7 @@
 # define MV_SPEED 1.0
 # define TILE 20
 # define ROT_SPPED 0.01 
-# define RAYSIZE 30 * TILE	
+# define RAYSIZE 5 * TILE	
 # define BORDER 0xFFFFFFFF
 
 typedef enum e_keys

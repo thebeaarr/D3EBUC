@@ -44,11 +44,16 @@ void	player_view(t_player *player)
 	next_ray = M_PI_2 / (float)raysnum;
 	while(i < raysnum)
 	{
-		end_x = (int)(cosf(player->angle + next_ray * i) * RAYSIZE) + player->x - TILE / 2;
-		end_y = (int)(sinf(player->angle + next_ray * i) * RAYSIZE) + player->y - TILE / 2;
+		end_x = (int)(cosf(-M_PI_4 + player->angle + next_ray * i) * RAYSIZE) + player->x - TILE / 2;
+		end_y = (int)(sinf(- M_PI_4 + player->angle + next_ray * i) * RAYSIZE) + player->y - TILE / 2;
 		dx = end_x - player->x + TILE / 2;
 		dy = end_y - player->y + TILE / 2;
 		draw_line(player->data, player, dx, dy);
 		i++;
 	}
+		// end_x = (int)(cosf(player->angle) * RAYSIZE) + player->x - TILE / 2;
+		// end_y = (int)(sinf(player->angle ) * RAYSIZE) + player->y - TILE / 2;
+		// dx = end_x - player->x + TILE / 2;
+		// dy = end_y - player->y + TILE / 2;
+		// draw_line(player->data, player, dx, dy);
 }
