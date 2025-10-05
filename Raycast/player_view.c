@@ -20,9 +20,9 @@ void	draw_line(t_data *data, t_player *player , int dx, int dy)
 	y = 0;
 	while (i < steps)
 	{
-		if (is_border(player->data, (player->x - TILE / 2 + x), (int)(player->y - TILE /2 + y)))
+		if (is_border(player->data, ((int)player->pos_x + CENTER + x), (int)((int)player->pos_y + CENTER + y)))
 			break;			
-		my_mlx_pixel_put(data->img, (int)(player->x - TILE / 2 + x) , (int)(player->y - TILE /2 + y) , RED);
+		my_mlx_pixel_put(data->img, (int)((int)player->pos_x + CENTER + x) , (int)((int)player->pos_y + CENTER + y) , RED);
 		x += x_inc;
 		y += y_inc;
 		i++;
@@ -36,24 +36,24 @@ void	player_view(t_player *player)
 	int	end_y;
 	int	dx;
 	int	dy;
-	float	next_ray;
-	int	i = 0;
-	int		raysnum;
+	// float	next_ray;
+	// int	i = 0;
+	// int		raysnum;
 
-	raysnum = 100;
-	next_ray = M_PI_2 / (float)raysnum;
-	while(i < raysnum)
-	{
-		end_x = (int)(cosf(-M_PI_4 + player->angle + next_ray * i) * RAYSIZE) + player->x - TILE / 2;
-		end_y = (int)(sinf(- M_PI_4 + player->angle + next_ray * i) * RAYSIZE) + player->y - TILE / 2;
-		dx = end_x - player->x + TILE / 2;
-		dy = end_y - player->y + TILE / 2;
-		draw_line(player->data, player, dx, dy);
-		i++;
-	}
-	// end_x = (int)(cosf(player->angle) * RAYSIZE) + player->x - TILE / 2;
-	// end_y = (int)(sinf(player->angle ) * RAYSIZE) + player->y - TILE / 2;
-	// dx = end_x - player->x + TILE / 2;
-	// dy = end_y - player->y + TILE / 2;
-	// draw_line(player->data, player, dx, dy);
+	// raysnum = 100;
+	// next_ray = M_PI_2 / (float)raysnum;
+	// while(i < raysnum)
+	// {
+	// 	end_x = (int)(cosf(-M_PI_4 + player->angle + next_ray * i) * RAYSIZE) + player->x - TILE / 2;
+	// 	end_y = (int)(sinf(- M_PI_4 + player->angle + next_ray * i) * RAYSIZE) + player->y - TILE / 2;
+	// 	dx = end_x - player->x + TILE / 2;
+	// 	dy = end_y - player->y + TILE / 2;
+	// 	draw_line(player->data, player, dx, dy);
+	// 	i++;
+	// }
+	end_x = (int)(cosf(player->angle) * RAYSIZE) + player->pos_y + CENTER;
+	end_y = (int)(sinf(player->angle ) * RAYSIZE) + player->pos_y + CENTER;
+	dx = end_x - player->pos_x - CENTER;
+	dy = end_y - player->pos_y - CENTER;
+	draw_line(player->data, player, dx, dy);
 }

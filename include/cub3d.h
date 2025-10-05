@@ -7,8 +7,9 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <math.h>
-# define MV_SPEED 1.0
+# define MV_SPEED 1.5
 # define TILE 20
+# define CENTER TILE / 2 - 1
 # define ROT_SPPED 0.01 
 # define RAYSIZE 50 * TILE	
 # define BORDER 0xFFFFFFFF
@@ -39,11 +40,17 @@ typedef enum e_colors
     GRAY    = 0x00808080
 }				t_colors;
 
-typedef struct s_cord
+typedef struct s_vector
 {
 	int	x;
 	int	y;
-}			t_cord;
+}			t_vector;
+
+typedef struct s_vector_f
+{
+	float	x;
+	float	y;
+}			t_vector_f;
 
 typedef struct s_action
 {
@@ -53,8 +60,6 @@ typedef struct s_action
 	int		right;
 	int		rot_left;
 	int		rot_right;
-	float	screen_x;
-	float	screen_y; 
 }			t_action;
 
 typedef struct s_img 
@@ -70,11 +75,11 @@ typedef struct s_player
 {
 	struct s_data	*data;
   	t_action		action;
-	int				init_x;
-	int				init_y;
+	float			pos_x;
+	float			pos_y;
+	float			angle;
 	int				x;
 	int				y;
-	float			angle;
 }			t_player;
 
 typedef struct s_data
@@ -100,5 +105,5 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	player_init(t_player *player);
 int		gett_color(char c);
 int		draw_minimap(void *arg);
-int	is_border(t_data *data, int x, int y);
+int		is_border(t_data *data, int x, int y);
 #endif

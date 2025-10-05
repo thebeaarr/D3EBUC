@@ -18,16 +18,16 @@ int	is_border(t_data *data, int x, int y)
 		(data->img->bits_per_pixel / 8))] == (char)BORDER);
 }
 
-static void	borders_stop(t_player *player, int x, int y)
+static void	borders_stop(t_player *player, t_vector index, t_vector p_pix)
 {
-	if (x == 0 && is_border(player->data, player->x + TILE - 1, player->y))
-		player->action.screen_x -= MV_SPEED;
-	if (x == 0 && is_border(player->data, player->x, player->y))
-		player->action.screen_x += MV_SPEED;
-	if (y == 0 && is_border(player->data, player->x, player->y + TILE - 1))
-		player->action.screen_y -= MV_SPEED;
-	if (y == 0 && is_border(player->data, player->x, player->y))
-		player->action.screen_y += MV_SPEED;
+	if (index.x == 0 && is_border(player->data, p_pix.x + TILE - 1, p_pix.y))
+		player->pos_x -= MV_SPEED;
+	if (index.x == 0 && is_border(player->data, p_pix.x, p_pix.y))
+		player->pos_x += MV_SPEED;
+	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y + TILE - 1))
+		player->pos_y -= MV_SPEED;
+	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y))
+		player->pos_y += MV_SPEED;
 }
 
 static void	draw_map_init(void *arg)
@@ -58,28 +58,29 @@ int	draw_minimap(void *arg)
 {
 	t_data 		*data;
 	t_player	*player;
-	int			x;
-	int			y;
+	t_vector	index;
+	t_vector	p_pix;
 
 	data = (t_data *)arg;
 	player	= &data->player;
-	y = 0;
+	index.y = 0;
 	draw_map_init(data);
-	while (y < TILE)
+	while (index.y < TILE)
 	{
-		x = 0;
-		while (x < TILE)
+		index.x = 0;
+		while (index.x < TILE)
 		{
-			player->x = player->init_x + x + (int)player->action.screen_x;
-			player->y = player->init_y + y + (int)player->action.screen_y;
-			borders_stop(player, x, y);
-			my_mlx_pixel_put(data->img, player->x, player->y, ORANGE);
-			x++;
+			p_pix.x = (int)player->pos_x + index.x;
+			p_pix.y = (int)player->pos_y + index.y;
+			borders_stop(player, index, p_pix);
+			my_mlx_pixel_put(data->img, p_pix.x, p_pix.y, ORANGE);
+			index.x++;
 		}
-		y++;
+		index.y++;
 	}
 	player_view(&data->player);
 	update_movement(player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	usleep(100);
 	return (0);
 }
