@@ -79,7 +79,7 @@ int	draw_minimap(void *arg)
 		index.y++;
 	}
 	player_view(&data->player);
-	player->moved = update_movement(player);
+	update_movement(player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	usleep(100);
 	return (0);

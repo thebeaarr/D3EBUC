@@ -99,8 +99,15 @@ typedef struct s_data
 /* key handling */
 int 	key_release(t_keys key, t_player *player);
 int 	key_press(t_keys key, t_player *player);
-int		update_movement(t_player *player);
+void	update_movement(t_player *player);
 int 	handle_close();
+void	player_pos(t_player *player, t_keys key);
+void	player_rot(t_player *player, t_keys key);
+void	update_pos(t_player *player);
+void	update_rot(t_player *player);
+int		handle_close(void);
+
+
 void	player_view(t_player *player);
 
 /* Init cub3D*/
