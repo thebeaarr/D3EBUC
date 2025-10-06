@@ -35,6 +35,8 @@ void	player_init(t_player *player)
 	player->action.left = 0;
 	player->action.right = 0;
 	player->angle = 0;
+	player->dir.x = 1;
+	player->dir.y = 0;
 	i = -1;
 	while (map[++i])
 	{ 
@@ -43,8 +45,8 @@ void	player_init(t_player *player)
 		{
 			if (gett_color(map[i][j]) == ORANGE)
 			{
-				player->pos_x = j * TILE;
-				player->pos_y = i * TILE;
+				player->pos.x = j * TILE;
+				player->pos.y = i * TILE;
 				return ;
 			}
 			j++;

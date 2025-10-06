@@ -21,13 +21,13 @@ int	is_border(t_data *data, int x, int y)
 static void	borders_stop(t_player *player, t_vector index, t_vector p_pix)
 {
 	if (index.x == 0 && is_border(player->data, p_pix.x + TILE - 1, p_pix.y))
-		player->pos_x -= MV_SPEED;
+		player->pos.x -= MV_SPEED;
 	if (index.x == 0 && is_border(player->data, p_pix.x, p_pix.y))
-		player->pos_x += MV_SPEED;
+		player->pos.x += MV_SPEED;
 	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y + TILE - 1))
-		player->pos_y -= MV_SPEED;
+		player->pos.y -= MV_SPEED;
 	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y))
-		player->pos_y += MV_SPEED;
+		player->pos.y += MV_SPEED;
 }
 
 static void	draw_map_init(void *arg)
@@ -70,8 +70,8 @@ int	draw_minimap(void *arg)
 		index.x = 0;
 		while (index.x < TILE)
 		{
-			p_pix.x = (int)player->pos_x + index.x;
-			p_pix.y = (int)player->pos_y + index.y;
+			p_pix.x = (int)player->pos.x + index.x;
+			p_pix.y = (int)player->pos.y + index.y;
 			borders_stop(player, index, p_pix);
 			my_mlx_pixel_put(data->img, p_pix.x, p_pix.y, ORANGE);
 			index.x++;
@@ -79,7 +79,7 @@ int	draw_minimap(void *arg)
 		index.y++;
 	}
 	player_view(&data->player);
-	update_movement(player);
+	player->moved = update_movement(player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	usleep(100);
 	return (0);

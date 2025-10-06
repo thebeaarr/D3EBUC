@@ -20,9 +20,9 @@ void	draw_line(t_data *data, t_player *player , int dx, int dy)
 	y = 0;
 	while (i < steps)
 	{
-		if (is_border(player->data, ((int)player->pos_x + CENTER + x), (int)((int)player->pos_y + CENTER + y)))
+		if (is_border(player->data, (int)(player->pos.x + CENTER + x), (int)(player->pos.y + CENTER + y)))
 			break;			
-		my_mlx_pixel_put(data->img, (int)((int)player->pos_x + CENTER + x) , (int)((int)player->pos_y + CENTER + y) , RED);
+		my_mlx_pixel_put(data->img, (int)(player->pos.x + CENTER + x) , (int)(player->pos.y + CENTER + y) , RED);
 		x += x_inc;
 		y += y_inc;
 		i++;
@@ -51,9 +51,13 @@ void	player_view(t_player *player)
 	// 	draw_line(player->data, player, dx, dy);
 	// 	i++;
 	// }
-	end_x = (int)(cosf(player->angle) * RAYSIZE) + player->pos_y + CENTER;
-	end_y = (int)(sinf(player->angle ) * RAYSIZE) + player->pos_y + CENTER;
-	dx = end_x - player->pos_x - CENTER;
-	dy = end_y - player->pos_y - CENTER;
+	// end_x = (int)(cosf(player->angle) * RAYSIZE) + player->pos.y + CENTER;
+	// end_y = (int)(sinf(player->angle ) * RAYSIZE) + player->pos.y + CENTER;
+
+	end_x = player->dir.x * RAYSIZE;
+	end_y = player->dir.y * RAYSIZE;
+	dx = end_x;
+	dy = end_y;
+	printf("%d %d\n",end_x, end_y);
 	draw_line(player->data, player, dx, dy);
 }

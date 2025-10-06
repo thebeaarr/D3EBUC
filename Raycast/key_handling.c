@@ -76,34 +76,50 @@ int	key_release(t_keys key, t_player *player)
 	return (0);
 }
 
-void	update_movement(t_player *player)
+int	update_movement(t_player *player)
 {
+	float temp;
 	if (player->action.right)
 	{
-		player->pos_x += cosf(M_PI_2 + player->angle) * MV_SPEED;
-		player->pos_y += sin(M_PI_2 + player->angle) * MV_SPEED;
+		player->pos.x += cosf(M_PI_2 + player->angle) * MV_SPEED;
+		player->pos.y += sin(M_PI_2 + player->angle) * MV_SPEED;
+		return (1);
 	}
 	if (player->action.left)
 	{
-		player->pos_x += cosf(-M_PI_2 + player->angle) * MV_SPEED;
-		player->pos_y += sin(-M_PI_2 + player->angle) * MV_SPEED;
+		player->pos.x += cosf(-M_PI_2 + player->angle) * MV_SPEED;
+		player->pos.y += sin(-M_PI_2 + player->angle) * MV_SPEED;
+		return (1);
 	}
 	if (player->action.down)
 	{
-		player->pos_x -= cosf(player->angle) * MV_SPEED;
-		player->pos_y -= sin(player->angle) * MV_SPEED;
+		player->pos.x -= cosf(player->angle) * MV_SPEED;
+		player->pos.y -= sin(player->angle) * MV_SPEED;
+		return (1);
 	}
 	if (player->action.up)
 	{
-		player->pos_x += cosf(player->angle) * MV_SPEED;
-		player->pos_y += sin(player->angle) * MV_SPEED;
+	
+		player->pos.x +=  player->dir.x * MV_SPEED;
+		player->pos.y += player->dir.y * MV_SPEED;
+
+		return (1);
 	}
 	if (player->action.rot_left)
 	{
-		player->angle -= ROT_SPPED;
+		player->angle = -ROT_SPPED;
+		temp = player->dir.x;
+		player->dir.x = player->dir.x * cosf(player->angle) - player->dir.y * sinf(player->angle);
+		player->dir.y = temp * sinf(player->angle) + player->dir.y * cosf(player->angle);
+		return (1);
 	}
 	if (player->action.rot_right)
 	{
-		player->angle += ROT_SPPED;
+		player->angle = ROT_SPPED;
+		temp = player->dir.x;
+		player->dir.x = player->dir.x * cosf(player->angle) - player->dir.y * sinf(player->angle);
+		player->dir.y = temp * sinf(player->angle) + player->dir.y * cosf(player->angle);
+		return (1);
 	}
+	return (0);
 }

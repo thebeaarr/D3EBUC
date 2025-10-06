@@ -10,8 +10,8 @@
 # define MV_SPEED 1.5
 # define TILE 20
 # define CENTER TILE / 2 - 1
-# define ROT_SPPED 0.01 
-# define RAYSIZE 50 * TILE	
+# define ROT_SPPED 0.019
+# define RAYSIZE 50.0
 # define BORDER 0xFFFFFFFF
 
 typedef enum e_keys
@@ -52,6 +52,11 @@ typedef struct s_vector_f
 	float	y;
 }			t_vector_f;
 
+// typedef struct s_raycast
+// {
+// 	float	;
+
+// }				t_raycast;
 typedef struct s_action
 {
 	int		down;
@@ -75,11 +80,10 @@ typedef struct s_player
 {
 	struct s_data	*data;
   	t_action		action;
-	float			pos_x;
-	float			pos_y;
+	t_vector_f		dir;
+	t_vector_f		pos;
 	float			angle;
-	int				x;
-	int				y;
+	int				moved;
 }			t_player;
 
 typedef struct s_data
@@ -95,7 +99,7 @@ typedef struct s_data
 /* key handling */
 int 	key_release(t_keys key, t_player *player);
 int 	key_press(t_keys key, t_player *player);
-void	update_movement(t_player *player);
+int		update_movement(t_player *player);
 int 	handle_close();
 void	player_view(t_player *player);
 
