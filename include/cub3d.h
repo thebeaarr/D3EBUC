@@ -7,8 +7,8 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <math.h>
-# define MV_SPEED 1.5
-# define TILE 20
+# define MV_SPEED 0.075
+# define TILE 20.0
 # define CENTER TILE / 2 - 1
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
@@ -40,6 +40,25 @@ typedef enum e_colors
     GRAY    = 0x00808080
 }				t_colors;
 
+typedef struct s_img 
+{
+	void 	*img;
+	char 	*adr; 
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_image;
+
+typedef struct s_action
+{
+	int		down;
+	int		up;
+	int		left;
+	int		right;
+	int		rot_left;
+	int		rot_right;
+}			t_action;
+
 typedef struct s_vector
 {
 	int	x;
@@ -52,29 +71,18 @@ typedef struct s_vector_f
 	float	y;
 }			t_vector_f;
 
-// typedef struct s_raycast
-// {
-// 	float	;
-
-// }				t_raycast;
-typedef struct s_action
+typedef struct s_raycast
 {
-	int		down;
-	int		up;
-	int		left;
-	int		right;
-	int		rot_left;
-	int		rot_right;
-}			t_action;
+	t_vector	map;
+	t_vector	step;
+	t_vector_f	delta;
+	t_vector_f	dir;
+}				t_raycast;
 
-typedef struct s_img 
+typedef struct s_maps
 {
-	void 	*img;
-	char 	*adr; 
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_image;
+	t_vector_f	pos;
+}				t_maps;
 
 typedef struct s_player
 {
@@ -84,7 +92,10 @@ typedef struct s_player
 	t_vector_f		pos;
 	float			angle;
 	int				moved;
+	t_maps			mmap;
 }			t_player;
+
+
 
 typedef struct s_data
 {
@@ -95,6 +106,7 @@ typedef struct s_data
 	t_player		player;
 
 }t_data;
+
 
 /* key handling */
 int 	key_release(t_keys key, t_player *player);

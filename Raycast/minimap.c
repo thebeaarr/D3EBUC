@@ -18,17 +18,17 @@ int	is_border(t_data *data, int x, int y)
 		(data->img->bits_per_pixel / 8))] == (char)BORDER);
 }
 
-static void	borders_stop(t_player *player, t_vector index, t_vector p_pix)
-{
-	if (index.x == 0 && is_border(player->data, p_pix.x + TILE - 1, p_pix.y))
-		player->pos.x -= MV_SPEED;
-	if (index.x == 0 && is_border(player->data, p_pix.x, p_pix.y))
-		player->pos.x += MV_SPEED;
-	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y + TILE - 1))
-		player->pos.y -= MV_SPEED;
-	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y))
-		player->pos.y += MV_SPEED;
-}
+// static void	borders_stop(t_player *player, t_vector index, t_vector p_pix)
+// {
+// 	if (index.x == 0 && is_border(player->data, p_pix.x + TILE - 1, p_pix.y))
+// 		player->pos.x -= 0.01;
+// 	if (index.x == 0 && is_border(player->data, p_pix.x, p_pix.y))
+// 		player->pos.x += 0.01;
+// 	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y + TILE - 1))
+// 		player->pos.y -= 0.01;
+// 	if (index.y == 0 && is_border(player->data, p_pix.x, p_pix.y))
+// 		player->pos.y += 0.01;
+// }
 
 static void	draw_map_init(void *arg)
 {
@@ -60,9 +60,12 @@ int	draw_minimap(void *arg)
 	t_player	*player;
 	t_vector	index;
 	t_vector	p_pix;
+	t_vector	map;
 
 	data = (t_data *)arg;
 	player	= &data->player;
+	map.x = (player->pos.x - 0.5) * TILE;
+	map.y = (player->pos.y - 0.5) * TILE;
 	index.y = 0;
 	draw_map_init(data);
 	while (index.y < TILE)
@@ -70,9 +73,9 @@ int	draw_minimap(void *arg)
 		index.x = 0;
 		while (index.x < TILE)
 		{
-			p_pix.x = (int)player->pos.x + index.x;
-			p_pix.y = (int)player->pos.y + index.y;
-			borders_stop(player, index, p_pix);
+			p_pix.x = (int)map.x + index.x;
+			p_pix.y = (int)map.y + index.y;
+			// borders_stop(player, index, p_pix);
 			my_mlx_pixel_put(data->img, p_pix.x, p_pix.y, ORANGE);
 			index.x++;
 		}

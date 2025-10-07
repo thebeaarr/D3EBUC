@@ -44,27 +44,59 @@ void	player_rot(t_player *player, t_keys key)
 	}
 }
 
+static int	not_wall(t_player *player, float x, float y)
+{
+	char	**map;
+	
+	map = player->data->cub3d->map;
+	if (map[(int)floor(y - 0.5)][(int)floor(x - 0.5)] == '1')
+		return (0);
+	if (map[(int)ceil(y - 0.5)][(int)ceil(x - 0.5)] == '1')
+		return (0);
+	if (map[(int)floor(y - 0.5)][(int)ceil(x - 0.5)] == '1')
+		return (0);
+	if (map[(int)ceil(y - 0.5)][(int)floor(x - 0.5)] == '1')
+		return (0);
+	
+	return (1);
+}
+
+void	move_player(t_player *player, float x, float y)
+{
+	if (not_wall(player, x, y))
+	{
+		player->pos.x = x;
+		player->pos.y = y;
+	}
+}
+
 void	update_pos(t_player *player)
 {
+	float	new_x, new_y;
+	
 	if (player->action.right)
 	{
-		player->pos.x -= player->dir.y * MV_SPEED;
-		player->pos.y += player->dir.x * MV_SPEED;
+		new_x = player->pos.x - player->dir.y * MV_SPEED;
+		new_y = player->pos.y + player->dir.x * MV_SPEED;
+		move_player(player, new_x, new_y);
 	}
 	if (player->action.left)
 	{
-		player->pos.x += player->dir.y * MV_SPEED;
-		player->pos.y -= player->dir.x * MV_SPEED;
+		new_x = player->pos.x + player->dir.y * MV_SPEED;
+		new_y = player->pos.y - player->dir.x * MV_SPEED;
+		move_player(player, new_x, new_y);
 	}
 	if (player->action.down)
 	{
-		player->pos.x -= player->dir.x * MV_SPEED;
-		player->pos.y -= player->dir.y * MV_SPEED;
+		new_x = player->pos.x - player->dir.x * MV_SPEED;
+		new_y = player->pos.y - player->dir.y * MV_SPEED;
+		move_player(player, new_x, new_y);
 	}
 	if (player->action.up)
 	{
-		player->pos.x += player->dir.x * MV_SPEED;
-		player->pos.y += player->dir.y * MV_SPEED;
+		new_x = player->pos.x + player->dir.x * MV_SPEED;
+		new_y = player->pos.y + player->dir.y * MV_SPEED;
+		move_player(player, new_x, new_y);
 	}
 }
 
@@ -78,6 +110,7 @@ void	update_rot(t_player *player)
 		temp = player->dir.x;
 		player->dir.x = player->dir.x * cosf(player->angle) - player->dir.y * sinf(player->angle);
 		player->dir.y = temp * sinf(player->angle) + player->dir.y * cosf(player->angle);
+		// printf("dir_x : %f, dir_y %f \n",player->dir.x, player->dir.y)
 	}
 	if (player->action.rot_right)
 	{
