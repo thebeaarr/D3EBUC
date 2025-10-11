@@ -1,0 +1,118 @@
+* [1;34m8d7d83f[m - [1;32m(2 minutes ago)[m [37mLAST[m [2;37m - SAADELJARIDA[m[m[33m ([m[1;36mHEAD -> [m[1;32mKEYS[m[33m)[m[m
+[31m|[m * [1;34m0a4daa8[m - [1;32m(24 minutes ago)[m [37mVF[m [2;37m - SAADELJARIDA[m[m[33m ([m[1;31morigin/KEYS[m[33m)[m[m
+[31m|[m * [1;34m106a3c3[m - [1;32m(32 minutes ago)[m [37msave[m [2;37m - SAADELJARIDA[m[m[m
+[31m|[m * [1;34m6d26141[m - [1;32m(69 minutes ago)[m [37mez[m [2;37m - SAADELJARIDA[m[m[m
+[31m|[m * [1;34medd7c10[m - [1;32m(72 minutes ago)[m [37mcleaner version[m [2;37m - SAADELJARIDA[m[m[m
+[31m|[m * [1;34m98636b5[m - [1;32m(73 minutes ago)[m [37mclean[m [2;37m - SAADELJARIDA[m[m[m
+[31m|[m * [1;34m6680501[m - [1;32m(14 hours ago)[m [37mwith dark[m [2;37m - SAADELJARIDA[m[m[m
+[31m|[m[31m/[m  
+* [1;34m7c445b8[m - [1;32m(4 days ago)[m [37mclose[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mada5778[m - [1;32m(4 days ago)[m [37mnorm[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m3b7161e[m - [1;32m(5 days ago)[m [37mnew approach[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m6d9f212[m - [1;32m(5 days ago)[m [37mclean[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mf07b3ca[m - [1;32m(5 days ago)[m [37mfix boarder[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mb203a46[m - [1;32m(11 days ago)[m [37mmv foved[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m6dc92ed[m - [1;32m(11 days ago)[m [37mmv foved[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mb3cb8c6[m - [1;32m(11 days ago)[m [37mbetter mouvments[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m00ab17c[m - [1;32m(2 weeks ago)[m [37mClean 2D Rays[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m81eae84[m - [1;32m(3 weeks ago)[m [37mextra smouther mv[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mc777c3e[m - [1;32m(3 weeks ago)[m [37mclean version 1.0[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mde53161[m - [1;32m(3 weeks ago)[m [37mclean version[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mdaeb3d2[m - [1;32m(3 weeks ago)[m [37mclean struct[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m09f2967[m - [1;32m(3 weeks ago)[m [37mclean[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m275d06e[m - [1;32m(3 weeks ago)[m [37mrays not yet[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34ma7e9c43[m - [1;32m(3 weeks ago)[m [37mclean[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mae95783[m - [1;32m(5 weeks ago)[m [37mworks[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m82cdb79[m - [1;32m(5 weeks ago)[m [37mmoving but not perfect[m [2;37m - SAADELJARIDA[m[m[m
+[32m|[m * [1;34mdeff259[m - [1;32m(4 weeks ago)[m [37monly_mv_working[m [2;37m - SAADELJARIDA[m[m[33m ([m[1;31morigin/fa_mv[m[33m)[m[m
+[32m|[m * [1;34m1d22322[m - [1;32m(4 weeks ago)[m [37msure[m [2;37m - SAADELJARIDA[m[m[m
+[32m|[m * [1;34m8b75a68[m - [1;32m(4 weeks ago)[m [37masd[m [2;37m - SAADELJARIDA[m[m[m
+[32m|[m * [1;34m5ffa55a[m - [1;32m(5 weeks ago)[m [37msure[m [2;37m - SAADELJARIDA[m[m[m
+[32m|[m * [1;34m0e1b05e[m - [1;32m(5 weeks ago)[m [37m.[m [2;37m - SAADELJARIDA[m[m[m
+[32m|[m * [1;34m77871e0[m - [1;32m(5 weeks ago)[m [37msure[m [2;37m - SAADELJARIDA[m[m[m
+[32m|[m[32m/[m  
+* [1;34m3ef281e[m - [1;32m(5 weeks ago)[m [37mspeed problem[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34m79acd02[m - [1;32m(6 weeks ago)[m [37mmoving[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mb18ffdf[m - [1;32m(6 weeks ago)[m [37mmoving[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mf51c31b[m - [1;32m(6 weeks ago)[m [37miw[m [2;37m - feeedback[m[m[m
+* [1;34m9a6e90c[m - [1;32m(6 weeks ago)[m [37mkey_handling[m [2;37m - SAADELJARIDA[m[m[m
+* [1;34mc2ad0b2[m - [1;32m(6 weeks ago)[m [37matoi's behavior is changed for the color converting int[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m9dbfc04[m - [1;32m(5 weeks ago)[m [37mupdate[m [2;37m - Mohamed Lakhdar[m[m[33m ([m[1;31morigin/FEEDBACK[m[33m)[m[m
+[33m|[m * [1;34mb9a9cc7[m - [1;32m(5 weeks ago)[m [37mto wasd control[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34mc8b7e8b[m - [1;32m(5 weeks ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m29c4866[m - [1;32m(5 weeks ago)[m [37msir t7wa[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m39b4668[m - [1;32m(5 weeks ago)[m [37mslak[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m97660b9[m - [1;32m(5 weeks ago)[m [37mblan db[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m160a22a[m - [1;32m(5 weeks ago)[m [37mplayer in one pixel, ( will be in rectangle )[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m6ebe79d[m - [1;32m(5 weeks ago)[m [37mupdate1[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m8e324ab[m - [1;32m(5 weeks ago)[m [37mnice render[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m6e7c17b[m - [1;32m(5 weeks ago)[m [37mrendering with hadok l ashom so to debug and easy to control hh[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m5d8b10d[m - [1;32m(5 weeks ago)[m [37mownedbyhunter[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34madc7042[m - [1;32m(5 weeks ago)[m [37mlil[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m57ad939[m - [1;32m(5 weeks ago)[m [37mwd[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34mec82cc5[m - [1;32m(5 weeks ago)[m [37mwoend[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m6286378[m - [1;32m(5 weeks ago)[m [37mtrying[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m6944db4[m - [1;32m(5 weeks ago)[m [37mw[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m1929c32[m - [1;32m(5 weeks ago)[m [37mownedbyu[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m4978540[m - [1;32m(5 weeks ago)[m [37mstruct of function changed only , nothing of logic is changed[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m4a973a8[m - [1;32m(5 weeks ago)[m [37mparsi mzyan hahahaha[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34mcc06b1a[m - [1;32m(5 weeks ago)[m [37mcheck first colone + checked player closed or free to move + i forgot what i checked but checked hahahaha[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34mc01e6d5[m - [1;32m(5 weeks ago)[m [37mremoved garbage files[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m050f59f[m - [1;32m(5 weeks ago)[m [37mremoving leaks[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m71ebc49[m - [1;32m(5 weeks ago)[m [37mspliting the algo into files and structure them first[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34mba4abe6[m - [1;32m(5 weeks ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m0e68504[m - [1;32m(5 weeks ago)[m [37morganize code darori a chef ana ndirha[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m86c7a05[m - [1;32m(5 weeks ago)[m [37mparsing done hahahah, i don't think so[m [2;37m - Mohamed Lakhdar[m[m[m
+[33m|[m * [1;34m9abf2e0[m - [1;32m(5 weeks ago)[m [37mw[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34mf06a102[m - [1;32m(6 weeks ago)[m [37mstarted checking the map[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m005aaeb[m - [1;32m(6 weeks ago)[m [37mpush[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m167f459[m - [1;32m(6 weeks ago)[m [37mownedhunter[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34mb329301[m - [1;32m(6 weeks ago)[m [37mownebdyhunter[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m298a063[m - [1;32m(6 weeks ago)[m [37m.[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m95c2740[m - [1;32m(6 weeks ago)[m [37mownedbu[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m2c1664f[m - [1;32m(6 weeks ago)[m [37mfclean[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m76e466e[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m24a301b[m - [1;32m(6 weeks ago)[m [37mownedbyhunteR[m [2;37m - feeedback[m[m[m
+[33m|[m * [1;34m87c988d[m - [1;32m(6 weeks ago)[m [37mnew[m [2;37m - feeedback[m[m[m
+[33m|[m[33m/[m  
+* [1;34m278a2a4[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - feeedback[m[m[m
+* [1;34m6dd830e[m - [1;32m(6 weeks ago)[m [37ma[m [2;37m - feeedback[m[m[m
+* [1;34md64ad8e[m - [1;32m(6 weeks ago)[m [37madd(parsing part): checked the map with valid chars only and one player[m [2;37m - feeedback[m[m[m
+* [1;34meec1070[m - [1;32m(6 weeks ago)[m [37mmw[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m2937877[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m809eccd[m - [1;32m(6 weeks ago)[m [37mi guess good[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m7eeb4fc[m - [1;32m(6 weeks ago)[m [37msegv[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34mfa12e85[m - [1;32m(6 weeks ago)[m [37mmwed[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34mc5dcb56[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m7221bed[m - [1;32m(6 weeks ago)[m [37mstrutctured code i guess[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34ma8c46b4[m - [1;32m(6 weeks ago)[m [37mnew[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34md4cc152[m - [1;32m(6 weeks ago)[m [37mtest parsing[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34mf5413b6[m - [1;32m(6 weeks ago)[m [37mrendered something in the window ( using image)[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m951737b[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m7fd8633[m - [1;32m(6 weeks ago)[m [37mproblem(parsing):...[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m4d95fd3[m - [1;32m(6 weeks ago)[m [37madd(parsing): split with spaces for textures[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m89ace2f[m - [1;32m(6 weeks ago)[m [37mw"[m [2;37m - feeedback[m[m[m
+* [1;34mfb3b26f[m - [1;32m(6 weeks ago)[m [37mw[m [2;37m - feeedback[m[m[m
+* [1;34me564868[m - [1;32m(6 weeks ago)[m [37m.[m [2;37m - feeedback[m[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m[m
+* [1;34md62e942[m - [1;32m(6 weeks ago)[m [37mjust work[m [2;37m - feeedback[m[m[m
+* [1;34m5e6f541[m - [1;32m(6 weeks ago)[m [37mw[m [2;37m - feeedback[m[m[m
+* [1;34maa8f667[m - [1;32m(6 weeks ago)[m [37m.' '[m [2;37m - feeedback[m[m[m
+* [1;34m742f4d3[m - [1;32m(6 weeks ago)[m [37mdd some files for mlx init sf[m [2;37m - feeedback[m[m[m
+* [1;34mfef08df[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - feeedback[m[m[m
+* [1;34m06b0fb5[m - [1;32m(6 weeks ago)[m [37mstill map and review the parsing[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34mf99cc76[m - [1;32m(6 weeks ago)[m [37mremove a segv, wrote what i stored in the cub3d ,readcmts[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34mff4972e[m - [1;32m(6 weeks ago)[m [37mownedbyhunter[m [2;37m - feeedback[m[m[m
+* [1;34m9aa2598[m - [1;32m(8 weeks ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m1934628[m - [1;32m(8 weeks ago)[m [37msalina[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m015ac5e[m - [1;32m(9 weeks ago)[m [37mweoifji[m [2;37m - feeedback[m[m[m
+* [1;34m67a6cff[m - [1;32m(2 months ago)[m [37mww[m [2;37m - feeedback[m[m[m
+* [1;34mae3b00e[m - [1;32m(2 months ago)[m [37mwnmoefnweogin[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34mce1b08a[m - [1;32m(2 months ago)[m [37mown[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m33fa584[m - [1;32m(2 months ago)[m [37mowne[m [2;37m - feeedback[m[m[m
+* [1;34mb54bb52[m - [1;32m(2 months ago)[m [37mown[m [2;37m - feeedback[m[m[m
+* [1;34m4c1316b[m - [1;32m(2 months ago)[m [37mWWW[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m57f493e[m - [1;32m(2 months ago)[m [37mownedbyhunter[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m3049598[m - [1;32m(2 months ago)[m [37mnothing but parsing[m [2;37m - Mohamed Lakhdar[m[m[m
+* [1;34m3b11a6a[m - [1;32m(2 months ago)[m [37monw[m [2;37m - feeedback[m[m[m
+* [1;34m56831d5[m - [1;32m(2 months ago)[m [37mOLD[m [2;37m - feeedback[m[m[m
+* [1;34mc483330[m - [1;32m(2 months ago)[m [37mInitial commit[m [2;37m - B0SM4[m[m[m
