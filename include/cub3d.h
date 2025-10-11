@@ -8,7 +8,7 @@
 # include <X11/X.h>
 # include <math.h>
 # define MV_SPEED 0.075
-# define TILE 20.0
+# define TILE 10.0
 # define CENTER TILE / 2 - 1
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
@@ -71,13 +71,22 @@ typedef struct s_vector_f
 	float	y;
 }			t_vector_f;
 
-typedef struct s_raycast
+typedef struct s_ray
 {
 	t_vector	map;
 	t_vector	step;
 	t_vector_f	delta;
 	t_vector_f	dir;
-}				t_raycast;
+	t_vector_f sidedist;
+	t_vector_f deltadist;
+	int			side;
+	float		wall_dist;
+	int			wall_x;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	float		camera_x;
+}				t_ray;
 
 typedef struct s_maps
 {
@@ -89,6 +98,7 @@ typedef struct s_player
 	struct s_data	*data;
   	t_action		action;
 	t_vector_f		dir;
+	t_vector_f		plane;
 	t_vector_f		pos;
 	float			angle;
 	int				moved;
@@ -104,6 +114,8 @@ typedef struct s_data
 	t_image			*img;
 	t_cub3d			*cub3d;
 	t_player		player;
+	int				win_width;
+	int				win_height;
 
 }t_data;
 
@@ -128,5 +140,7 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	player_init(t_player *player);
 int		gett_color(char c);
 int		draw_minimap(void *arg);
+int		raycasting(t_player *player, t_data *data);
 int		is_border(t_data *data, int x, int y);
+void	raycast(t_data *data);
 #endif

@@ -37,6 +37,8 @@ void	player_init(t_player *player)
 	player->angle = 0;
 	player->dir.x = 1;
 	player->dir.y = 0;
+	player->plane.x = 0;
+	player->plane.y = 0.66;
 	i = -1;
 	while (map[++i])
 	{ 

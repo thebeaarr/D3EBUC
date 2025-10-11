@@ -102,21 +102,27 @@ void	update_pos(t_player *player)
 
 void	update_rot(t_player *player)
 {
-	float temp;
+	float	temp;
+	float	rot_angle;
 
 	if (player->action.rot_left)
 	{
-		player->angle = -ROT_SPPED;
+		rot_angle = -ROT_SPPED; // Left rotation (positive angle)
 		temp = player->dir.x;
-		player->dir.x = player->dir.x * cosf(player->angle) - player->dir.y * sinf(player->angle);
-		player->dir.y = temp * sinf(player->angle) + player->dir.y * cosf(player->angle);
-		// printf("dir_x : %f, dir_y %f \n",player->dir.x, player->dir.y)
+		player->dir.x = player->dir.x * cos(rot_angle) - player->dir.y * sin(rot_angle);
+		player->dir.y = temp * sin(rot_angle) + player->dir.y * cos(rot_angle);
+		temp = player->plane.x;
+		player->plane.x = player->plane.x * cos(rot_angle) - player->plane.y * sin(rot_angle);
+		player->plane.y = temp * sin(rot_angle) + player->plane.y * cos(rot_angle);
 	}
 	if (player->action.rot_right)
 	{
-		player->angle = ROT_SPPED;
+		rot_angle = ROT_SPPED; // Right rotation (negative angle)
 		temp = player->dir.x;
-		player->dir.x = player->dir.x * cosf(player->angle) - player->dir.y * sinf(player->angle);
-		player->dir.y = temp * sinf(player->angle) + player->dir.y * cosf(player->angle);
+		player->dir.x = player->dir.x * cos(rot_angle) - player->dir.y * sin(rot_angle);
+		player->dir.y = temp * sin(rot_angle) + player->dir.y * cos(rot_angle);
+		temp = player->plane.x;
+		player->plane.x = player->plane.x * cos(rot_angle) - player->plane.y * sin(rot_angle);
+		player->plane.y = temp * sin(rot_angle) + player->plane.y * cos(rot_angle);
 	}
 }

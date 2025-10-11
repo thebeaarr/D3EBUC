@@ -47,7 +47,7 @@ static void	draw_map_init(void *arg)
 			for (int y = 0; y < TILE; y++)
 			{
 				for (int x = 0; x < TILE; x++)
-					my_mlx_pixel_put(data->img,j * TILE + x,i * TILE + y,color);
+					my_mlx_pixel_put(data->img,j * TILE + x,700 + (i * TILE) + y,color);
 			}
         }
     }
@@ -64,6 +64,9 @@ int	draw_minimap(void *arg)
 
 	data = (t_data *)arg;
 	player	= &data->player;
+	
+	raycast(data);
+	
 	map.x = (player->pos.x - 0.5) * TILE;
 	map.y = (player->pos.y - 0.5) * TILE;
 	index.y = 0;
@@ -76,7 +79,7 @@ int	draw_minimap(void *arg)
 			p_pix.x = (int)map.x + index.x;
 			p_pix.y = (int)map.y + index.y;
 			// borders_stop(player, index, p_pix);
-			my_mlx_pixel_put(data->img, p_pix.x, p_pix.y, ORANGE);
+			my_mlx_pixel_put(data->img, p_pix.x,700 +  p_pix.y, ORANGE);
 			index.x++;
 		}
 		index.y++;
