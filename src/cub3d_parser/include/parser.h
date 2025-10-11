@@ -6,9 +6,9 @@
 #include <fcntl.h>
 #include <string.h>
 
-#include "../../libft/libft.h"
-#include "../../libft/get_next_line/get_next_line.h"
-#include "../../minilibx-linux/mlx.h"
+#include "../../../lib/libft/libft.h"
+#include "../../../lib/libft/get_next_line/get_next_line.h"
+#include "../../../lib/minilibx-linux/mlx.h"
 
 // linked list for file reader
 typedef struct s_file 

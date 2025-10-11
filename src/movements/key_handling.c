@@ -12,10 +12,54 @@
 
 #include "cub3d.h"
 
+int	handle_close(void)
+{
+	printf("cub3D closed\n");
+	exit(1);
+}
+
+void	player_pos(t_player *player, t_keys key)
+{
+	if (key == XK_s)
+	{
+		player->action.up = 0;
+		player->action.down = 1;
+	}
+	else if (key == XK_w)
+	{
+		player->action.down = 0;
+		player->action.up = 1;
+	}
+	else if (key == XK_a)
+	{
+		player->action.right = 0;
+		player->action.left = 1;
+	}
+	else if (key == XK_d)
+	{
+		player->action.left = 0;
+		player->action.right = 1;
+	}
+}
+
+void	player_rot(t_player *player, t_keys key)
+{
+	if (key == XK_Left)
+	{
+		player->action.rot_left = 1;
+		player->action.rot_right = 0;
+	}
+	else if (key == XK_Right)
+	{
+		player->action.rot_right = 1;
+		player->action.rot_left = 0;
+	}
+}
+
 int	key_press(t_keys key, t_player *player)
 {
 	if (key == XK_escape)
-		handle_close();	
+		handle_close();
 	player_pos(player, key);
 	player_rot(player, key);
 	return (0);
@@ -36,11 +80,4 @@ int	key_release(t_keys key, t_player *player)
 	else if (key == XK_Right)
 		player->action.rot_right = 0;
 	return (0);
-}
-
-/*hadi new approach so i can perform the dda , u can checkout other branches to see the difference*/
-void	update_movement(t_player *player)
-{
-	update_pos(player);	
-	update_rot(player);
 }

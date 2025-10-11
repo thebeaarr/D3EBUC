@@ -1,10 +1,10 @@
 CC = cc
-MLX_DIR = minilibx-linux
+MLX_DIR = lib/minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-CFLAGS = -Wall -Werror -Wextra -Iinclude -I./libft -I./libft/get_next_line -I$(MLX_DIR) -I./mlx_init/include -g
-SRCS = cub3d_parser/src/parser.c $(wildcard Raycast/*.c)  $(wildcard init/*.c)  $(wildcard mv/*.c) main.c
+CFLAGS = -Wall -Werror -Wextra -Iinclude -I./lib/libft -I./lib/libft/get_next_line -I$(MLX_DIR) -I./mlx_init/include -g
+SRCS = src/cub3d_parser/src/parser.c $(wildcard src/Raycast/*.c)  $(wildcard src/init/*.c) $(wildcard src/minimap/*.c) $(wildcard src/movements/*.c) src/main.c
 
-LIBFT_DIR = libft
+LIBFT_DIR = lib/libft
 HEADER = include/cub3d.h
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
