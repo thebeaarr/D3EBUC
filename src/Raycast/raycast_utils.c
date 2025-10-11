@@ -36,10 +36,27 @@ void	dda_inc(t_ray *ray, t_player *player)
 	}
 }
 
+static void	calculate_map_dimensions(t_data *data)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (data->cub3d->map[y])
+		y++;
+	data->map_height = y;
+	x = 0;
+	if (data->cub3d->map[0])
+	{
+		while (data->cub3d->map[0][x] && data->cub3d->map[0][x] != '\n')
+			x++;
+	}
+	data->map_width = x;
+}
+
 void	dda_init(int x, t_ray *ray, t_data *data, t_player *player)
 {
-	data->map_height = 37;
-	data->map_width = 28;
+	calculate_map_dimensions(data);
 	ray->camera_x = 2 * x / (float)data->win_width - 1;
 	ray->dir.x = player->dir.x + player->plane.x * ray->camera_x;
 	ray->dir.y = player->dir.y + player->plane.y * ray->camera_x;
