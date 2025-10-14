@@ -25,6 +25,9 @@
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
 # define BORDER 0xFFFFFFFF
+# define MINIMAP_Y 500
+# define MINIMAP_X 13
+
 
 typedef enum e_keys
 {
@@ -114,7 +117,6 @@ typedef struct s_player
 	t_vector_f		pos;
 	float			angle;
 	int				moved;
-	t_maps			mmap;
 }			t_player;
 
 typedef struct s_data
@@ -128,6 +130,8 @@ typedef struct s_data
 	int			win_height;
 	int			map_height;
 	int			map_width;
+	t_vector_f	init_pos;
+	t_maps		mmap;
 }			t_data;
 
 /* key handling */
@@ -148,7 +152,7 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	player_init(t_player *player);
 int		get_tile_color(char c);
 int		draw_minimap(void *arg);
-int		is_border(t_data *data, int x, int y);
+int		is_border(t_data *data, int x, int y, t_colors color);
 void	raycast(t_data *data);
 
 /* TEXTURES */
@@ -161,5 +165,6 @@ int		dda_algorithm(t_ray *ray, t_data *data);
 void	calculate_wall_distance(t_ray *ray, int temp, t_data *data);
 
 /*wall collision*/
-void	move_player(t_player *player, float x, float y);
+void	move_player(t_player *player, t_vector_f new);
+
 #endif

@@ -28,11 +28,11 @@ static int	not_wall(t_player *player, float x, float y)
 	return (1);
 }
 
-void	move_player(t_player *player, float x, float y)
+void	move_player(t_player *player, t_vector_f new)
 {
-	if (not_wall(player, x, y))
+	if (not_wall(player, new.x, new.y))
 	{
-		player->pos.x = x;
-		player->pos.y = y;
+		player->pos.x = new.x;
+		player->pos.y = new.y;
 	}
 }
