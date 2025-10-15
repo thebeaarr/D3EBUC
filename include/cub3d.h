@@ -20,12 +20,12 @@
 # include <X11/X.h>
 # include <math.h>
 # define MV_SPEED 0.075
-# define TILE 10.0
+# define TILE 7.0
 # define CENTER 4.0
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
 # define BORDER 0xFFFFFFFF
-# define MINIMAP_Y 500
+# define MINIMAP_Y 803
 # define MINIMAP_X 13
 
 
@@ -52,7 +52,8 @@ typedef enum e_colors
 	MAGENTA = 0x00FF00FF,
 	ORANGE = 0x00FFA500,
 	PURPLE = 0x00800080,
-	GRAY = 0x00808080
+	GRAY = 0x00808080,
+	FLOOR = 0x00404040
 }				t_colors;
 
 typedef struct s_img

@@ -19,31 +19,34 @@ int	is_border(t_data *data, int x, int y, t_colors color)
 
 	pixel_addr = data->img->adr
 		+ (y * data->img->line_length + x * (data->img->bits_per_pixel / 8));
-	pixel_color = *(int *)pixel_addr; // read all 4 bytes
+	pixel_color = *(int *)pixel_addr; // remember e
 
 	return (pixel_color == (int)color);
 }
 
-void	draw_tile(t_data *data, int x, int y, int color)
+int	draw_tile(t_data *data, int x, int y, int color)
 {
 	int		i;
 	int		j;
+	int		border;
 
+	border = 0;
 	i = 0;
 	while (i < TILE)
 	{
 		j = 0;
 		while (j < TILE)
 		{
-			if (is_border(data, x + j, y + i, MAGENTA))
-				break;
-			my_mlx_pixel_put(data->img, x + j, y + i, color);
+			if ((x + j < (data->win_width / 4) && x + j >= 13)
+			&& (y + i) < (data->win_width - 13) && (y + i) >= 803)
+				my_mlx_pixel_put(data->img, x + j, y + i, color);
 			j++;
 		}
-		// if (is_border(data, x + j, y +i,  MAGENTA))
-		// 	break;
 		i++;
 	}
+	if (border)
+		return (1);
+	return (0);
 }
 
 static void	draw_map_init(void *arg)
@@ -67,8 +70,9 @@ static void	draw_map_init(void *arg)
 			new.y = (data->player.pos.y - data->init_pos.y) * TILE;
 			color = get_tile_color(map[y][x]);
 			if (color == ORANGE)
-				color = BLACK;
-			draw_tile(data, MINIMAP_X + x  * TILE - new.x,  MINIMAP_Y + y * TILE - new.y, color);
+				color = FLOOR;
+			if (draw_tile(data, MINIMAP_X + x  * TILE - new.x,  MINIMAP_Y + y * TILE - new.y, color))
+				break ;
 			x++;
 		}
 		y++;
@@ -104,6 +108,8 @@ void	draw_cadre(t_data * data)
 	int	x;
 	int	y;
 
+	// _
+	// _
 	y = 800;
 	while (y < 803)
 	{
@@ -115,8 +121,8 @@ void	draw_cadre(t_data * data)
 		}
 		y++;
 	}
-	y = data->win_width - 13;
-	while (y < data->win_width - 10)
+	y = data->win_height - 13;
+	while (y < data->win_height - 10)
 	{
 		x = 10;
 		while (x < data->win_width / 4)
@@ -126,7 +132,20 @@ void	draw_cadre(t_data * data)
 		}
 		y++;
 	}
+	// | | 
+	x = 10; 	
+	while (x < 13)
+	{
+		y = 800;
+		while (y < data->win_height - 10)
+		{
+			my_mlx_pixel_put(data->img, x, y, MAGENTA);
+			y++;
+		}
+		x++;
+	}
 
+	x = data->win_width / 4;
 	while (x < (data->win_width / 4) + 3)
 	{
 		y = 800;
@@ -138,16 +157,16 @@ void	draw_cadre(t_data * data)
 		x++;
 	}
 
-	x = 10; 	
-	while (x < 13)
+	y = 803;
+	while (y < data->win_height - 13)
 	{
-		y = 800;
-		while (y < data->win_height - 10)
+		x = 13;
+		while (x < (data->win_width / 4))
 		{
-			my_mlx_pixel_put(data->img, x, y, MAGENTA);
-			y++;
+			my_mlx_pixel_put(data->img, x, y, BLACK);
+			x++;
 		}
-		x++;
+		y++;
 	}
 }
 

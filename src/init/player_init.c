@@ -15,9 +15,9 @@
 int	get_tile_color(char c)
 {
 	if (c == '1')
-		return (WHITE);
-	if (c == '0')
 		return (BLACK);
+	if (c == '0')
+		return (FLOOR);
 	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
 		return (ORANGE);
 	return (GREEN);
