@@ -100,7 +100,7 @@ int	draw_minimap(void *arg)
 
 	data = (t_data *)arg;
 	player = &data->player;
-	init_minimap(data);
+	init_micnimap(data);
 	raycast(data);
 	draw_frame(data);
 	draw_map_init(data);

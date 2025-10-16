@@ -20,7 +20,7 @@
 # include <X11/X.h>
 # include <math.h>
 # define MV_SPEED 0.075
-# define TILE 7.0
+# define TILE 8.0
 # define CENTER 4.0
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
