@@ -19,8 +19,7 @@ int	is_border(t_data *data, int x, int y, t_colors color)
 
 	pixel_addr = data->img->adr
 		+ (y * data->img->line_length + x * (data->img->bits_per_pixel / 8));
-	pixel_color = *(int *)pixel_addr; // remember e
-
+	pixel_color = *(int *)pixel_addr;
 	return (pixel_color == (int)color);
 }
 
@@ -28,145 +27,69 @@ int	draw_tile(t_data *data, int x, int y, int color)
 {
 	int		i;
 	int		j;
-	int		border;
 
-	border = 0;
 	i = 0;
 	while (i < TILE)
 	{
 		j = 0;
 		while (j < TILE)
 		{
-			if ((x + j < (data->win_width / 4) && x + j >= 13)
-			&& (y + i) < (data->win_width - 13) && (y + i) >= 803)
+			if ((x + j < ((data->win_width / 4) - 3) && x + j >= MINIMAP_X)
+				&& (y + i) < (data->win_height - 13) && (y + i) >= MINIMAP_Y)
 				my_mlx_pixel_put(data->img, x + j, y + i, color);
 			j++;
 		}
 		i++;
 	}
-	if (border)
-		return (1);
 	return (0);
 }
 
 static void	draw_map_init(void *arg)
 {
-	t_data	*data;
-	char	**map;
-	int		y;
-	int		x;
-	int		color;
-	t_vector new;
+	char		**map;
+	int			color;
+	t_data		*data;
+	t_vector	index;
+	t_vector_f	map_pos;
 
 	data = (t_data *)arg;
 	map = data->cub3d->map;
-	y = 0;
-	while (map[y])
+	index.y = -1;
+	while (map[++index.y])
 	{
-		x = 0;
-		while (map[y][x] && map[y][x] != '\n')
+		index.x = 0;
+		while (map[index.y][index.x] && map[index.y][index.x] != '\n')
 		{
-			new.x = (data->player.pos.x - data->init_pos.x) * TILE;
-			new.y = (data->player.pos.y - data->init_pos.y) * TILE;
-			color = get_tile_color(map[y][x]);
+			map_pos.x = ((float)index.x - data->player.pos.x) * TILE;
+			map_pos.y = ((float)index.y - data->player.pos.y) * TILE;
+			color = get_tile_color(map[index.y][index.x]);
 			if (color == ORANGE)
 				color = FLOOR;
-			if (draw_tile(data, MINIMAP_X + x  * TILE - new.x,  MINIMAP_Y + y * TILE - new.y, color))
+			if (draw_tile(data, data->mmap.center.x + (int)map_pos.x,
+					data->mmap.center.y + (int)map_pos.y, color))
 				break ;
-			x++;
+			index.x++;
 		}
-		y++;
 	}
 }
 
-void	draw_player(t_data *data, t_player *player)
+void	draw_player(t_data *data)
 {
 	t_vector	index;
 	t_vector	p_pix;
-	t_vector	map;
 
-	(void)player;
-	map.x = (data->init_pos.x - 0.5) * TILE;
-	map.y = (data->init_pos.y - 0.5) * TILE;
 	index.y = 0;
 	while (index.y < TILE)
 	{
 		index.x = 0;
 		while (index.x < TILE)
 		{
-			p_pix.x = (int)map.x + index.x;
-			p_pix.y = (int)map.y + index.y;
-			my_mlx_pixel_put(data->img, MINIMAP_X + p_pix.x, MINIMAP_Y + p_pix.y, ORANGE);
+			p_pix.x = data->mmap.center.x - TILE / 2 + index.x;
+			p_pix.y = data->mmap.center.y - TILE / 2 + index.y;
+			my_mlx_pixel_put(data->img, p_pix.x, p_pix.y, ORANGE);
 			index.x++;
 		}
 		index.y++;
-	}
-}
-
-void	draw_cadre(t_data * data)
-{
-	int	x;
-	int	y;
-
-	// _
-	// _
-	y = 800;
-	while (y < 803)
-	{
-		x = 10;
-		while (x < data->win_width / 4)
-		{
-			my_mlx_pixel_put(data->img, x, y, MAGENTA);
-			x++;
-		}
-		y++;
-	}
-	y = data->win_height - 13;
-	while (y < data->win_height - 10)
-	{
-		x = 10;
-		while (x < data->win_width / 4)
-		{
-			my_mlx_pixel_put(data->img, x, y, MAGENTA);
-			x++;
-		}
-		y++;
-	}
-	// | | 
-	x = 10; 	
-	while (x < 13)
-	{
-		y = 800;
-		while (y < data->win_height - 10)
-		{
-			my_mlx_pixel_put(data->img, x, y, MAGENTA);
-			y++;
-		}
-		x++;
-	}
-
-	x = data->win_width / 4;
-	while (x < (data->win_width / 4) + 3)
-	{
-		y = 800;
-		while (y < data->win_height - 10)
-		{
-			my_mlx_pixel_put(data->img, x, y, MAGENTA);
-			y++;
-		}
-		x++;
-	}
-
-	y = 803;
-	while (y < data->win_height - 13)
-	{
-		x = 13;
-		while (x < (data->win_width / 4))
-		{
-			my_mlx_pixel_put(data->img, x, y, BLACK);
-			x++;
-		}
-		y++;
 	}
 }
 
@@ -177,10 +100,11 @@ int	draw_minimap(void *arg)
 
 	data = (t_data *)arg;
 	player = &data->player;
+	init_minimap(data);
 	raycast(data);
-	draw_cadre(data);
+	draw_frame(data);
 	draw_map_init(data);
-	draw_player(data, player);
+	draw_player(data);
 	player_view(player);
 	update_transform(player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);

@@ -20,7 +20,7 @@ int	get_tile_color(char c)
 		return (FLOOR);
 	if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
 		return (ORANGE);
-	return (GREEN);
+	return (BLACK);
 }
 
 static void	set_direction(t_player *player, t_vector_f plane, t_vector_f dir)

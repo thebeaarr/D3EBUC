@@ -25,8 +25,8 @@
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
 # define BORDER 0xFFFFFFFF
-# define MINIMAP_Y 803
-# define MINIMAP_X 13
+# define MINIMAP_Y 800
+# define MINIMAP_X 10
 
 
 typedef enum e_keys
@@ -107,6 +107,8 @@ typedef struct s_ray
 typedef struct s_maps
 {
 	t_vector_f	pos;
+	t_vector 	mm_frame;
+	t_vector	center;
 }				t_maps;
 
 typedef struct s_player
@@ -168,4 +170,8 @@ void	calculate_wall_distance(t_ray *ray, int temp, t_data *data);
 /*wall collision*/
 void	move_player(t_player *player, t_vector_f new);
 
+/*minimap*/
+
+void	draw_frame(t_data * data);
+void	init_minimap(t_data *data);
 #endif
