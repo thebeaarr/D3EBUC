@@ -72,7 +72,7 @@ void	player_init(t_player *player)
 	player->action.right = 0;
 	player->angle = 0;
 	player->pos = set_player_pos(map);
-	player->data->init_pos = player->pos; // zayda
+	player->data->init_pos = player->pos;
 	player->data->mmap.pos.x = 0;
 	player->data->mmap.pos.y = 0;
 	set_player_direction(player, map[(int)player->pos.y][(int)player->pos.x]);
