@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+/*drawing vertical and horizontal lines (mmap frame)*/
+
 static void	draw_frame_line(t_data *data, t_vector start, t_vector end)
 {
 	t_vector	offset;
@@ -29,7 +31,11 @@ static void	draw_frame_line(t_data *data, t_vector start, t_vector end)
 	}
 }
 
-void	draw_mmap_background(t_data *data)
+/* the background of the minimap, 
+the colors will change most likely f textures,
+try to remove this from draw_frame so u can see the difference. */
+
+static void	draw_mmap_background(t_data *data)
 {
 	t_vector	offset;
 	int			thickness;
@@ -47,6 +53,9 @@ void	draw_mmap_background(t_data *data)
 		offset.x++;
 	}
 }
+
+/* Just the map frame 
+(calculation is a bit tricky but it shoudl work in diff dim)*/
 
 void	draw_frame(t_data *data)
 {

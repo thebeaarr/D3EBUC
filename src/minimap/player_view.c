@@ -12,6 +12,9 @@
 
 #include "cub3d.h"
 
+/* i used the DDA to draw the line , what this vid : 
+https://www.youtube.com/watch?v=W5P8GlaEOSI&t=1040s */
+
 static void	draw_line(t_data *data, t_player *player, t_vector_f inc, int steps)
 {
 	t_vector_f	index;

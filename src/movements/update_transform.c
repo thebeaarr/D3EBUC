@@ -64,6 +64,7 @@ void	update_rot(t_player *player)
 	}
 }
 
+/* U don't need to understand this to render textures*/
 void	update_transform(t_player *player)
 {
 	update_pos(player);

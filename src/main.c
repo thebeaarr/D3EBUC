@@ -39,7 +39,7 @@ int main(int ac, char **av)
 	player->data = data;
 	player_init(&data->player);
     // 3) Draw the map (2D debug)
-	mlx_loop_hook(data->mlx, draw_minimap, data);
+	mlx_loop_hook(data->mlx, game, data);
 
     mlx_hook(data->win, 17, 0, handle_close, data);
 	mlx_hook(data->win, 2, KeyPressMask, key_press, player);

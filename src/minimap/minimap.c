@@ -44,18 +44,17 @@ int	draw_tile(t_data *data, int x, int y, int color)
 	return (0);
 }
 
-static void	draw_map_init(void *arg)
+/* Draw the map withotu the player, the player is not moving, instead , the map moves */
+void	draw_map_init(t_data *data)
 {
 	char		**map;
 	int			color;
-	t_data		*data;
 	t_vector	index;
 	t_vector_f	map_pos;
 
-	data = (t_data *)arg;
 	map = data->cub3d->map;
-	index.y = -1;
-	while (map[++index.y])
+	index.y = 0;
+	while (map[index.y])
 	{
 		index.x = 0;
 		while (map[index.y][index.x] && map[index.y][index.x] != '\n')
@@ -70,10 +69,12 @@ static void	draw_map_init(void *arg)
 				break ;
 			index.x++;
 		}
+		index.y++;
 	}
 }
 
-void	draw_player(t_data *data)
+/*just that orrange cub in the middle of the mm*/
+void	draw_player_mmap(t_data *data)
 {
 	t_vector	index;
 	t_vector	p_pix;
@@ -93,21 +94,12 @@ void	draw_player(t_data *data)
 	}
 }
 
-int	draw_minimap(void *arg)
+/*i will add the fov animation in the future */
+void	minimap(t_data *data)
 {
-	t_data		*data;
-	t_player	*player;
-
-	data = (t_data *)arg;
-	player = &data->player;
-	init_micnimap(data);
-	raycast(data);
+	init_minimap(data);
 	draw_frame(data);
 	draw_map_init(data);
-	draw_player(data);
-	player_view(player);
-	update_transform(player);
-	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	usleep(100);
-	return (0);
+	draw_player_mmap(data);
+	player_view(&data->player);
 }

@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+/*it's just math, read this : https://hackmd.io/@nszl/H1LXByIE2 */
+
 void	cast_single_ray(int x, t_ray *ray, t_data *data, t_player *player)
 {
 	int	temp;

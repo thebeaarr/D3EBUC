@@ -147,14 +147,12 @@ void	player_rot(t_player *player, t_keys key);
 void	update_pos(t_player *player);
 void	update_rot(t_player *player);
 
-void	player_view(t_player *player);
 
 /* Init cub3D*/
 int		init_mlx(t_data *data);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	player_init(t_player *player);
 int		get_tile_color(char c);
-int		draw_minimap(void *arg);
 int		is_border(t_data *data, int x, int y, t_colors color);
 void	raycast(t_data *data);
 
@@ -172,6 +170,14 @@ void	move_player(t_player *player, t_vector_f new);
 
 /*minimap*/
 
-void	draw_frame(t_data * data);
+void	minimap(t_data *data);
 void	init_minimap(t_data *data);
+void	draw_map_init(t_data *data);
+void	draw_player_mmap(t_data *data);
+void	draw_frame(t_data * data);
+void	player_view(t_player *player);
+
+/*GAME*/
+
+int		game(void *arg);
 #endif

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-jari <marvin@42.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/11 19:52:33 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/11 19:52:38 by sel-jari         ###   ########.fr       */
+/*   Created: 2025/10/17 01:06:53 by sel-jari          #+#    #+#             */
+/*   Updated: 2025/10/17 01:06:58 by sel-jari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int not_wall(t_data *data, float x, float y)
+int	game(void *arg)
 {
-	return (data->cub3d->map[(int)y][(int)x] != '1');
-}
+	t_data		*data;
 
-void	move_player(t_player *player, t_vector_f new)
-{
-	if (not_wall(player->data, new.x, new.y))
-	{
-		player->pos.x = new.x;
-		player->pos.y = new.y;
-	}
+	data = (t_data *)arg;
+	raycast(data);
+	minimap(data);
+	update_transform(&data->player);
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	usleep(100);
+	return (0);
 }
