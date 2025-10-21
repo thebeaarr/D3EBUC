@@ -64,6 +64,7 @@ void move_player2(int keycode , t_data *config)
 		config->cub3d->player_y -= 3;
 		printf("↑\n");
 	}
+
 	else if(keycode ==115)
 	{
 		char **map = config->cub3d->map ;
@@ -75,6 +76,7 @@ void move_player2(int keycode , t_data *config)
 		printf("↓\n");
 		config->cub3d->player_y+= 3;
 	}
+
 	else if(keycode == 100)
 	{
 		char **map = config->cub3d->map ;
@@ -86,6 +88,7 @@ void move_player2(int keycode , t_data *config)
 		printf("→\n");
 		config->cub3d->player_x+= 3;
 	}
+
 	else if(keycode == 97)
 	{
 		char **map = config->cub3d->map ;
@@ -113,7 +116,6 @@ int key_press_hadik(int keycode , t_data *config)
 	}
 	return 0;
 }
-
 
 bool chef_raycaster(t_cub3d *cub3d)
 {

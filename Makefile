@@ -1,4 +1,4 @@
-CC = cc
+CC = clang
 MLX_DIR = minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 CFLAGS = -Wall -Werror -Wextra -I./libft -I./libft/get_next_line -I$(MLX_DIR) -I./mlx_init/include -g
