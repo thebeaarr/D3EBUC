@@ -62,10 +62,12 @@ void	dda_init(int x, t_ray *ray, t_data *data, t_player *player)
 	ray->dir.y = player->dir.y + player->plane.y * ray->camera_x;
 	ray->map.x = (int)player->pos.x;
 	ray->map.y = (int)player->pos.y;
-	ray->deltadist.x = sqrt(1.0
-			+ (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
-	ray->deltadist.y = sqrt(1.0
-			+ (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
+	// ray->deltadist.x = sqrt(1.0
+	// 		+ (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
+	// ray->deltadist.y = sqrt(1.0
+	// 		+ (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
+	ray->deltadist.x = fabs(1.0 / ray->dir.x);
+	ray->deltadist.y = fabs(1.0 / ray->dir.y);
 }
 
 int	dda_algorithm(t_ray *ray, t_data *data)
