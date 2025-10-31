@@ -15,7 +15,7 @@
 
 int	handle_close(void)
 {
-	exit(1);
+	exit(0);
 }
 
 void	player_pos(t_player *player, t_keys key)
