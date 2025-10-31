@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jari <marvin@42.ma>                    +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/11 19:58:43 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:50:50 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "../src/cub3d_parser/include/parser.h"
 # include "../lib/minilibx-linux/mlx.h"
+#include "../lib/libft/libft.h"
 # include <X11/X.h>
 # include <math.h>
 # define MV_SPEED 0.075
@@ -28,7 +28,54 @@
 # define MINIMAP_Y 800
 # define MINIMAP_X 10
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
+///////////////////////////////////////////////////////////
+#include "../lib/libft/get_next_line/get_next_line.h"
 
+typedef struct s_file 
+{
+	char *line;
+	struct s_file *next;
+} t_file;
+
+typedef struct  s_list
+{
+	t_file *head_f;
+	t_file *head_s;
+} t_list;
+
+typedef struct s_cub3d
+{
+	char **map;
+	int floor;
+	int ceiling;
+	char ***textures;
+} t_cub3d;
+
+void	free_dptr(char **txt);
+void	free_tptr(char ***textures , int count);
+void	free_list(t_list *head);
+void	free_file(t_file*head);
+bool	parse_map(char **map);
+char	**get_map(t_file *head);
+char	**ft_split_space(const char *s);
+t_cub3d *get_file_as_struct(char *path);
+bool	isspaces(char *line);
+void	add_back(t_file **head, t_file *current);
+t_file	*anode(char *line);
+t_list	*read_file(char *path);
+char	***get_textures(t_file *head);
+bool	get_colors_(t_cub3d *store , t_file *head);
+bool	is_player(char c);
+void	print_cub3d(t_cub3d *cub3d);
+int		size_list(t_file *head);
+ /////////////////////////////////////////////
 typedef enum e_keys
 {
 	XK_Right = 0xff53,

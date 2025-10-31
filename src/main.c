@@ -15,8 +15,6 @@ int main(int ac, char **av)
     data = malloc(sizeof(t_data));
     if (!data)
         return (1);
-
-    // 1) Parse map (a problem in the parsing still checking for it)
     data->cub3d = get_file_as_struct(av[1]);
     if (!data->cub3d)
     {
@@ -24,13 +22,9 @@ int main(int ac, char **av)
         free(data);
         return (1);
     }
-    // print_cub3d(data->cub3d);
-
-    // 2) Initialize MLX
     if (!init_mlx(data))
     {
         printf("ERROR: mlx init\n");
-		// freeadd_exit(); later
         free(data->cub3d);
         free(data);
         return (1);
@@ -38,9 +32,7 @@ int main(int ac, char **av)
 	player = &data->player;
 	player->data = data;
 	player_init(&data->player);
-    // 3) Draw the map (2D debug)
 	mlx_loop_hook(data->mlx, game, data);
-
     mlx_hook(data->win, 17, 0, handle_close, data);
 	mlx_hook(data->win, 2, KeyPressMask, key_press, player);
 	mlx_hook(data->win, 3, KeyReleaseMask, key_release, player);

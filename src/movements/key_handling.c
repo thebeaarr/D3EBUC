@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   key_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 00:42:12 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/09/18 00:42:26 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/10/31 15:02:16 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
+
 
 int	handle_close(void)
 {
-	printf("cub3D closed\n");
 	exit(1);
 }
 

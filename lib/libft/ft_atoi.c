@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:58:18 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/08/18 14:57:42 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:48:17 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	num = 0;
 	sign = 1;
-	printf("%s\n" , str + i);
-
 	while(isspace(str[i]))
 		i++;
-	printf("%s\n" , str + i);
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
