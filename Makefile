@@ -1,24 +1,26 @@
-CC = cc
-MLX_DIR = minilibx-linux
+CC= cc
+MLX_DIR = lib/minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-CFLAGS = -Wall -Werror -Wextra -I./libft -I./libft/get_next_line -I$(MLX_DIR) -I./mlx_init/include
-SRCS = cub3d_parser/srcs/parser.c main/cub3d.c mlx_init/src/mlx.c
-LIBFT_DIR = libft
+CFLAGS = -Wall -Werror -Wextra -Iinclude -I./lib/libft -I./lib/libft/get_next_line -I$(MLX_DIR) -I./mlx_init/include -g
+SRCS = $(wildcard lib/get_next_line/*.c) $(wildcard src/cub3d_parser/*.c) $(wildcard src/Raycast/*.c)  $(wildcard src/init/*.c) $(wildcard src/minimap/*.c) $(wildcard src/movements/*.c) src/main.c src/game.c
+
+LIBFT_DIR = lib/libft
+HEADER = include/cub3d.h
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
 OBJ = $(SRCS:.c=.o)
-NAME = cub3d
+NAME = cub3D
 
 all: $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
+$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ) $(HEADER)
+	$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
+
 $(MLX_LIB):
 	make -C $(MLX_DIR)
-
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
-	$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
