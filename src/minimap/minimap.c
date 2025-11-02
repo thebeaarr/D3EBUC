@@ -64,8 +64,8 @@ void	draw_map_init(t_data *data)
 			color = get_tile_color(map[index.y][index.x]);
 			if (color == ORANGE)
 				color = FLOOR;
-			if (draw_tile(data, data->mmap_center.x + (int)map_pos.x,
-					data->mmap_center.y + (int)map_pos.y, color))
+			if (draw_tile(data, data->mmap.center.x + (int)map_pos.x,
+					data->mmap.center.y + (int)map_pos.y, color))
 				break ;
 			index.x++;
 		}
@@ -85,8 +85,8 @@ void	draw_player_mmap(t_data *data)
 		index.x = 0;
 		while (index.x < TILE)
 		{
-			p_pix.x = data->mmap_center.x - TILE / 2 + index.x;
-			p_pix.y = data->mmap_center.y - TILE / 2 + index.y;
+			p_pix.x = data->mmap.center.x - TILE / 2 + index.x;
+			p_pix.y = data->mmap.center.y - TILE / 2 + index.y;
 			my_mlx_pixel_put(data->img, p_pix.x, p_pix.y, ORANGE);
 			index.x++;
 		}

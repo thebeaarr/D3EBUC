@@ -14,6 +14,6 @@
 
 void	init_minimap(t_data *data)
 {
-	data->mmap_center.x = MINIMAP_X + ((data->win_width / 4) - MINIMAP_X) / 2;
-	data->mmap_center.y = MINIMAP_Y + ((data->win_height - 10) - MINIMAP_Y) / 2;
+	data->mmap.center.x = MINIMAP_X + ((data->win_width / 4) - MINIMAP_X) / 2;
+	data->mmap.center.y = MINIMAP_Y + ((data->win_height - 10) - MINIMAP_Y) / 2;
 }
