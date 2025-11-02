@@ -5,7 +5,7 @@ CFLAGS = -Wall -Werror -Wextra -Iinclude -I./lib/libft -I./lib/libft/get_next_li
 SRCS = $(wildcard lib/get_next_line/*.c) $(wildcard src/cub3d_parser/*.c) $(wildcard src/Raycast/*.c)  $(wildcard src/init/*.c) $(wildcard src/minimap/*.c) $(wildcard src/movements/*.c) src/main.c src/game.c
 
 LIBFT_DIR = lib/libft
-HEADER = include/cub3d.h
+HEADER = cub3d.h
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
 OBJ = $(SRCS:.c=.o)

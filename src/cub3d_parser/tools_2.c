@@ -1,4 +1,4 @@
-#include "../../include/cub3d.h" 
+#include "../../cub3d.h" 
 
 int size_list(t_file *head)
 {

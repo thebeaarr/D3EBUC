@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 void	floor_and_scealing(t_data *data, t_ray *ray, int x)
 {

@@ -1,4 +1,4 @@
-#include "../../include/cub3d.h" 
+#include "../../cub3d.h" 
 
 bool dup_c(t_file *head)
 {

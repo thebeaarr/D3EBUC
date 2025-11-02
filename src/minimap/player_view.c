@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 /* i used the DDA to draw the line , what this vid : 
 https://www.youtube.com/watch?v=W5P8GlaEOSI&t=1040s */

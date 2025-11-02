@@ -15,8 +15,8 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "../lib/minilibx-linux/mlx.h"
-#include "../lib/libft/libft.h"
+# include "lib/minilibx-linux/mlx.h"
+#include "lib/libft/libft.h"
 # include <X11/X.h>
 # include <math.h>
 # define MV_SPEED 0.075
@@ -36,7 +36,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 ///////////////////////////////////////////////////////////
-#include "../lib/libft/get_next_line/get_next_line.h"
+#include "lib/libft/get_next_line/get_next_line.h"
 
 typedef struct s_file 
 {
@@ -112,6 +112,15 @@ typedef struct s_img
 	int		endian;
 }			t_image;
 
+
+
+typedef struct s_texture 
+{
+	t_image data ;
+	int     width;
+    int     height;
+}t_texture;
+
 typedef struct s_action
 {
 	int		down;
@@ -176,6 +185,7 @@ typedef struct s_data
 	t_image		*img;
 	t_cub3d		*cub3d;
 	t_player	player;
+	t_texture texture[4];
 	int			win_width;
 	int			win_height;
 	int			map_height;
@@ -223,6 +233,12 @@ void	draw_map_init(t_data *data);
 void	draw_player_mmap(t_data *data);
 void	draw_frame(t_data * data);
 void	player_view(t_player *player);
+
+
+
+/*LOAD TEXTURES */
+t_texture    load_texture(void *mlx, char *path);
+bool load_textures(t_data *data);
 
 /*GAME*/
 

@@ -1,4 +1,4 @@
-#include "../../include/cub3d.h" 
+#include "../../cub3d.h" 
 
 static size_t	ft_countword(const char *str)
 {

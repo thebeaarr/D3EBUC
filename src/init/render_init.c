@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 int	init_mlx(t_data *data)
 {
@@ -28,6 +28,8 @@ int	init_mlx(t_data *data)
 			&data->img->bits_per_pixel,
 			&data->img->line_length,
 			&data->img->endian);
+	if(!load_textures(data))
+		return (0);
 	return (1);
 }
 

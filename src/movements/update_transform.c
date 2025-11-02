@@ -12,7 +12,7 @@
 
 
 
-#include "../../include/cub3d.h"
+#include "../../cub3d.h"
 
 
 static void	move_in_direction(t_player *player, float dir_x, float dir_y)

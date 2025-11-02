@@ -12,7 +12,7 @@
 
 
 
-#include "../../include/cub3d.h"
+#include "../../cub3d.h"
 
 /*it's just math, read this : https://hackmd.io/@nszl/H1LXByIE2 */
 
