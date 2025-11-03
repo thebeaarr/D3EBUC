@@ -13,12 +13,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include "lib/minilibx-linux/mlx.h"
-#include "lib/libft/libft.h"
-# include <X11/X.h>
-# include <math.h>
 # define MV_SPEED 0.075
 # define TILE 8.0
 # define CENTER 4.0
@@ -35,8 +29,11 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-///////////////////////////////////////////////////////////
 #include "lib/libft/get_next_line/get_next_line.h"
+# include "lib/minilibx-linux/mlx.h"
+#include "lib/libft/libft.h"
+# include <X11/X.h>
+# include <math.h>
 
 typedef struct s_file 
 {
