@@ -87,9 +87,9 @@ void draw_textured_wall(t_data *data, t_ray *ray, int x, int side)
     // Calculate X coordinate on texture
     double wall_x;
     if (side == 0)
-        wall_x = data->player.pos.y + 4.5f * ray->dir.y;
+        wall_x = data->player.pos.y + ray->wall_dist * ray->dir.y;
     else
-        wall_x = data->player.pos.x + 4.5f * ray->dir.x;
+        wall_x = data->player.pos.x + ray->wall_dist * ray->dir.x;
     wall_x -= floor(wall_x); // get fractional part
 
     tex_x = (int)(wall_x * (double)(tex->width));
