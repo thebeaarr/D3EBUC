@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_textures.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 04:56:08 by mlakhdar          #+#    #+#             */
+/*   Updated: 2025/11/11 21:06:34 by mlakhdar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3d.h" 
 
 int is_txt(char *line)
@@ -20,7 +32,8 @@ bool dup_(t_file *ca)
   int s =0;
   int n = 0;
   int check =0;
-  t_file * c = ca;
+  t_file * c; 
+  c = ca;
   while(c)
   {
     check = is_txt(c->line);
@@ -38,6 +51,7 @@ bool dup_(t_file *ca)
   }
   return !(e == 1 && w == 1 && s == 1 && n == 1);
 }
+
 bool check_ntxt(char **str)
 {
   int i = 0;
@@ -94,32 +108,63 @@ void free_tptr(char ***textures , int count )
 	textures = NULL;
 }
 
-char ***get_textures(t_file *head)
+static bool	validate_texture(char **texture)
 {
-  t_file *current = head;
-  // check if texutres enough and not dups;
-  if(dup_(current))
-  {
-    printf("duplicated textures/not enough texutre!");
-    return NULL;
-  }
-  char ***textures = malloc(sizeof(char **) * 5);
-  textures[4] = NULL;
-  int count  = 0;
-  while(current && count < 4)
-  {
-    if(is_txt(current->line))
-    {
-      textures[count] = ft_split_space(current->line);
-      if(!check_ntxt(textures[count]) || !path_valid(textures[count][1]))
-      {
-        printf("invalid textures");
-		free_tptr(textures , count);
-		return NULL;
-      }
-      count++;
-    }
-    current = current->next;
-  }
-  return textures;
+	if (!check_ntxt(texture))
+		return (false);
+	if (!path_valid(texture[1]))
+		return (false);
+	return (true);
 }
+
+static bool	process_texture_line(char ***textures, char *line, int *count)
+{
+	if (!is_txt(line))
+		return (true);
+	textures[*count] = ft_split_space(line);
+	if (!validate_texture(textures[*count]))
+	{
+		printf("invalid textures\n");
+		free_tptr(textures, *count);
+		return (false);
+	}
+	(*count)++;
+	return (true);
+}
+
+static char	***allocate_textures(void)
+{
+	char	***textures;
+
+	textures = malloc(sizeof(char **) * 5);
+	if (!textures)
+		return (NULL);
+	textures[4] = NULL;
+	return (textures);
+}
+
+char	***get_textures(t_file *head)
+{
+	t_file	*current;
+	char	***textures;
+	int		count;
+
+	if (dup_(head))
+	{
+		printf("duplicated textures/not enough texture!\n");
+		return (NULL);
+	}
+	textures = allocate_textures();
+	if (!textures)
+		return (NULL);
+	current = head;
+	count = 0;
+	while (current && count < 4)
+	{
+		if (!process_texture_line(textures, current->line, &count))
+			return (NULL);
+		current = current->next;
+	}
+	return (textures);
+}
+

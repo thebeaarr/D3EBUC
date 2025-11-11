@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 00:42:12 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/31 15:02:16 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/09 04:44:15 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
 
 int	handle_close(void)
 {

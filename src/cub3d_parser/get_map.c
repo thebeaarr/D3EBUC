@@ -1,39 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 04:56:04 by mlakhdar          #+#    #+#             */
+/*   Updated: 2025/11/11 20:53:47 by mlakhdar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3d.h" 
 
-char **get_map(t_file *head)
+static int	get_max_length(t_file *head)
 {
-  t_file *current = head;
-  int max = 0;
+	t_file	*current;
+	int		max;
+	int		len;
 
-  int i = 0;
-  while(current)
-  {
-	if((int)ft_strlen(current->line) > max)
-		max = ft_strlen(current->line);
-	current =  current->next;
-	i++;
-  }
-  char **map = malloc(sizeof(char *) * ( i + 1));
-  map[i] = NULL;
-  current = head;
-   i = 0;
-  while(current)
-  {
-    // map[i] = strdup(current->line);
-	int j  =0;
-	map[i] = malloc(sizeof(char ) * ( max + 1));
-
-	while(current->line[j])
+	max = 0;
+	current = head;
+	while (current)
 	{
-		map[i][j] = current->line[j];
+		len = ft_strlen(current->line);
+		if (len > max)
+			max = len;
+		current = current->next;
+	}
+	return (max);
+}
+
+static int	count_lines(t_file *head)
+{
+	t_file	*current;
+	int		count;
+
+	count = 0;
+	current = head;
+	while (current)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
+
+static void	fill_line(char *dest, char *src, int max)
+{
+	int	j;
+
+	j = 0;
+	while (src[j])
+	{
+		dest[j] = src[j];
 		j++;
 	}
-	while(j < max)
-		map[i][j++] = ' ';
-	map[i][j] = '\0'; 
-    current = current->next;
-    i++;
-  }
-  return map;
+	while (j < max)
+	{
+		dest[j] = ' ';
+		j++;
+	}
+	dest[j] = '\0';
+}
+
+char	**get_map(t_file *head)
+{
+	t_file	*current;
+	char	**map;
+	int		max;
+	int		i;
+
+	max = get_max_length(head);
+	i = count_lines(head);
+	map = malloc(sizeof(char *) * (i + 1));
+	if (!map)
+		return (NULL);
+	map[i] = NULL;
+	current = head;
+	i = 0;
+	while (current)
+	{
+		map[i] = malloc(sizeof(char) * (max + 1));
+		if (!map[i])
+			return (NULL);
+		fill_line(map[i], current->line, max);
+		current = current->next;
+		i++;
+	}
+	return (map);
 }
 

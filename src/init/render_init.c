@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jari <marvin@42.ma>                    +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 18:31:34 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/11 18:31:36 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/11/09 04:43:20 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_mlx(t_data *data)
 			&data->img->bits_per_pixel,
 			&data->img->line_length,
 			&data->img->endian);
-	if(!load_textures(data))
+	if (!load_textures(data))
 		return (0);
 	return (1);
 }

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   update_transform.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:49:25 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/31 14:34:33 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/09 04:44:40 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../cub3d.h"
-
 
 static void	move_in_direction(t_player *player, float dir_x, float dir_y)
 {
@@ -67,7 +64,6 @@ void	update_rot(t_player *player)
 	}
 }
 
-/* U don't need to understand this to render textures*/
 void	update_transform(t_player *player)
 {
 	update_pos(player);

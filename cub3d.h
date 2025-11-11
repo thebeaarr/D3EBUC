@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/31 14:50:50 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/11 20:50:33 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 #include "lib/libft/libft.h"
 # include <X11/X.h>
 # include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+
 
 typedef struct s_file 
 {

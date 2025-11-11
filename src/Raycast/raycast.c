@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 17:19:56 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/31 14:34:12 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/09 04:45:53 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../../cub3d.h"
-
-/*it's just math, read this : https://hackmd.io/@nszl/H1LXByIE2 */
 
 void	cast_single_ray(int x, t_ray *ray, t_data *data, t_player *player)
 {

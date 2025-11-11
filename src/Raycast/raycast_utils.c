@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jari <marvin@42.ma>                    +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 17:20:05 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/10/11 17:20:07 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/11/09 04:46:09 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ void	dda_init(int x, t_ray *ray, t_data *data, t_player *player)
 	ray->dir.y = player->dir.y + player->plane.y * ray->camera_x;
 	ray->map.x = (int)player->pos.x;
 	ray->map.y = (int)player->pos.y;
-	// ray->deltadist.x = sqrt(1.0
-	// 		+ (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
-	// ray->deltadist.y = sqrt(1.0
-	// 		+ (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
 	ray->deltadist.x = fabs(1.0 / ray->dir.x);
 	ray->deltadist.y = fabs(1.0 / ray->dir.y);
 }

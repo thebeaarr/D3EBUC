@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 00:42:17 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/09/18 00:42:19 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/11/09 04:43:46 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	draw_tile(t_data *data, int x, int y, int color)
 	return (0);
 }
 
-/* Draw the map withotu the player, the player is not moving, instead , the map moves */
 void	draw_map_init(t_data *data)
 {
 	char		**map;
