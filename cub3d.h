@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/11 20:50:33 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/12 10:05:09 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ typedef struct s_cub3d
 	char ***textures;
 } t_cub3d;
 
+
+
+// texture_utils.c
+int		is_txt(char *line);
+bool	check_ntxt(char **str);
+bool	path_valid(char *str);
+
+// get_textures.c
+bool	dup_(t_file *ca);
+char	***get_textures(t_file *head);
 void	free_dptr(char **txt);
 void	free_tptr(char ***textures , int count);
 void	free_list(t_list *head);
@@ -70,13 +80,23 @@ t_cub3d *get_file_as_struct(char *path);
 bool	isspaces(char *line);
 void	add_back(t_file **head, t_file *current);
 t_file	*anode(char *line);
+int ft_strcmp(char *ext , char const *tst);
+bool path_cub(char *path);
 t_list	*read_file(char *path);
 char	***get_textures(t_file *head);
+char *rm_spaces_check(char *s);
+bool dup_c(t_file *head);
+int	get_color(char *s);
 bool	get_colors_(t_cub3d *store , t_file *head);
 bool	is_player(char c);
 void	print_cub3d(t_cub3d *cub3d);
 int		size_list(t_file *head);
- /////////////////////////////////////////////
+bool	read_config(int fd, t_list **list, char **tmp);
+bool	is_valid_char(char c);
+bool	line_has_walls(char *line);
+bool	check_line_chars(char *line, int *player_count);
+bool	c_player(int player_count);
+//?????////////////////////////////
 typedef enum e_keys
 {
 	XK_Right = 0xff53,
@@ -194,6 +214,10 @@ typedef struct s_data
 	t_vector_f	init_pos;
 	t_maps		mmap;
 }			t_data;
+// cub3d_parser 
+
+
+
 
 /* key handling */
 int		key_release(t_keys key, t_player *player);
