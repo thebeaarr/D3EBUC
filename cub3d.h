@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/12 10:05:09 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/12 17:01:02 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define BORDER 0xFFFFFFFF
 # define MINIMAP_Y 800
 # define MINIMAP_X 10
+
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -96,6 +101,9 @@ bool	is_valid_char(char c);
 bool	line_has_walls(char *line);
 bool	check_line_chars(char *line, int *player_count);
 bool	c_player(int player_count);
+bool	check_position(char **map, int i, int j, char c);
+bool player_trapped(char **map, int i, int j);
+bool has_hole(char **map, int i, int j);
 //?????////////////////////////////
 typedef enum e_keys
 {

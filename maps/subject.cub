@@ -1,13 +1,20 @@
 NO textures/bluestone.xpm
-SO textures/eagle.xpm
 
-WE textures/sky_1.xpm
+
+
+
 EA textures/purplestone.xpm
 
+SO textures/eagle.xpm
+WE textures/sky_1.xpm
 
-F 220,100,0
-C 225,30,0
-	
+
+
+
+
+F 50,50,50
+C 20,20,20
+
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001

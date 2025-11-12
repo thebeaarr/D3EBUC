@@ -6,11 +6,12 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:13 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/12 09:57:17 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/12 10:42:08 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
 static void	free_store_partial(t_cub3d *store, t_list *list, int stage)
 {
 	if (stage >= 1)

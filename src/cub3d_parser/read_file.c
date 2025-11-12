@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/12 10:47:46 by madhat            #+#    #+#             */
+/*   Updated: 2025/11/12 10:48:34 by madhat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3d.h" 
 
 static bool	read_map(int fd, t_list *list, char *tmp)
@@ -12,8 +24,11 @@ static bool	read_map(int fd, t_list *list, char *tmp)
 	}
 	list->head_s = anode(tmp);
 	free(tmp);
-	while ((tmp = get_next_line(fd)))
+	while (1)
 	{
+		tmp = get_next_line(fd);
+		if (!tmp)
+			break ;
 		line = anode(tmp);
 		add_back(&list->head_s, line);
 		free(tmp);

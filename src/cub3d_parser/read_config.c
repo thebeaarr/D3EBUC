@@ -1,10 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_config.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
+/*   Updated: 2025/11/12 10:46:23 by madhat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3d.h"
 
 static bool	is_empty_line(char *line)
 {
-	if (line[0] == '\n' || isspaces(line))
-		return (true);
-	return (false);
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!isspace(line[i]) && line[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 static bool	is_map_line(char *line)
@@ -29,7 +48,7 @@ static int	skip_leading_spaces(char *line)
 	return (i);
 }
 
-t_list	*init_list(char *line)
+static t_list	*init_list(char *line)
 {
 	t_list	*list;
 
@@ -43,18 +62,17 @@ t_list	*init_list(char *line)
 
 bool	read_config(int fd, t_list **list, char **tmp)
 {
-	t_file	*line;
-	int		i;
-
+	t_file *(line);
+	int (i);
 	while ((*tmp = get_next_line(fd)))
 	{
 		if (is_empty_line(*tmp))
 		{
 			free(*tmp);
-			continue;
+			continue ;
 		}
 		if (is_map_line(*tmp))
-			break;
+			break ;
 		i = skip_leading_spaces(*tmp);
 		line = anode(*tmp + i);
 		if (!*list)
@@ -64,6 +82,9 @@ bool	read_config(int fd, t_list **list, char **tmp)
 		free(*tmp);
 	}
 	if (size_list((*list)->head_f) > 6)
-		return (free_list(*list), false);
+	{
+		free_list(*list);
+		return (false);
+	}
 	return (true);
 }

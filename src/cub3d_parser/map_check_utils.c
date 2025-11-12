@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_check_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/12 10:32:51 by madhat            #+#    #+#             */
+/*   Updated: 2025/11/12 10:34:43 by madhat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3d.h"
 
 bool	is_valid_char(char c)
@@ -44,6 +56,24 @@ bool	c_player(int player_count)
 	if (player_count != 1)
 	{
 		printf("ERROR: player not exist or multiple players\n");
+		return (false);
+	}
+	return (true);
+}
+
+bool	check_position(char **map, int i, int j, char c)
+{
+	if (c == '0' || is_player(c))
+	{
+		if (has_hole(map, i, j))
+		{
+			printf("player or zero may escape the map\n");
+			return (false);
+		}
+	}
+	if (is_player(c) && player_trapped(map, i, j))
+	{
+		printf("player can't move\n");
 		return (false);
 	}
 	return (true);

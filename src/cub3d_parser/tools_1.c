@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 05:02:08 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/11 20:24:36 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/12 10:51:02 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	add_back(t_file **head, t_file *current)
 	tmp->next = current;
 }
 
-bool isaspace(char c)
+bool	isaspace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }

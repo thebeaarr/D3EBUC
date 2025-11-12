@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 01:06:53 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/11 20:38:36 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/12 10:22:03 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	game(void *arg)
 	minimap(data);
 	update_transform(&data->player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
-	// usleep(100); // can you tell me this is for what ? 
+	usleep(100);
 	return (0);
 }

@@ -6,35 +6,33 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:01 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/12 09:07:08 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/12 10:29:44 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h" 
+#include "../../cub3d.h"
 
-char *rm_spaces_check(char *s)
+char	*rm_spaces_check(char *s)
 {
-  char *new;
-  int t ; 
-  int index ;
-  
-  t = 0;
-  index = 0;
-  new  = malloc(sizeof(char) * ft_strlen(s) + 1);
-  if(s[0] == 'C' || s[0] == 'F')
-    index = 1;
-  
-  while(s[index] && isspace(s[index]))
-    index++;
-  
-  while(s[index])
-  {
-      new[t] = s[index];
-      	t++;
-    index++;
-  }
-  new[t] = '\0';
-  return new;
+	char	*new;
+	int		t;
+	int		index;
+
+	t = 0;
+	index = 0;
+	new = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (s[0] == 'C' || s[0] == 'F')
+		index = 1;
+	while (s[index] && isspace(s[index]))
+		index++;
+	while (s[index])
+	{
+		new[t] = s[index];
+		t++;
+		index++;
+	}
+	new[t] = '\0';
+	return (new);
 }
 
 static int	skip_spaces(char *str)
@@ -80,7 +78,7 @@ bool	get_colors_(t_cub3d *store, t_file *head)
 {
 	if (dup_c(head))
 	{
-		printf("ERROR:duplicated colors\n");
+		printf("ERROR: duplicated colors\n");
 		return (false);
 	}
 	store->ceiling = -1;
@@ -88,7 +86,7 @@ bool	get_colors_(t_cub3d *store, t_file *head)
 	parse_colors(store, head);
 	if (store->ceiling == -1 || store->floor == -1)
 	{
-		printf("ERROR: Invalid color values\n");
+		printf("ERROR: invalid color values\n");
 		return (false);
 	}
 	return (true);

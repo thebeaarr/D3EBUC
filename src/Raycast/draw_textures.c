@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   draw_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 17:19:31 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/11 21:11:27 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:54:57 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void    floor_and_ceiling(t_data *data, t_ray *ray, int x)
+void	floor_and_ceiling(t_data *data, t_ray *ray, int x)
 {
-    int y;
+	int	y;
 
-    y = 0;
-    while (y < ray->draw_start)
-    {
-        my_mlx_pixel_put(data->img, x, y, data->cub3d->ceiling);
-        y++;
-    }
-    
-    y = ray->draw_end;
-    while (y < data->win_height)
-    {
-        my_mlx_pixel_put(data->img, x, y , data->cub3d->floor);
-        y++;
-    }
+	y = 0;
+	while (y < ray->draw_start)
+	{
+		my_mlx_pixel_put(data->img, x, y, data->cub3d->ceiling);
+		y++;
+	}
+	y = ray->draw_end;
+	while (y < data->win_height)
+	{
+		my_mlx_pixel_put(data->img, x, y, data->cub3d->floor);
+		y++;
+	}
 }
 
-unsigned int get_pixel_color(t_texture *tex, int x, int y)
+unsigned int	get_pixel_color(t_texture *tex, int x, int y)
 {
-    char            *pixel;
-    unsigned int    color;
+	char			*pixel;
+	unsigned int	color;
 
-    pixel = tex->data.adr + (y * tex->data.line_length + x * (tex->data.bits_per_pixel / 8));
-    color = *(unsigned int *)pixel;
-    return (color);
+	pixel = tex->data.adr + (y * tex->data.line_length + x * (tex->data.bits_per_pixel / 8));
+	color = *(unsigned int *)pixel;
+	return (color);
 }
+
 static t_texture	*select_texture(t_data *data, t_ray *ray, int side)
 {
 	t_texture	*tex;
@@ -83,7 +83,8 @@ static int	calculate_tex_x(t_ray *ray, t_texture *tex, double wall_x, int side)
 	return (tex_x);
 }
 
-static void	draw_wall_column(t_data *data, t_ray *ray, t_texture *tex, int params[2])
+static void	draw_wall_column(t_data *data,
+	t_ray *ray, t_texture *tex, int params[2])
 {
 	int				y;
 	int				tex_y;
