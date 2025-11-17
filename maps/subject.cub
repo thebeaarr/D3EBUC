@@ -1,8 +1,7 @@
 NO textures/bluestone.xpm
 EA textures/purplestone.xpm
 SO textures/eagle.xpm
-WE textures/sky_1.xpm
-
+WE textures/sky_1.xp
 
 F 0,0,1
 C 200,200,200

@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:31:23 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 16:15:25 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 16:41:55 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ char	***get_textures(t_file *head)
 			return (NULL);
 		current = current->next;
 	}
-	// free_tptr(textures, count);
 	return (textures);
 }

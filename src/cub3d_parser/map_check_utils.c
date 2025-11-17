@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:32:51 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/12 10:34:43 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 16:42:21 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ bool	check_line_chars(char *line, int *player_count)
 	int	j;
 
 	if (line[0] == '\n' || line[0] == '\0')
-		return (printf("empty line\n"), false);
+		return (printf("ERROR:empty line\n"), false);
 	j = 0;
 	while (line[j])
 	{
 		if (is_player(line[j]))
 			(*player_count)++;
 		else if (!is_valid_char(line[j]))
-			return (printf("not a valid char\n"), false);
+			return (printf("ERROR:not a valid char\n"), false);
 		j++;
 	}
 	return (true);
@@ -67,13 +67,13 @@ bool	check_position(char **map, int i, int j, char c)
 	{
 		if (has_hole(map, i, j))
 		{
-			printf("player or zero may escape the map\n");
+			printf("ERROR: player or zero may escape the map\n");
 			return (false);
 		}
 	}
 	if (is_player(c) && player_trapped(map, i, j))
 	{
-		printf("player can't move\n");
+		printf("ERROR:player can't move\n");
 		return (false);
 	}
 	return (true);
