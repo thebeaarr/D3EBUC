@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:13 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/12 10:42:08 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 16:35:10 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,17 @@ t_cub3d	*get_file_as_struct(char *path)
 		return (NULL);
 	list = read_file(path);
 	if (list == NULL || list->head_f == NULL || list->head_s == NULL)
-		return (printf("ERROR\n"), NULL);
+	{
+		printf("ERROR: Invalid file structure\n");
+		exit(1);
+	}
 	store = malloc(sizeof(t_cub3d));
 	if (!store)
 		return (free_list(list), NULL);
 	if (!init_textures(store, list))
 		return (NULL);
 	if (!init_colors(store, list))
-		return (NULL);
+			return (NULL);
 	if (!init_map(store, list))
 		return (NULL);
 	return (store);

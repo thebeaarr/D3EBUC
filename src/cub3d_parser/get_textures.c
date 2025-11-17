@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:31:23 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/12 10:32:16 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 16:15:25 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool	process_texture_line(char ***textures, char *line, int *count)
 	textures[*count] = ft_split_space(line);
 	if (!validate_texture(textures[*count]))
 	{
-		printf("invalid textures\n");
+		printf("ERROR: invalid texture path\n");
 		free_tptr(textures, *count);
 		return (false);
 	}
@@ -84,7 +84,7 @@ char	***get_textures(t_file *head)
 
 	if (dup_(head))
 	{
-		printf("duplicated textures/not enough texture!\n");
+		printf("ERROR:duplicated textures/not enough texture!\n");
 		return (NULL);
 	}
 	textures = allocate_textures();
@@ -98,5 +98,6 @@ char	***get_textures(t_file *head)
 			return (NULL);
 		current = current->next;
 	}
+	// free_tptr(textures, count);
 	return (textures);
 }

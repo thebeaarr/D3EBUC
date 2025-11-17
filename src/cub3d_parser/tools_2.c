@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:21 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/09 04:57:43 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:35:52 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	free_list(t_list *head)
 {
 	if (head)
 	{
-		free_file(head->head_f);
-		free_file(head->head_s);
+		if(head->head_f)
+			free_file(head->head_f);
+		if(head->head_s)
+			free_file(head->head_s);
 		free(head);
 	}
 }

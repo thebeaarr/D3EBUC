@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 15:30:15 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 15:44:36 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ static t_list	*init_list(t_file *line)
 	return (list);
 }
 
+void free_gnl(char *line , int fd)
+{
+	if (line)
+		free(line);
+	while((line = get_next_line(fd)))
+		free(line);
+	close(fd);
+}
+
 bool	read_config(int fd, t_list **list, char **tmp)
 {
 	t_file *(line);
@@ -81,8 +90,9 @@ bool	read_config(int fd, t_list **list, char **tmp)
 			add_back(&(*list)->head_f, line);
 		free(*tmp);
 	}
-	if (size_list((*list)->head_f) > 6 || size_list((*list)->head_f) < 6)
+	if (size_list((*list)->head_f) != 6)
 	{
+		free_gnl(*tmp , fd);
 		free_list(*list);
 		return (false);
 	}

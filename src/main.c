@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-jari <marvin@42.ma>                    +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 12:35:17 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/17 12:35:36 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:39:08 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static bool	init_data(t_data *data, char *path)
 	t_cub3d	*cub3d;
 
 	cub3d = get_file_as_struct(path);
-	data->cub3d = cub3d;
-	if (!data->cub3d)
+	printf("DEBUG: after get_file_as_struct\n");
+	if (!cub3d)
 	{
-		printf("ERROR: parsing\n");
 		free(data);
 		return (false);
 	}
+	data->cub3d = cub3d;
 	if (!init_mlx(data))
 	{
 		printf("ERROR: mlx init\n");
@@ -70,7 +70,7 @@ int	main(int ac, char **av)
 	if (!validate_args(ac))
 		return (1);
 	data = malloc(sizeof(t_data));
-	if (!data)
+	if (data == NULL)
 		return (1);
 	if (!init_data(data, av[1]))
 		return (1);
