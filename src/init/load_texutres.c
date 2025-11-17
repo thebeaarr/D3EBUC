@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:41:39 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/12 17:05:47 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 12:47:43 by sel-jari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,24 @@ t_texture	load_texture(void *mlx, char *path)
 
 	tex.data.img = mlx_xpm_file_to_image(mlx, path, &tex.width, &tex.height);
 	if (!tex.data.img)
-		{
-			fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
-			exit(EXIT_FAILURE);
-		}
+	{
+		fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
+		exit(EXIT_FAILURE);
+	}
 	tex.data.adr = mlx_get_data_addr(tex.data.img, &tex.data.bits_per_pixel,
 			&tex.data.line_length, &tex.data.endian);
 	return (tex);
 }
 
-int get_index(char ***textures, int i)
+int	get_index(char ***textures, int i)
 {
-	int index = -1 ;
-	int j = 0;
-	char *a;
-	if(i == 0)
+	int		index;
+	int		j;
+	char	*a;
+
+	index = -1;
+	j = 0;
+	if (i == 0)
 		a = ft_strdup("NO");
 	else if (i == 1)
 		a = ft_strdup("SO");
@@ -40,20 +43,20 @@ int get_index(char ***textures, int i)
 		a = ft_strdup("WE");
 	else if (i == 3)
 		a = ft_strdup("EA");
-	while(j < 4)
+	while (j < 4)
 	{
 		if (strcmp(textures[j][0], a) == 0)
 			index = j;
 		j++;
 	}
 	free(a);
-	return index ;
+	return (index);
 }
 
 bool	load_textures(t_data *data)
 {
 	int	i;
-
+	int	index;
 	// i = 0;
 	// while (i < 4)
 	// {
@@ -64,11 +67,11 @@ bool	load_textures(t_data *data)
 	// 	i++;
 	// }
 	i = 0;
-	int index = 0;
-	while(i < 4)
+	index = 0;
+	while (i < 4)
 	{
-		index = get_index(data->cub3d->textures , i);
-		if(index == -1 )
+		index = get_index(data->cub3d->textures, i);
+		if (index == -1)
 			return (false);
 		data->texture[i] = load_texture(data->mlx,
 				data->cub3d->textures[index][1]);

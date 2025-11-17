@@ -35,7 +35,8 @@ unsigned int	get_pixel_color(t_texture *tex, int x, int y)
 	char			*pixel;
 	unsigned int	color;
 
-	pixel = tex->data.adr + (y * tex->data.line_length + x * (tex->data.bits_per_pixel / 8));
+	pixel = tex->data.adr + (y * tex->data.line_length + x
+			* (tex->data.bits_per_pixel / 8));
 	color = *(unsigned int *)pixel;
 	return (color);
 }

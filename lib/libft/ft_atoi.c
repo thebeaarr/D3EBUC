@@ -13,6 +13,7 @@
 #include "libft.h"
 #include <string.h>
 #include <ctype.h>
+
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -22,7 +23,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	num = 0;
 	sign = 1;
-	while(isspace(str[i]))
+	while (isspace(str[i]))
 		i++;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
@@ -35,13 +36,13 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		num = num * 10 + (str[i++] - '0');
-		if(num > 255)
-			return -1;
+		if (num > 255)
+			return (-1);
 	}
-	while(isspace(str[i]))
+	while (isspace(str[i]))
 		i++;
-	if(str[i])
-		return -1;
+	if (str[i])
+		return (-1);
 	num *= sign;
 	return (num);
 }

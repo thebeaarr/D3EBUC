@@ -12,20 +12,20 @@
 
 #include "../../cub3d.h" 
 
-bool has_hole(char **map, int i, int j)
+bool	has_hole(char **map, int i, int j)
 {
 	if (map[i - 1][j] == ' ')
 		return (true);
 	if (map[i + 1][j] == ' ')
 		return (true);
-	if (map[i][ j - 1] == ' ')
+	if (map[i][j - 1] == ' ')
 		return (true);
-	if (map[i][ j + 1] == ' ')
+	if (map[i][j + 1] == ' ')
 		return (true);
 	return (false);
 }
 
-bool player_trapped(char **map, int i, int j)
+bool	player_trapped(char **map, int i, int j)
 {
 	if (map[i - 1][j] != '1')
 		return (false);
