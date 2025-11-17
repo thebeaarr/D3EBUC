@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:50:14 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 18:01:23 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 20:22:41 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ bool	path_valid(char *str)
 		return (false);
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("file cannot be open\n");
 		return (false);
-	}
 	close(fd);
 	return (true);
 }
