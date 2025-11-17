@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/12 10:46:23 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 15:30:15 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static int	skip_leading_spaces(char *line)
 	return (i);
 }
 
-static t_list	*init_list(char *line)
+static t_list	*init_list(t_file *line)
 {
 	t_list	*list;
 
 	list = malloc(sizeof(t_list));
 	if (!list)
 		return (NULL);
-	list->head_f = anode(line);
+	list->head_f = line;
 	list->head_s = NULL;
 	return (list);
 }
@@ -76,12 +76,12 @@ bool	read_config(int fd, t_list **list, char **tmp)
 		i = skip_leading_spaces(*tmp);
 		line = anode(*tmp + i);
 		if (!*list)
-			*list = init_list(*tmp + i);
+			*list = init_list(line);
 		else
 			add_back(&(*list)->head_f, line);
 		free(*tmp);
 	}
-	if (size_list((*list)->head_f) > 6)
+	if (size_list((*list)->head_f) > 6 || size_list((*list)->head_f) < 6)
 	{
 		free_list(*list);
 		return (false);

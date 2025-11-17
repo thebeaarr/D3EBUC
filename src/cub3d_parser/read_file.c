@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:47:46 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/12 10:48:34 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 15:25:00 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_list	*read_file(char *path)
 	char	*tmp;
 	int		fd;
 
+	tmp = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
