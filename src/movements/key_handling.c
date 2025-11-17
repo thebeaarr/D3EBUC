@@ -12,8 +12,9 @@
 
 #include "../../cub3d.h"
 
-int	handle_close(void)
+int	handle_close(t_data *data)
 {
+	free_all(data);
 	exit(0);
 }
 
@@ -58,7 +59,7 @@ void	player_rot(t_player *player, t_keys key)
 int	key_press(t_keys key, t_player *player)
 {
 	if (key == XK_escape)
-		handle_close();
+		handle_close(player->data);
 	player_pos(player, key);
 	player_rot(player, key);
 	return (0);

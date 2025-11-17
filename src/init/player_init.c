@@ -70,7 +70,8 @@ void	player_init(t_player *player)
 	player->action.up = 0;
 	player->action.left = 0;
 	player->action.right = 0;
-	player->angle = 0;
+	player->action.rot_left = 0;
+	player->action.rot_right = 0;
 	player->pos = set_player_pos(map);
 	player->data->init_pos = player->pos;
 	player->data->mmap.pos.x = 0;

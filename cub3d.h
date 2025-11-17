@@ -203,7 +203,6 @@ typedef struct s_player
 	t_vector_f		dir;
 	t_vector_f		plane;
 	t_vector_f		pos;
-	float			angle;
 	int				moved;
 }			t_player;
 
@@ -226,12 +225,12 @@ typedef struct s_data
 
 
 
-
+void	free_all(t_data *data);
 /* key handling */
 int		key_release(t_keys key, t_player *player);
 int		key_press(t_keys key, t_player *player);
 void	update_transform(t_player *player);
-int		handle_close(void);
+int		handle_close(t_data *data);
 void	player_pos(t_player *player, t_keys key);
 void	player_rot(t_player *player, t_keys key);
 void	update_pos(t_player *player);
