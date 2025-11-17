@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:01 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/12 10:29:44 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 19:26:44 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,19 @@ char	*rm_spaces_check(char *s)
 	char	*new;
 	int		t;
 	int		index;
+	int		virgule ;
 
 	t = 0;
+	index = 0;
+	virgule = 0;
+	while(s[index])
+	{
+		if(s[index] == ',')
+			virgule++;
+		if(virgule >= 3)
+			return NULL;
+		index++;
+	}
 	index = 0;
 	new = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (s[0] == 'C' || s[0] == 'F')
