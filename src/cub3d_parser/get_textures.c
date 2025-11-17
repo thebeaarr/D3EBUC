@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:31:23 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 16:41:55 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:00:07 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static bool	process_texture_line(char ***textures, char *line, int *count)
 	if (!validate_texture(textures[*count]))
 	{
 		printf("ERROR: invalid texture path\n");
-		free_tptr(textures, *count);
+		// free_tptr(textures, *count);
 		return (false);
 	}
 	(*count)++;
@@ -95,7 +95,10 @@ char	***get_textures(t_file *head)
 	while (current && count < 4)
 	{
 		if (!process_texture_line(textures, current->line, &count))
+		{
+			free_tptr(textures, 4);
 			return (NULL);
+		}
 		current = current->next;
 	}
 	return (textures);

@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:50:14 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/12 10:50:30 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:01:23 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ bool	path_valid(char *str)
 
 	extension = strrchr(str, '.');
 	if (!extension || strcmp(extension, ".xpm") != 0)
-	{
-		printf("extension path .xpm\n");
 		return (false);
-	}
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{

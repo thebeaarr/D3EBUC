@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:47:46 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 15:44:12 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:05:24 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ t_list	*read_file(char *path)
 	}
 	list = NULL;
 	if (!read_config(fd, &list, &tmp))
+	{
+		close(fd);
 		return (NULL);
+	}
 	if (!read_map(fd, list, tmp))
 	{
 		close(fd);

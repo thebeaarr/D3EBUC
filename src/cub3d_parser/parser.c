@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:13 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 16:57:54 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:07:17 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ t_cub3d	*get_file_as_struct(char *path)
 	t_list	*list;
 
 	if (!path_cub(path))
-		return (NULL);
-	list = read_file(path);
-	if (list == NULL || list->head_f == NULL || list->head_s == NULL)
 	{
-		printf("ERROR: Invalid file structure\n");
+		printf("ERROR: Invalid file extension\n");
 		return NULL;
 	}
+	list = read_file(path);
+	if (list == NULL || list->head_f == NULL || list->head_s == NULL)
+		return NULL;
 	store = malloc(sizeof(t_cub3d));
 	if (!store)
 		return (free_list(list), NULL);

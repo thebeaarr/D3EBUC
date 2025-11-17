@@ -6,7 +6,7 @@
 /*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 12:35:17 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/17 16:57:15 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:01:45 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ static bool	init_data(t_data *data, char *path)
 
 	cub3d = get_file_as_struct(path);
 	if (!cub3d)
-	{
-		printf("DEBUG: failed to parse file\n");
 		return (false);
-	}
 	data->cub3d = cub3d;
 	if (!init_mlx(data))
 	{
-		printf("DEBUG: mlx init failed\n");
 		printf("ERROR: mlx init\n");
 		free_dptr(data->cub3d->map);
 		free_tptr(data->cub3d->textures, 4);
