@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:13 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:29 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:28:29 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_cub3d	*get_file_as_struct(char *path)
 
 	if (!path_cub(path))
 	{
-		printf("ERROR: Invalid file extension\n");
+		print_error("ERROR: Invalid file extension\n");
 		return NULL;
 	}
 	list = read_file(path);

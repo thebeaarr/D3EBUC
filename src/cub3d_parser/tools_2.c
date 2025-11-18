@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:21 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:48 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:26:18 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,9 @@ void	free_list(t_list *head)
 			free_file(head->head_s);
 		free(head);
 	}
+}
+
+void print_error(char *s)
+{
+	write(2 , s, ft_strlen(s));
 }
