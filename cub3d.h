@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/17 21:19:22 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:01:02 by madhat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,7 @@ bool	c_player(int player_count);
 bool	check_position(char **map, int i, int j, char c);
 bool player_trapped(char **map, int i, int j);
 bool has_hole(char **map, int i, int j);
-void print_error(char *s);
-
+//?????////////////////////////////
 typedef enum e_keys
 {
 	XK_Right = 0xff53,

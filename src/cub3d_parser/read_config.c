@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 21:28:59 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:39:31 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ bool	read_config(int fd, t_list **list, char **tmp)
 	}
 	if (size_list((*list)->head_f) != 6)
 	{
-		print_error("ERROR: too much config lines\n");
 		free_gnl(*tmp , fd);
 		free_list(*list);
 		return (false);

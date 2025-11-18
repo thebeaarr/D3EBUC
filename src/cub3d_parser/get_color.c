@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:01 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 21:27:39 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:58:01 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,38 +66,51 @@ static bool	is_color_line(char *line, char type)
 	return (false);
 }
 
-static void	parse_colors(t_cub3d *store, t_file *head)
+static bool	parse_colors(t_cub3d *store, t_file *head)
 {
 	t_file	*current;
 	char	*tmp;
 	int		index;
+	int flag;
 
+	flag = 0;
 	current = head;
 	while (current)
 	{
 		tmp = current->line;
 		index = skip_spaces(tmp);
 		if (is_color_line(tmp, 'F'))
+		{
 			store->floor = get_color(tmp + index);
+			flag++;
+		}
 		else if (is_color_line(tmp, 'C'))
+		{
 			store->ceiling = get_color(tmp + index);
+			flag++;
+		}
 		current = current->next;
 	}
+	return (flag == 2);
 }
 
 bool	get_colors_(t_cub3d *store, t_file *head)
 {
 	if (dup_c(head))
 	{
-		print_error("ERROR: duplicated colors\n");
+		printf("ERROR: duplicated colors\n");
 		return (false);
 	}
 	store->ceiling = -1;
 	store->floor = -1;
-	parse_colors(store, head);
+	if(parse_colors(store, head))
+	{
+		printf("ERROR: too much lines\n");
+		return false;
+	}
 	if (store->ceiling == -1 || store->floor == -1)
 	{
-		print_error("ERROR: invalid color values\n");
+		printf("ERROR: invalid color values\n");
 		return (false);
 	}
 	return (true);
