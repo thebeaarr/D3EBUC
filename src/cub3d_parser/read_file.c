@@ -53,10 +53,12 @@ t_list	*read_file(char *path)
 	if (!read_config(fd, &list, &tmp))
 	{
 		close(fd);
+		print_error("ERROR: config\n");
 		return (NULL);
 	}
 	if (!read_map(fd, list, tmp))
 	{
+		print_error("ERROR: map\n");
 		close(fd);
 		return (NULL);
 	}

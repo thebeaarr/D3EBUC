@@ -28,7 +28,7 @@ static void	draw_line(t_data *data, t_player *player, t_vector_f inc, int steps)
 	{
 		pos.x = data->mmap.center.x + index.x;
 		pos.y = data->mmap.center.y + index.y;
-		if (is_border(player->data, pos.x, pos.y, WHITE))
+		if (is_border(player->data, pos.x, pos.y, BLACK))
 			break ;
 		my_mlx_pixel_put(data->img, pos.x, pos.y, RED);
 		index.x += inc.x;

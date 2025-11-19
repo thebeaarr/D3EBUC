@@ -21,7 +21,6 @@
 # define BORDER 0x00FFFFFF
 # define MINIMAP_Y 800
 # define MINIMAP_X 10
-# define BONUS 0
 # define NO 0
 # define SO 1
 # define WE 2

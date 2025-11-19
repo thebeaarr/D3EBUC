@@ -18,8 +18,7 @@ int	game(void *arg)
 
 	data = (t_data *)arg;
 	raycast(data);
-	if (BONUS)
-		minimap(data);
+	minimap(data);
 	update_transform(&data->player);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	return (0);
