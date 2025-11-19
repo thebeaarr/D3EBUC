@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:32:51 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:20 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:18:46 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	line_has_walls(char *line)
 	while (line[j] == ' ')
 		j++;
 	if (line[j] == '\0')
-		return (printf("no walls\n"), false);
+		return (printf("ERROR: no walls\n"), false);
 	return (true);
 }
 

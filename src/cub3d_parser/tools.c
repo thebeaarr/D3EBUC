@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:23 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:40:27 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:10:00 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ static size_t	calculate_every_word(const char *s)
 
 static void	free_memory(char **trunks, size_t i)
 {
-	while (i--)
+	while (i > 0)
+	{
 		free(trunks[i]);
+		i--;
+	}
 }
 
 static int	split_helper(char **trunks, const char *s)
@@ -87,11 +90,11 @@ char	**ft_split_space(const char *s)
 	trunks = malloc((word_count + 1) * sizeof(char *));
 	if (!trunks)
 		return (NULL);
-	trunks[word_count] = NULL;
 	if (!split_helper(trunks, s))
 	{
 		free(trunks);
 		return (NULL);
 	}
+	trunks[word_count] = NULL;
 	return (trunks);
 }

@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:49:57 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:37 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:06:28 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_dptr(char **txt)
 		index++;
 	}
 	free(txt);
-	txt = NULL;
 }
 
 void	free_tptr(char ***textures, int count)
@@ -37,5 +36,4 @@ void	free_tptr(char ***textures, int count)
 		index++;
 	}
 	free(textures);
-	textures = NULL;
 }

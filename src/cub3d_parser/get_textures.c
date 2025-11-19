@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:31:23 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:17 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:11:08 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static bool	process_texture_line(char ***textures, char *line, int *count)
 	textures[*count] = ft_split_space(line);
 	if (!validate_texture(textures[*count]))
 	{
+		free_dptr(textures[*count]);
 		printf("ERROR: invalid texture path\n");
-		// free_tptr(textures, *count);
 		return (false);
 	}
 	(*count)++;
@@ -72,6 +72,12 @@ static char	***allocate_textures(void)
 	textures = malloc(sizeof(char **) * 5);
 	if (!textures)
 		return (NULL);
+	int i  = 0;
+	while(i < 5)
+	{
+		textures[i] = NULL;
+		i++;
+	}
 	textures[4] = NULL;
 	return (textures);
 }
@@ -96,7 +102,7 @@ char	***get_textures(t_file *head)
 	{
 		if (!process_texture_line(textures, current->line, &count))
 		{
-			free_tptr(textures, 4);
+			free_tptr(textures, count);
 			return (NULL);
 		}
 		current = current->next;
