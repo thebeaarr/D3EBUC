@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:21 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:48 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:55:12 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	free_list(t_list *head)
 {
 	if (head)
 	{
-		if(head->head_f)
+		if (head->head_f)
 			free_file(head->head_f);
-		if(head->head_s)
+		if (head->head_s)
 			free_file(head->head_s);
 		free(head);
 	}

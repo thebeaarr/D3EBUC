@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:31 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:07:35 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,15 @@ static t_list	*init_list(t_file *line)
 	return (list);
 }
 
-void free_gnl(char *line , int fd)
-{
-	if (line)
-		free(line);
-	while((line = get_next_line(fd)))
-		free(line);
-	close(fd);
-}
-
 bool	read_config(int fd, t_list **list, char **tmp)
 {
 	t_file *(line);
 	int (i);
-	while ((*tmp = get_next_line(fd)))
+	while (1)
 	{
+		*tmp = get_next_line(fd);
+		if (*tmp == NULL)
+			break ;
 		if (is_empty_line(*tmp))
 		{
 			free(*tmp);
@@ -91,10 +85,6 @@ bool	read_config(int fd, t_list **list, char **tmp)
 		free(*tmp);
 	}
 	if (size_list((*list)->head_f) != 6)
-	{
-		free_gnl(*tmp , fd);
-		free_list(*list);
-		return (false);
-	}
+		return (free_gnl(*tmp, fd), free_list(*list), (false));
 	return (true);
 }

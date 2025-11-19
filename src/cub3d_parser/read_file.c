@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:47:46 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:34 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:52:06 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	read_map(int fd, t_list *list, char *tmp)
 
 	if (tmp == NULL)
 	{
-		printf("incomplete map\n");
+		print_error("incomplete map\n");
 		free_list(list);
 		return (false);
 	}
@@ -46,7 +46,7 @@ t_list	*read_file(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("ERROR: failed to open file\n");
+		print_error("ERROR: failed to open file\n");
 		return (NULL);
 	}
 	list = NULL;

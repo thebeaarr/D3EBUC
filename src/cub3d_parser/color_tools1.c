@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:06:28 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:07 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:10:11 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,17 @@ bool	dup_c(t_file *head)
 		current = current->next;
 	}
 	return (count_f != 1 || count_c != 1);
+}
+
+void	free_gnl(char *line, int fd)
+{
+	if (line)
+		free(line);
+	while (line)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
+	line = NULL;
+	close(fd);
 }

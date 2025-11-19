@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:01 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/18 17:03:03 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/19 18:13:40 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ char	*rm_spaces_check(char *s)
 	t = 0;
 	index = 0;
 	virgule = 0;
-	while(s[index])
+	while (s[index])
 	{
-		if(s[index] == ',')
+		if (s[index] == ',')
 			virgule++;
-		if(virgule > 2)
-			return NULL;
+		if (virgule > 2)
+			return (NULL);
 		index++;
 	}
 	index = 0;
@@ -89,7 +89,7 @@ bool	get_colors_(t_cub3d *store, t_file *head)
 {
 	if (dup_c(head))
 	{
-		printf("ERROR: duplicated colors\n");
+		print_error("ERROR: duplicated colors\n");
 		return (false);
 	}
 	store->ceiling = -1;
@@ -97,7 +97,7 @@ bool	get_colors_(t_cub3d *store, t_file *head)
 	parse_colors(store, head);
 	if (store->ceiling == -1 || store->floor == -1)
 	{
-		printf("ERROR: invalid color values\n");
+		print_error("ERROR: invalid color values\n");
 		return (false);
 	}
 	return (true);

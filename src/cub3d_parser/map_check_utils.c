@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:32:51 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/19 17:18:46 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:51:52 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	line_has_walls(char *line)
 	while (line[j] == ' ')
 		j++;
 	if (line[j] == '\0')
-		return (printf("ERROR: no walls\n"), false);
+		return (print_error("ERROR: no walls\n"), false);
 	return (true);
 }
 
@@ -38,14 +38,14 @@ bool	check_line_chars(char *line, int *player_count)
 	int	j;
 
 	if (line[0] == '\n' || line[0] == '\0')
-		return (printf("ERROR:empty line\n"), false);
+		return (print_error("ERROR:empty line\n"), false);
 	j = 0;
 	while (line[j])
 	{
 		if (is_player(line[j]))
 			(*player_count)++;
 		else if (!is_valid_char(line[j]))
-			return (printf("ERROR:not a valid char\n"), false);
+			return (print_error("ERROR:not a valid char\n"), false);
 		j++;
 	}
 	return (true);
@@ -55,7 +55,7 @@ bool	c_player(int player_count)
 {
 	if (player_count != 1)
 	{
-		printf("ERROR: player not exist or multiple players\n");
+		print_error("ERROR: player not exist or multiple players\n");
 		return (false);
 	}
 	return (true);
@@ -67,13 +67,13 @@ bool	check_position(char **map, int i, int j, char c)
 	{
 		if (has_hole(map, i, j))
 		{
-			printf("ERROR: player or zero may escape the map\n");
+			print_error("ERROR: player or zero may escape the map\n");
 			return (false);
 		}
 	}
 	if (is_player(c) && player_trapped(map, i, j))
 	{
-		printf("ERROR:player can't move\n");
+		print_error("ERROR:player can't move\n");
 		return (false);
 	}
 	return (true);

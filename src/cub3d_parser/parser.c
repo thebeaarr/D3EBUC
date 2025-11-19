@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:13 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:29 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:11:20 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,19 @@ t_cub3d	*get_file_as_struct(char *path)
 
 	if (!path_cub(path))
 	{
-		printf("ERROR: Invalid file extension\n");
-		return NULL;
+		print_error("ERROR: Invalid file extension\n");
+		return (NULL);
 	}
 	list = read_file(path);
 	if (list == NULL || list->head_f == NULL || list->head_s == NULL)
-		return NULL;
+		return (NULL);
 	store = malloc(sizeof(t_cub3d));
 	if (!store)
 		return (free_list(list), NULL);
 	if (!init_textures(store, list))
 		return (NULL);
 	if (!init_colors(store, list))
-			return (NULL);
+		return (NULL);
 	if (!init_map(store, list))
 		return (NULL);
 	return (store);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/12 17:01:02 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/19 17:59:22 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ bool dup_c(t_file *head);
 int	get_color(char *s);
 bool	get_colors_(t_cub3d *store , t_file *head);
 bool	is_player(char c);
+void	free_gnl(char *line, int fd);
+void print_error(char *s);
 void	print_cub3d(t_cub3d *cub3d);
 int		size_list(t_file *head);
 bool	read_config(int fd, t_list **list, char **tmp);

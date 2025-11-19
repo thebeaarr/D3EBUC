@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 05:02:08 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:45 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:56:46 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,12 @@ bool	isspaces(char *line)
 		i++;
 	}
 	return (true);
+}
+
+void	print_error(char *s)
+{
+	int	i;
+
+	i = ft_strlen(s);
+	write(2, s, i);
 }

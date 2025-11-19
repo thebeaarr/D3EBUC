@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 12:35:17 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/17 18:01:45 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/19 17:53:15 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	validate_args(int ac)
 {
 	if (ac != 2)
 	{
-		printf("ERROR: arguments\n");
+		print_error("ERROR: arguments\n");
 		return (false);
 	}
 	return (true);
@@ -34,7 +34,7 @@ static bool	init_data(t_data *data, char *path)
 	data->cub3d = cub3d;
 	if (!init_mlx(data))
 	{
-		printf("ERROR: mlx init\n");
+		print_error("ERROR: mlx init\n");
 		free_dptr(data->cub3d->map);
 		free_tptr(data->cub3d->textures, 4);
 		free(data->cub3d);

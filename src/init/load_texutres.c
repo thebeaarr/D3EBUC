@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_texutres.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:41:39 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 12:47:43 by sel-jari         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:52:55 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_texture	load_texture(void *mlx, char *path)
 	tex.data.img = mlx_xpm_file_to_image(mlx, path, &tex.width, &tex.height);
 	if (!tex.data.img)
 	{
-		fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
+		print_error("Error: Failed to load texture from path: %s\n");
 		exit(EXIT_FAILURE);
 	}
 	tex.data.adr = mlx_get_data_addr(tex.data.img, &tex.data.bits_per_pixel,
@@ -57,15 +57,7 @@ bool	load_textures(t_data *data)
 {
 	int	i;
 	int	index;
-	// i = 0;
-	// while (i < 4)
-	// {
-	// 	data->texture[i] = load_texture(data->mlx,
-	// 			data->cub3d->textures[i][1]);
-	// 	if (!data->texture[i].data.img)
-	// 		return (false);
-	// 	i++;
-	// }
+
 	i = 0;
 	index = 0;
 	while (i < 4)
