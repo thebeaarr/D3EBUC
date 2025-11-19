@@ -19,14 +19,9 @@ static	int	not_wall(t_data *data, float x, float y)
 
 void	move_player(t_player *player, t_vector_f new)
 {
-	if (!BONUS)
-	{
+	if (not_wall(player->data, new.x, player->pos.y))
 		player->pos.x = new.x;
+
+	if (not_wall(player->data, player->pos.x, new.y))
 		player->pos.y = new.y;
-	}
-	if (not_wall(player->data, new.x, new.y))
-	{
-		player->pos.x = new.x;
-		player->pos.y = new.y;
-	}
 }
