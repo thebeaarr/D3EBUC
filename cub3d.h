@@ -18,9 +18,10 @@
 # define CENTER 4.0
 # define ROT_SPPED 0.019
 # define RAYSIZE 50.0
-# define BORDER 0xFFFFFFFF
+# define BORDER 0x00FFFFFF
 # define MINIMAP_Y 800
 # define MINIMAP_X 10
+# define BONUS 0
 
 # define NO 0
 # define SO 1
@@ -119,7 +120,7 @@ typedef enum e_keys
 typedef enum e_colors
 {
 	BLACK = 0x00000000,
-	WHITE = 0xFFFFFFFF,
+	WHITE = 0x00FFFFFF,
 	RED = 0x00FF0000,
 	GREEN = 0x0099FF00,
 	BLUE = 0x000000FF,

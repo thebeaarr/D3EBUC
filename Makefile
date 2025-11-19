@@ -37,4 +37,7 @@ fclean: clean
 
 re: fclean all
 
+bonus:
+	make all BONUS=1
+
 .PHONY: all clean fclean re
