@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:06:28 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/19 18:10:11 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:28:46 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,22 @@ void	free_gnl(char *line, int fd)
 	}
 	line = NULL;
 	close(fd);
+}
+
+bool	check_v(char *s)
+{
+	int	virgule;
+	int	index;
+
+	index = 0;
+	virgule = 0;
+	while (s[index])
+	{
+		if (s[index] == ',')
+			virgule++;
+		if (virgule > 2)
+			return (false);
+		index++;
+	}
+	return (true);
 }

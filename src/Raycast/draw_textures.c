@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madhat <madhat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 17:19:31 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/12 16:54:57 by madhat           ###   ########.fr       */
+/*   Updated: 2025/11/19 18:35:56 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,6 @@ static t_texture	*select_texture(t_data *data, t_ray *ray, int side)
 			tex = &data->texture[0];
 	}
 	return (tex);
-}
-
-static double	calculate_wall_x(t_data *data, t_ray *ray, int side)
-{
-	double	wall_x;
-
-	if (side == 0)
-		wall_x = data->player.pos.y + ray->wall_dist * ray->dir.y;
-	else
-		wall_x = data->player.pos.x + ray->wall_dist * ray->dir.x;
-	wall_x -= floor(wall_x);
-	return (wall_x);
-}
-
-static int	calculate_tex_x(t_ray *ray, t_texture *tex, double wall_x, int side)
-{
-	int	tex_x;
-
-	tex_x = (int)(wall_x * (double)(tex->width));
-	if ((side == 0 && ray->dir.x > 0) || (side == 1 && ray->dir.y < 0))
-		tex_x = tex->width - tex_x - 1;
-	return (tex_x);
 }
 
 static void	draw_wall_column(t_data *data,

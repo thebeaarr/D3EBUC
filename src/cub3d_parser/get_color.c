@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:01 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/19 18:13:40 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:30:19 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,11 @@ char	*rm_spaces_check(char *s)
 	char	*new;
 	int		t;
 	int		index;
-	int		virgule ;
 
 	t = 0;
 	index = 0;
-	virgule = 0;
-	while (s[index])
-	{
-		if (s[index] == ',')
-			virgule++;
-		if (virgule > 2)
-			return (NULL);
-		index++;
-	}
-	index = 0;
+	if (!check_v(s))
+		return (NULL);
 	new = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (s[0] == 'C' || s[0] == 'F')
 		index = 1;
