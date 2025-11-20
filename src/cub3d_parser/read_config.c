@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/20 01:25:23 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:44:51 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	read_config(int fd, t_list **list, char **tmp)
 		free(*tmp);
 	}
 	if(tmp != NULL && is_map_line(*tmp) && (*list == NULL  || size_list((*list)->head_f )!= 6))
-		return (free_gnl(*tmp, fd),free(*tmp) , free_list(*list), (false));
+		return (free_gnl(*tmp, fd), free_list(*list), (false));
 		
 	if (size_list((*list)->head_f) != 6)
 		return (free_gnl(*tmp, fd), free_list(*list), (false));
