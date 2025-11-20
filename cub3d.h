@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/19 18:41:41 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:09:10 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,10 @@ void		free_gnl(char *line, int fd);
 void		print_error(char *s);
 void		print_cub3d(t_cub3d *cub3d);
 int			size_list(t_file *head);
+bool		is_map_line(char *line);
+bool		is_empty_line(char *line);
+void		store_config_line(char *tmp, t_list **list);
+bool		valid_before_map(char *tmp, t_list **list, int fd);
 bool		read_config(int fd, t_list **list, char **tmp);
 bool		is_valid_char(char c);
 bool		line_has_walls(char *line);

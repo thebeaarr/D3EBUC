@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:47:46 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/19 17:52:06 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:59:11 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ static bool	read_map(int fd, t_list *list, char *tmp)
 
 t_list	*read_file(char *path)
 {
-	t_list	*list;
-	char	*tmp;
-	int		fd;
-
+	t_list *(list);
+	char *(tmp);
+	int (fd);
 	tmp = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)

@@ -6,37 +6,11 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:41:00 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/20 16:44:51 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:00:30 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-static bool	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!isspace(line[i]) && line[i] != '\n')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static bool	is_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == '1' || line[i] == ' ' || line[i] == '\n')
-		i++;
-	if (line[i] == '\0')
-		return (true);
-	return (false);
-}
 
 static int	skip_leading_spaces(char *line)
 {
@@ -60,14 +34,46 @@ static t_list	*init_list(t_file *line)
 	return (list);
 }
 
+void	store_config_line(char *tmp, t_list **list)
+{
+	int		i;
+	t_file	*line;
+
+	i = skip_leading_spaces(tmp);
+	line = anode(tmp + i);
+	if (!*list)
+		*list = init_list(line);
+	else
+		add_back(&(*list)->head_f, line);
+}
+
+bool	valid_before_map(char *tmp, t_list **list, int fd)
+{
+	int	size;
+
+	if (!is_map_line(tmp))
+		return (true);
+	if (!*list)
+	{
+		free_gnl(tmp, fd);
+		return (false);
+	}
+	size = size_list((*list)->head_f);
+	if (size != 6)
+	{
+		free_gnl(tmp, fd);
+		free_list(*list);
+		return (false);
+	}
+	return (true);
+}
+
 bool	read_config(int fd, t_list **list, char **tmp)
 {
-	t_file *(line);
-	int (i);
 	while (1)
 	{
 		*tmp = get_next_line(fd);
-		if (*tmp == NULL)
+		if (!*tmp)
 			break ;
 		if (is_empty_line(*tmp))
 		{
@@ -76,18 +82,12 @@ bool	read_config(int fd, t_list **list, char **tmp)
 		}
 		if (is_map_line(*tmp))
 			break ;
-		i = skip_leading_spaces(*tmp);
-		line = anode(*tmp + i);
-		if (!*list)
-			*list = init_list(line);
-		else
-			add_back(&(*list)->head_f, line);
+		store_config_line(*tmp, list);
 		free(*tmp);
 	}
-	if(tmp != NULL && is_map_line(*tmp) && (*list == NULL  || size_list((*list)->head_f )!= 6))
-		return (free_gnl(*tmp, fd), free_list(*list), (false));
-		
+	if (!valid_before_map(*tmp, list, fd))
+		return (false);
 	if (size_list((*list)->head_f) != 6)
-		return (free_gnl(*tmp, fd), free_list(*list), (false));
+		return (false);
 	return (true);
 }
