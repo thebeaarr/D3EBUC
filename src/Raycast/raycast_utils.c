@@ -40,18 +40,21 @@ static void	calculate_map_dimensions(t_data *data)
 {
 	int	y;
 	int	x;
+	int	max_width;
 
 	y = 0;
+	max_width = 0;
 	while (data->cub3d->map[y])
-		y++;
-	data->map_height = y;
-	x = 0;
-	if (data->cub3d->map[0])
 	{
-		while (data->cub3d->map[0][x] && data->cub3d->map[0][x] != '\n')
+		x = 0;
+		while (data->cub3d->map[y][x] && data->cub3d->map[y][x] != '\n')
 			x++;
+		if (x > max_width)
+			max_width = x;
+		y++;
 	}
-	data->map_width = x;
+	data->map_height = y;
+	data->map_width = max_width;
 }
 
 void	dda_init(int x, t_ray *ray, t_data *data, t_player *player)
