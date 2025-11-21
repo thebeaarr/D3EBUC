@@ -72,8 +72,8 @@ void	calculate_wall_distance(t_ray *ray, int temp, t_data *data)
 	else
 		ray->wall_dist = (ray->sidedist.x - ray->deltadist.x);
 	ray->line_height = (int)(data->win_height / ray->wall_dist);
-	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
-	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
+	ray->draw_start = (data->win_height / 2) - (ray->line_height / 2);
+	ray->draw_end = (data->win_height / 2) + (ray->line_height / 2);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	if (ray->draw_end >= data->win_height)
