@@ -14,6 +14,8 @@
 
 void	dda_inc(t_ray *ray, t_player *player)
 {
+	ray->deltadist.x = fabs(1.0 / ray->dir.x);
+	ray->deltadist.y = fabs(1.0 / ray->dir.y);
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -1;
@@ -36,64 +38,29 @@ void	dda_inc(t_ray *ray, t_player *player)
 	}
 }
 
-static void	calculate_map_dimensions(t_data *data)
-{
-	int	y;
-	int	x;
-	int	max_width;
-
-	y = 0;
-	max_width = 0;
-	while (data->cub3d->map[y])
-	{
-		x = 0;
-		while (data->cub3d->map[y][x] && data->cub3d->map[y][x] != '\n')
-			x++;
-		if (x > max_width)
-			max_width = x;
-		y++;
-	}
-	data->map_height = y;
-	data->map_width = max_width;
-}
-
-void	dda_init(int x, t_ray *ray, t_data *data, t_player *player)
-{
-	calculate_map_dimensions(data);
-	ray->camera_x = 2 * x / (float)data->win_width - 1;
-	ray->dir.x = player->dir.x + player->plane.x * ray->camera_x;
-	ray->dir.y = player->dir.y + player->plane.y * ray->camera_x;
-	ray->map.x = (int)player->pos.x;
-	ray->map.y = (int)player->pos.y;
-	ray->deltadist.x = fabs(1.0 / ray->dir.x);
-	ray->deltadist.y = fabs(1.0 / ray->dir.y);
-}
-
 int	dda_algorithm(t_ray *ray, t_data *data)
 {
-	int	hit;
+	int	wall;
 	int	temp;
 
-	hit = 0;
-	while (hit == 0)
+	wall = 0;
+	while (!wall)
 	{
-		if (ray->sidedist.x < ray->sidedist.y)
-		{
-			ray->sidedist.x += ray->deltadist.x;
-			ray->map.x += ray->step.x;
-			temp = 0;
-		}
-		else
+		if (ray->sidedist.y < ray->sidedist.x)
 		{
 			ray->sidedist.y += ray->deltadist.y;
 			ray->map.y += ray->step.y;
 			temp = 1;
 		}
+		else
+		{
+			ray->sidedist.x += ray->deltadist.x;
+			ray->map.x += ray->step.x;
+			temp = 0;
+		}
 		if (ray->map.y < 0 || ray->map.x < 0
-			|| ray->map.y >= data->map_height
-			|| ray->map.x >= data->map_width
 			|| data->cub3d->map[ray->map.y][ray->map.x] == '1')
-			hit = 1;
+			wall = 1;
 	}
 	return (temp);
 }

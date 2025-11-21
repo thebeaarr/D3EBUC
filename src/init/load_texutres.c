@@ -19,7 +19,9 @@ t_texture	load_texture(void *mlx, char *path)
 	tex.data.img = mlx_xpm_file_to_image(mlx, path, &tex.width, &tex.height);
 	if (!tex.data.img)
 	{
-		print_error("Error: Failed to load texture from path: %s\n");
+		print_error("Error: Failed to load texture from path: ");
+		print_error(path);
+		print_error("\n");
 		exit(EXIT_FAILURE);
 	}
 	tex.data.adr = mlx_get_data_addr(tex.data.img, &tex.data.bits_per_pixel,

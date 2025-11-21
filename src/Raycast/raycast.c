@@ -29,8 +29,8 @@ void	raycast(t_data *data)
 	int		x;
 
 	x = 0;
-	data->win_height = 1000;
-	data->win_width = 1000;
+	data->win_height = WIN_HEIGHT;
+	data->win_width = WIN_WIDTH;
 	while (x < data->win_width)
 	{
 		cast_single_ray(x, &ray, data, &data->player);
