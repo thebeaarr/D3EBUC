@@ -171,7 +171,6 @@ typedef struct s_data
 	int			win_width;
 	int			win_height;
 	int			map_height;
-	int			map_width;
 	t_vector_f	init_pos;
 	t_maps		mmap;
 }	t_data;
