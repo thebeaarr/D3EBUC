@@ -72,7 +72,6 @@ void	draw_map_init(t_data *data)
 	}
 }
 
-/*just that orrange cub in the middle of the mm*/
 void	draw_player_mmap(t_data *data)
 {
 	t_vector	index;
@@ -93,7 +92,6 @@ void	draw_player_mmap(t_data *data)
 	}
 }
 
-/*i will add the fov animation in the future */
 void	minimap(t_data *data)
 {
 	init_minimap(data);
