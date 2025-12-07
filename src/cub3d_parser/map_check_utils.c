@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:32:51 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/19 17:51:52 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/21 20:41:41 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ bool	check_position(char **map, int i, int j, char c)
 			print_error("ERROR: player or zero may escape the map\n");
 			return (false);
 		}
-	}
-	if (is_player(c) && player_trapped(map, i, j))
-	{
-		print_error("ERROR:player can't move\n");
-		return (false);
 	}
 	return (true);
 }

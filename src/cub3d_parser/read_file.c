@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:47:46 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/20 16:59:11 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:27:58 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	read_map(int fd, t_list *list, char *tmp)
 
 	if (tmp == NULL)
 	{
-		print_error("incomplete map\n");
+		print_error("ERROR:incomplete map\n");
 		free_list(list);
 		return (false);
 	}

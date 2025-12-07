@@ -7,9 +7,7 @@ NAME = cub3D
 LIBFT_DIR = lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MLX_DIR = lib/minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -lmlx -lXext -lX11 -lm
 
 SRCS_GNL = \
 	lib/libft/get_next_line/get_next_line.c \
@@ -77,18 +75,18 @@ all: $(NAME)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(MLX_LIB):
-	make -C $(MLX_DIR)
 
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
+$(NAME): $(LIBFT)  $(OBJ)
 	$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus:
+	make all
+
 clean:
 	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
 	rm -f $(OBJ)
 
 fclean: clean

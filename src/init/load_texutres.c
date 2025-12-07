@@ -6,24 +6,42 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:41:39 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/19 17:52:55 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/21 22:10:39 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-t_texture	load_texture(void *mlx, char *path)
+void	free_help(t_data *data, int nbloads)
+{
+	int	i;
+
+	i = 0;
+	print_error("Error: Failed to load texture from path\n");
+	while (i < nbloads)
+	{
+		mlx_destroy_image(data->mlx, data->texture[i].data.img);
+		i++;
+	}
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img->img);
+	mlx_destroy_display(data->mlx);
+	free(data->img);
+	free_dptr(data->cub3d->map);
+	free_tptr(data->cub3d->textures, 4);
+	free(data->cub3d);
+	free(data->mlx);
+	free(data);
+	exit(EXIT_FAILURE);
+}
+
+t_texture	load_texture(t_data *data, void *mlx, char *path, int nbloads)
 {
 	t_texture	tex;
 
 	tex.data.img = mlx_xpm_file_to_image(mlx, path, &tex.width, &tex.height);
 	if (!tex.data.img)
-	{
-		print_error("Error: Failed to load texture from path: ");
-		print_error(path);
-		print_error("\n");
-		exit(EXIT_FAILURE);
-	}
+		free_help(data, nbloads);
 	tex.data.adr = mlx_get_data_addr(tex.data.img, &tex.data.bits_per_pixel,
 			&tex.data.line_length, &tex.data.endian);
 	return (tex);
@@ -67,8 +85,8 @@ bool	load_textures(t_data *data)
 		index = get_index(data->cub3d->textures, i);
 		if (index == -1)
 			return (false);
-		data->texture[i] = load_texture(data->mlx,
-				data->cub3d->textures[index][1]);
+		data->texture[i] = load_texture(data, data->mlx,
+				data->cub3d->textures[index][1], i);
 		i++;
 	}
 	return (true);

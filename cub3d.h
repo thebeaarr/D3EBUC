@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:58:41 by sel-jari          #+#    #+#             */
-/*   Updated: 2025/11/20 17:09:10 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/21 22:16:38 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # include <ctype.h>
 # include <math.h>
 # include "lib/libft/get_next_line/get_next_line.h"
-# include "lib/minilibx-linux/mlx.h"
 # include "lib/libft/libft.h"
+# include <mlx.h>
 # include <X11/X.h>
 
 typedef struct s_file
@@ -190,6 +190,8 @@ void		free_file(t_file *head);
 bool		parse_map(char **map);
 char		**get_map(t_file *head);
 char		**ft_split_space(const char *s);
+int			line_length(char *line);
+int			map_height(char **map);
 t_cub3d		*get_file_as_struct(char *path);
 bool		isspaces(char *line);
 bool		check_v(char *s);
@@ -263,7 +265,7 @@ void		draw_frame(t_data *data);
 void		player_view(t_player *player);
 
 /* LOAD TEXTURES */
-t_texture	load_texture(void *mlx, char *path);
+t_texture	load_texture(t_data *data, void *mlx, char *path, int nbloads	);
 bool		load_textures(t_data *data);
 int			calculate_tex_x(t_ray *ray, t_texture *tex, double wall_x,
 				int side);

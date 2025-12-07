@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:06:28 by madhat            #+#    #+#             */
-/*   Updated: 2025/11/19 18:28:46 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:14:19 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ bool	check_v(char *s)
 	{
 		if (s[index] == ',')
 			virgule++;
-		if (virgule > 2)
-			return (false);
 		index++;
 	}
+	if (virgule != 2)
+		return (false);
 	return (true);
 }

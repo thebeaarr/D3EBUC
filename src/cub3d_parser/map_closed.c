@@ -6,7 +6,7 @@
 /*   By: mlakhdar <mlakhdar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 04:56:10 by mlakhdar          #+#    #+#             */
-/*   Updated: 2025/11/17 19:39:23 by mlakhdar         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:15:06 by mlakhdar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 bool	has_hole(char **map, int i, int j)
 {
-	if (map[i - 1][j] == ' ')
+	int	h;
+	int	w;
+
+	h = map_height(map);
+	w = line_length(map[i]);
+	if (i - 1 < 0 || j >= line_length(map[i - 1]) || map[i - 1][j] == ' ')
 		return (true);
-	if (map[i + 1][j] == ' ')
+	if (i + 1 >= h || j >= line_length(map[i + 1]) || map[i + 1][j] == ' ')
 		return (true);
-	if (map[i][j - 1] == ' ')
+	if (j - 1 < 0 || map[i][j - 1] == ' ')
 		return (true);
-	if (map[i][j + 1] == ' ')
+	if (j + 1 >= w || map[i][j + 1] == ' ')
 		return (true);
 	return (false);
 }
@@ -62,7 +67,9 @@ bool	map_closed(char **map)
 	while (map[i])
 	{
 		if (!check_line(map, i))
+		{
 			return (false);
+		}
 		i++;
 	}
 	return (true);
